@@ -1,0 +1,18 @@
+.canvas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.window {
+  position: absolute;
+  width: 60%;
+  height: 80%;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}

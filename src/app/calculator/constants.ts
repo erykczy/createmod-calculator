@@ -12,6 +12,10 @@ export var g_calculatorsData: CalculatorData[] = [
   {
     name: "Mechanical Mixer",
     iconPath: "assets/icons/mixer.png"
+  },
+  {
+    name: "Bulk Processing",
+    iconPath: "assets/icons/fan.png"
   }
 ]
 

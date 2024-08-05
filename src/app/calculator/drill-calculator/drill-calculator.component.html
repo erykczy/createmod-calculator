@@ -1,5 +1,5 @@
 <app-input-side>
-  <app-number [(value)]="in_rpm">RPM</app-number>
+  <app-number [(value)]="in_rpm" [min]="1" [max]="256">RPM</app-number>
   <app-enum [values]="hardnessValues" [(value)]="in_hardnessIndex">Hardness</app-enum>
 </app-input-side>
 <app-output-side>

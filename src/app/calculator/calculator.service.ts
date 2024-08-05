@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Calculator } from "./calculator.model";
 import { VariableType } from "./variable.model";
+import { g_hardness } from "./constants";
 
 @Injectable({
   'providedIn': 'root'
@@ -23,12 +24,41 @@ export class CalculatorService {
       ],
       ouputs: [
         {
+          "name": "Raw Items/Second",
+          "type": VariableType.NUMBER
+        },
+        {
+          "name": "Items/Second (Cobblestone Generator)",
+          "type": VariableType.NUMBER
+        }
+      ],
+      calculate(input_values: number[]): number[] {
+        const rpm = input_values[0];
+        const hardness = Array.from(g_hardness.values())[input_values[1]];
+        let time = 45*hardness/rpm;
+
+        return [ (1/time), (1/(time+1)) ];
+      }
+    },
+    {
+      name: "Mechanical Mixer",
+      iconPath: "assets/icons/mixer.png",
+      inputs: [
+        {
+          "name": "RPM",
+          "type": VariableType.NUMBER
+        }
+      ],
+      ouputs: [
+        {
           "name": "Items/Second",
           "type": VariableType.NUMBER
         }
       ],
       calculate(input_values: number[]): number[] {
-        return [ input_values[0]+5 ];
+        const rpm = input_values[0];
+
+        return [ rpm ];
       }
     }
   ]
@@ -39,7 +69,16 @@ export class CalculatorService {
   get activeCalculator(): Calculator {
     return this.calculators[this.activeCalculatorIndex];
   }
+
+  get availableCalculators(): Calculator[] {
+    return this.calculators;
+  }
   
+  setActiveCalculator(index: number) {
+    this.activeCalculatorIndex = index;
+    this.calculate();
+  }
+
   setInput(index: number, value: number) {
     this.ins[index] = value;
     this.validateInput();

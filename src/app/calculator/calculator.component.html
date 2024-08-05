@@ -5,6 +5,9 @@
       @if(input.type === VariableType.NUMBER) {
         <app-number-variable [index]="i" [name]="input.name"/>
       }
+      @else if (input.type === VariableType.HARDNESS_ENUM) {
+        <app-enum-variable [index]="i" [name]="input.name" [values]="hardnessValues" />
+      }
       @else {
         <p>Not implemented yet :[</p>
       }

@@ -8,12 +8,18 @@
 .input-side {
   flex: 1.0;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .output-side {
   height: 40%;
   background-color: rgba(0, 0, 0, 0.1);
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 h1 {
@@ -23,4 +29,5 @@ h1 {
   font-size: 40px;
   letter-spacing: 4px;
   color: rgb(78, 78, 78);
+  text-align: center;
 }

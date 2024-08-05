@@ -12,6 +12,7 @@ button {
   background-color: rgba(0, 0, 0, 0);
   transition: background-color 0.1s;
   cursor: pointer;
+  border-radius: 10px 10px 0 0;
 }
 
 img {
@@ -21,5 +22,9 @@ img {
 }
 
 button:hover {
+  background-color: white;
+}
+
+button.selected {
   background-color: white;
 }

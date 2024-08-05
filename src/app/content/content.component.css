@@ -10,7 +10,8 @@
   display: flex;
   justify-items: stretch;
   align-items: center;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  /* border-right: 1px solid rgba(0, 0, 0, 0.1); */
+  box-shadow: 4px 0px 2px -2px rgba(0, 0, 0, 0.1);
 }
 
 .left-image {

@@ -4,11 +4,13 @@ import { NumberVariableComponent } from "./shared/number-variable/number-variabl
 import { Calculator } from './calculator.model';
 import { CalculatorService } from './calculator.service';
 import { VariableType } from './variable.model';
+import { EnumVariableComponent } from "./shared/enum-variable/enum-variable.component";
+import { g_hardness } from './constants';
 
 @Component({
   selector: 'app-calculator',
   standalone: true,
-  imports: [HeaderComponent, NumberVariableComponent],
+  imports: [HeaderComponent, NumberVariableComponent, EnumVariableComponent],
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.css'
 })
@@ -19,5 +21,9 @@ export class CalculatorComponent {
 
   get activeCalculator(): Calculator {
     return this.calculatorService.activeCalculator;
+  }
+
+  get hardnessValues(): string[] {
+    return Array.from(g_hardness.keys());
   }
 }

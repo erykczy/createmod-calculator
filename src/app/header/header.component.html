@@ -1,8 +1,7 @@
 <div class="tabs">
-  <button class="tab">
-    <img src="assets/icons/drill.png" class="tab-image" />
-  </button>
-  <button class="tab">
-    <img src="assets/icons/mixer.png" class="tab-image" />
-  </button>
+  @for(calculator of calculators; track calculator.name; let i = $index) {
+    <button class="tab" [class.selected]="calculator.name === activeCalculator.name" (click)="onTabChanged(i)">
+      <img [src]="calculator.iconPath" [alt]="calculator.name" class="tab-image" />
+    </button>
+  }
 </div>

@@ -1,0 +1,2 @@
+<label [class.output]="output"><ng-content /></label>
+<input [class.output]="output" [disabled]="output" [type]="output ? 'text' : 'number'" [ngModel]="visibleValue" (ngModelChange)="onValueChange($event)">

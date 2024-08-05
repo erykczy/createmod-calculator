@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
-import { CalculatorComponent } from "./calculator/calculator.component";
+import { CalculatorSideComponent } from "./calculator/calculator-side.component";
 import { ContentComponent } from './content/content.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, CalculatorComponent, ContentComponent],
+  imports: [RouterOutlet, HeaderComponent, CalculatorSideComponent, ContentComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

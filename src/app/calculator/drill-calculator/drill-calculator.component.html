@@ -1,0 +1,9 @@
+<app-input-side>
+  <app-number [(value)]="in_rpm">RPM</app-number>
+  <app-enum [values]="hardnessValues" [(value)]="in_hardnessIndex">Hardness</app-enum>
+</app-input-side>
+<app-output-side>
+  <app-number [output]="true" [unit]="'/s'" [(value)]="out1">Raw Items/Second</app-number>
+  <app-number [output]="true" [unit]="'/s'" [(value)]="out2">Items/Second + 1 second delay</app-number>
+  <app-number [output]="true" [unit]="'s'" [(value)]="out3">Processing Time</app-number>
+</app-output-side>

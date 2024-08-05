@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CalculatorService } from '../calculator/calculator.service';
+import { g_calculatorsData } from '../calculator/constants';
 
 @Component({
   selector: 'app-header',
@@ -11,15 +12,15 @@ import { CalculatorService } from '../calculator/calculator.service';
 export class HeaderComponent {
   private calculatorService = inject(CalculatorService);
 
-  get calculators() {
-    return this.calculatorService.availableCalculators;
+  get calculatorsData() {
+    return g_calculatorsData;
   }
 
-  get activeCalculator() {
-    return this.calculatorService.activeCalculator;
+  get activeCalculatorIndex() {
+    return this.calculatorService.activeCalculatorIndex;
   }
 
   onTabChanged(index: number) {
-    this.calculatorService.setActiveCalculator(index);
+    this.calculatorService.setActiveCalculatorIndex(index);
   }
 }

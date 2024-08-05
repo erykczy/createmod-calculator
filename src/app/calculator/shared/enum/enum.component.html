@@ -1,0 +1,6 @@
+<label [class.output]="output"><ng-content /></label>
+<select [ngModel]="value" (ngModelChange)="onValueChange($event)">
+  @for(opt of values; track opt; let i = $index) {
+    <option [value]="i">{{opt}}</option>
+  }
+</select>

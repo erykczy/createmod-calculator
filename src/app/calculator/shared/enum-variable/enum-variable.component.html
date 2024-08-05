@@ -1,6 +1,0 @@
-<label [class.output]="isOutput">{{name}}</label>
-<select [(ngModel)]="value" (ngModelChange)="onValueChanged()">
-  @for(opt of values; track opt; let i = $index) {
-    <option [value]="i">{{opt}}</option>
-  }
-</select>

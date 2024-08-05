@@ -1,9 +1,4 @@
-import { Variable } from "./variable.model";
-
-export interface Calculator {
+export interface CalculatorData {
   name: string;
   iconPath: string;
-  inputs: Variable[];
-  ouputs: Variable[];
-  calculate(input_values: number[]): number[];
 }

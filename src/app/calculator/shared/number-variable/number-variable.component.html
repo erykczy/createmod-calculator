@@ -1,0 +1,2 @@
+<label [class.output]="isOutput">{{name}}</label>
+<input [class.output]="isOutput" [disabled]="isOutput" type="number" [(ngModel)]="value" (ngModelChange)="onValueChanged()">

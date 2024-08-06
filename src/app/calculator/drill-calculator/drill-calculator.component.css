@@ -1,0 +1,12 @@
+.hardness {
+  display: flex;
+  flex-direction: row;
+}
+
+.hardnessEnum {
+  flex: 3;
+}
+
+.hardnessVariable {
+  flex: 1;
+}

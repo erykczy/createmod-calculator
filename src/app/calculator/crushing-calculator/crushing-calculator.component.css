@@ -1,0 +1,12 @@
+.recipe {
+  display: flex;
+  flex-direction: row;
+}
+
+.recipeEnum {
+  flex: 2;
+}
+
+.recipeVariable {
+  flex: 1;
+}

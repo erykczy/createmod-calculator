@@ -15,16 +15,21 @@ import { NumberComponent } from "../shared/number/number.component";
 export class DrillCalculatorComponent {
   in_rpm: number = 256;
   in_hardnessIndex: number = 0;
+  in_customHardness: number = 0;
   out1: number = 0;
   out2: number = 0;
   out3: number = 0;
 
   get hardnessValues(): string[] {
-    return Array.from(g_hardness.keys());
+    let arr: string[] = Array.from(g_hardness.keys());
+    arr.unshift("<custom>");
+    return arr;
   }
 
   get hardness(): number {
-    return Array.from(g_hardness.values())[this.in_hardnessIndex];
+    if(this.in_hardnessIndex == 0)
+      return this.in_customHardness;
+    return Array.from(g_hardness.values())[this.in_hardnessIndex-1];
   }
 
   calculate() {

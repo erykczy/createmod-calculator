@@ -25,7 +25,8 @@ export class NumberComponent {
     return String(this.value);
   }
 
-  onValueChange(newValue: number) {
+  onValueChange(newValueStr: string) {
+    let newValue = Number(newValueStr);
     if(newValue === null) newValue = 0;
     if(this.min !== undefined && newValue < this.min)
       newValue = this.min;

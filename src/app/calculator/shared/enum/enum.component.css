@@ -23,4 +23,5 @@ select {
   color: rgb(92, 92, 92);
   box-sizing: border-box;
   padding-left: 15px;
+  background-color: white;
 }

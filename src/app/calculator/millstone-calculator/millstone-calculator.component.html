@@ -1,5 +1,11 @@
 <app-input-side>
   <app-number [(value)]="in_rpm" [min]="1">RPM</app-number>
+  <div class="recipe">
+    <app-enum class="recipeEnum" [values]="recipesValues" [(value)]="in_recipeIndex">Recipe Input</app-enum>
+    @if(in_recipeIndex === 0) {
+      <app-number class="recipeVariable" [(value)]="in_customRecipeDuration" [min]="0">Custom Recipe Duration</app-number>
+    }
+  </div>
 </app-input-side>
 <app-output-side>
   <app-number [output]="true" [unit]="'/s'" [(value)]="out1">Recipes/Second</app-number>

@@ -1,5 +1,6 @@
 <app-input-side>
-  <app-number [(value)]="in_rpm" [min]="1">RPM</app-number>
+  <app-number [(value)]="in_stackSize" [min]="1">Stack Size</app-number>
+  <app-number [(value)]="in_fansAmount" [min]="1">Amount of Fans</app-number>
 </app-input-side>
 <app-output-side>
   <app-number [output]="true" [unit]="'/s'" [(value)]="out1">Recipes/Second</app-number>

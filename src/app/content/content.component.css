@@ -10,13 +10,26 @@
   display: flex;
   justify-items: stretch;
   align-items: center;
+  justify-content: center;
   /* border-right: 1px solid rgba(0, 0, 0, 0.1); */
   box-shadow: 4px 0px 2px -2px rgba(0, 0, 0, 0.1);
 }
 
+.left-image-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .left-image {
-  width: 100%;
+  width: 95%;
   aspect-ratio: 1.0;
+  transition: width 0.08s;
+  cursor: pointer;
+}
+
+.left-image:hover {
+  width: 100%;
 }
 
 .right {

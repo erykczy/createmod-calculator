@@ -1,6 +1,6 @@
 <div class="content">
   <div class="left">
-    <img [src]="activeCalculatorIconPath" class="left-image" />
+    <a class="left-image-link" [href]="activeCalculatorData.wikiPage" target="_blank"><img [src]="activeCalculatorData.iconPath" class="left-image" /></a>
   </div>
   <div class="right">
     <app-calculator-side />

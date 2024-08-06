@@ -13,7 +13,7 @@ import { g_calculatorsData } from '../calculator/constants';
 export class ContentComponent {
   private calculatorService = inject(CalculatorService);
 
-  get activeCalculatorIconPath() {
-    return g_calculatorsData[this.calculatorService.activeCalculatorIndex].iconPath;
+  get activeCalculatorData() {
+    return g_calculatorsData[this.calculatorService.activeCalculatorIndex];
   }
 }

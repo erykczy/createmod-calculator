@@ -16,3 +16,9 @@ h1 {
   text-align: center;
   cursor: default;
 }
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 30px;
+  }
+}

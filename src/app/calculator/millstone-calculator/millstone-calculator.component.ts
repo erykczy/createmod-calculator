@@ -15,7 +15,7 @@ import { g_millstoneRecipes } from '../constants';
 export class MillstoneCalculatorComponent {
   in_rpm: number = 256;
   in_recipeIndex: number = 0;
-  in_customRecipeDuration: number = 0;
+  in_customRecipeDuration: number = 100;
   out1: number = 0;
   out2: number = 0;
 
@@ -32,6 +32,13 @@ export class MillstoneCalculatorComponent {
     if(this.in_recipeIndex == 1)
       return 100;
     return Array.from(g_millstoneRecipes.values())[this.in_recipeIndex-2];
+  }
+
+  get recipeInputHint(): string {
+    return "Different recipes have different durations. If you can't see your input, select <all other recipes> or <custom>";
+  }
+  get recipeDurationHint(): string {
+    return "Click the image on the left side of this page. There you will find a table with all available recipes and their duration";
   }
 
   calculate() {

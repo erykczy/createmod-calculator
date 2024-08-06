@@ -1,9 +1,9 @@
 <app-input-side>
   <app-number [(value)]="in_rpm" [min]="1">RPM</app-number>
-  <div class="recipe">
-    <app-enum class="recipeEnum" [values]="recipesValues" [(value)]="in_recipeIndex">Recipe Input</app-enum>
+  <div class="variable-container">
+    <app-enum class="enum" [values]="recipesValues" [(value)]="in_recipeIndex" [help]="recipeInputHint">Recipe Input</app-enum>
     @if(in_recipeIndex === 0) {
-      <app-number class="recipeVariable" [(value)]="in_customRecipeDuration" [min]="0">Custom Recipe Duration</app-number>
+      <app-number class="variable" [(value)]="in_customRecipeDuration" [min]="0" [help]="recipeDurationHint">Custom Recipe Duration</app-number>
     }
   </div>
 </app-input-side>

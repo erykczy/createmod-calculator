@@ -12,6 +12,8 @@ export class EnumComponent {
   @Input() output: boolean = false;
   @Input({required: true}) values!: string[];
   @Input() value: number = 0;
+  @Input() help?: string = undefined;
+  @Input() helpUrl?: string = undefined;
   @Output() valueChange = new EventEmitter();
   
   onValueChange(newValue: string) {

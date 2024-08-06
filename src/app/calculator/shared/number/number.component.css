@@ -1,12 +1,17 @@
+:host {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 label {
-  display: block;
   text-transform: uppercase;
   font-weight: bold;
   color: rgb(154, 154, 154);
   font-size: 12px;
   text-align: center;
   margin-bottom: 2px;
-  margin-right: 10px;
 }
 
 input {
@@ -16,6 +21,6 @@ input {
   border: solid 1px rgb(154, 154, 154);
   text-align: center;
   color: rgb(92, 92, 92);
-  padding: 0;
   cursor: text;
+  box-sizing: border-box;
 }

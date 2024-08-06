@@ -1,2 +1,2 @@
-<label [class.output]="output"><ng-content /></label>
-<input [class.output]="output" [disabled]="output" [type]="output ? 'text' : 'number'" [ngModel]="visibleValue" (ngModelChange)="onValueChange($event)" minMax [min]="min" [max]="max">
+<label [class.output]="output" [class.tooltip]="help !== undefined"><ng-content /><span class="tooltip-text">{{help}}</span></label>
+<input [clickSelect]="output" [class.output]="output" [readonly]="output" [type]="output ? 'text' : 'number'" [ngModel]="visibleValue" (ngModelChange)="onValueChange($event)" minMax [min]="min" [max]="max">  

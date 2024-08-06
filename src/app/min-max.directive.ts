@@ -14,9 +14,9 @@ export class MinMaxDirective {
 
   constructor(private ref: ElementRef) { }
 
-  @HostListener('input', [ '$event' ])
-  public onInput(event: InputEvent): void {
-    let val = parseInt(this.ref.nativeElement.value);
+  @HostListener('focusout', [ '$event' ])
+  public onFocusOut(event: FocusEvent): void {
+    let val = parseFloat(this.ref.nativeElement.value);
 
     if(Number.isNaN(val))
       this.ref.nativeElement.value = (this.min) ? this.min.toString() : 0;

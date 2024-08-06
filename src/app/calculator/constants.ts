@@ -1,5 +1,7 @@
 import { CalculatorData } from "./calculator.model"
 
+export var g_invisibleChar: string = "​";
+
 export function decimal(num: number): number {
   return Number(num.toFixed(3));
 }
@@ -28,12 +30,12 @@ export var g_calculatorsData: CalculatorData[] = [
   {
     name: "Millstone",
     iconPath: "assets/icons/millstone.png",
-    wikiPage: "https://create.fandom.com/wiki/Millstone"
+    wikiPage: "https://create.fandom.com/wiki/Millstone#Recipe_Table"
   },
   {
     name: "Crushing",
     iconPath: "assets/icons/crushing.png",
-    wikiPage: "https://create.fandom.com/wiki/Crushing_Wheel"
+    wikiPage: "https://create.fandom.com/wiki/Crushing_Wheel#Recipe_Duration_Table"
   },
   {
     name: "Mechanical Belt",
@@ -44,8 +46,14 @@ export var g_calculatorsData: CalculatorData[] = [
 
 export var g_hardness = new Map<string, number>([
   ["cobblestone", 2],
+  ["stone", 1.5],
+  ["basalt", 1.25],
   ["obsidian", 50]
 ]);
+
+export var g_delays = new Map<string, number>([
+ ["generator (any)", 1.5] 
+])
 
 export var g_millstoneRecipes = new Map<string, number>([
   ["clay block", 50],

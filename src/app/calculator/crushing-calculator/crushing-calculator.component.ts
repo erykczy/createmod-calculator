@@ -35,6 +35,13 @@ export class CrushingCalculatorComponent {
     return Array.from(g_crushingRecipes.values())[this.in_recipeIndex-2];
   }
 
+  get recipeInputHint(): string {
+    return "Different recipes have different durations. If you can't see your input, select <all other recipes> or <custom>";
+  }
+  get recipeDurationHint(): string {
+    return "Click the image on the left side of this page. There you will find a table with all available recipes and their duration";
+  }
+
   calculate() {
     let a = this.recipeDuration - 20;
     let _b = this.in_rpm * 4 / 50 / Math.log2(this.in_stackSize);

@@ -16,6 +16,10 @@ export class BulkProcessingCalculatorComponent {
   out1: number = 0;
   out2: number = 0;
 
+  get fansHint(): string {
+    return "Multiple fans applying the same processing effect on the same block divide the processing time";
+  }
+
   calculate() {
     let time: number;
     if(this.in_stackSize <= 16)

@@ -35,3 +35,9 @@
 .right {
   flex: 1.0;
 }
+
+@media (max-width: 425px) {
+  .left {
+    width: 0;
+  }
+}

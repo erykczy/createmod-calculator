@@ -1,12 +1,13 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { decimal } from '../../constants';
+import { decimal, g_invisibleChar } from '../../constants';
 import { MinMaxDirective } from '../../../min-max.directive';
+import { ClickSelectDirective } from '../../../click-select';
 
 @Component({
   selector: 'app-number',
   standalone: true,
-  imports: [FormsModule, MinMaxDirective],
+  imports: [FormsModule, MinMaxDirective, ClickSelectDirective],
   templateUrl: './number.component.html',
   styleUrl: './number.component.css'
 })
@@ -17,11 +18,13 @@ export class NumberComponent {
   @Input() value: number = 0;
   @Input() min?: number = undefined;
   @Input() max?: number = undefined;
+  @Input() help?: string = undefined;
+  @Input() helpUrl?: string = undefined;
   @Output() valueChange = new EventEmitter();
   
   get visibleValue(): string {
     if(this.output)
-      return decimal(this.value)+this.unit;
+      return decimal(this.value)+g_invisibleChar+this.unit;
     return String(this.value);
   }
 

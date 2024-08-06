@@ -6,6 +6,14 @@ export function decimal(num: number): number {
   return Number(num.toFixed(3));
 }
 
+export function clamp(num: number, min: number, max: number) {
+  return Math.max(min, Math.min(max, num));
+}
+
+export function lerp(a: number, b: number, t: number) {
+  return a + t * (b - a);
+}
+
 export var g_calculatorsData: CalculatorData[] = [
   {
     name: "Mechanical Drill",

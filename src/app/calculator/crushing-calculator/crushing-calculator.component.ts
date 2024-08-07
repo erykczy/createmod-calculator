@@ -84,7 +84,7 @@ export class CrushingCalculatorComponent {
     frames += this.delay;
 
     this.out2 = frames / 20;
-    this.out1 = 1 / this.out2;
+    this.out1 = this.in_stackSize / this.out2;
     // let a = this.recipeDuration - 20;
     // let _b = this.in_rpm * 4 / 50 / Math.log2(this.in_stackSize);
     // let b = Math.max(0.25, Math.min(20, _b));

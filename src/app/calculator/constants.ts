@@ -6,6 +6,14 @@ export function decimal(num: number): number {
   return Number(num.toFixed(3));
 }
 
+export function clamp(num: number, min: number, max: number) {
+  return Math.max(min, Math.min(max, num));
+}
+
+export function lerp(a: number, b: number, t: number) {
+  return a + t * (b - a);
+}
+
 export var g_calculatorsData: CalculatorData[] = [
   {
     name: "Mechanical Drill",
@@ -53,7 +61,13 @@ export var g_hardness = new Map<string, number>([
 
 export var g_delays = new Map<string, number>([
  ["generator (any)", 1.5] 
-])
+]);
+
+export var g_inputDelays = new Map<string, number>([
+  ["funnel (fastest)", 1],
+  ["chute (slower)", 3],
+  ["thrown (slowest, not recommended)", 27]
+]);
 
 export var g_millstoneRecipes = new Map<string, number>([
   ["clay block", 50],

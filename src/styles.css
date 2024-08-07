@@ -4,9 +4,21 @@
   font-style: normal;
 }
 
+input {
+  -moz-appearance: textfield;
+  background-color: rgba(0, 0, 0, 0);
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
+}
+
+input[readonly] {
+  background-color: rgba(0, 0, 0, 0);
+}
+input[readonly]:focus {
+  outline: none;
 }
 
 .variable-container {
@@ -64,9 +76,3 @@ input::-webkit-inner-spin-button {
   opacity: 1;
 }
 
-input[readonly] {
-  background-color: rgba(0, 0, 0, 0);
-}
-input[readonly]:focus {
-  outline: none;
-}

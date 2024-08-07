@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { g_delays, g_hardness } from '../constants';
+import { clamp, g_delays, g_hardness } from '../constants';
 import { InputSideComponent } from "../shared/input-side/input-side.component";
 import { OutputSideComponent } from "../shared/output-side/output-side.component";
 import { EnumComponent } from "../shared/enum/enum.component";
@@ -52,10 +52,34 @@ export class DrillCalculatorComponent {
   }
 
   calculate() {
-    this.out4 = 45*this.hardness/this.in_rpm;
-    this.out1 = 1/this.out3;
-    this.out2 = 1/(this.out3+this.delay);
-    this.out3 = this.out4 + this.delay;
+    let breakSpeed = this.in_rpm / 100;
+    let ticksUntilNextProgress = 0;
+    let destroyProgress = 0;
+    let frame: number;
+    for(frame = 0; true; frame++) {
+      if(ticksUntilNextProgress-- > 0)
+        continue;
+
+      destroyProgress += clamp(Math.floor(breakSpeed / this.hardness), 1, 10 - destroyProgress);
+      console.log(frame);
+
+      if(destroyProgress >= 10) {
+        break;
+      }
+
+      ticksUntilNextProgress = Math.floor(this.hardness / breakSpeed);
+    }
+    frame += 1; // this weird frame of delay
+    let totalFrames = frame+1;
+
+    this.out1 = totalFrames / 20;
+    this.out2 = 1 / this.out1;
+    let delayInFrames = this.delay*20;
+    this.out3 = ((totalFrames-Math.min(1, delayInFrames)) + delayInFrames) / 20;
+    this.out4 = 1 / this.out3;
+    // this.out1 = 1/this.out3;
+    // this.out2 = 1/(this.out3+this.delay);
+    // this.out3 = this.out4 + this.delay;
   }
 
   ngOnInit() { this.calculate(); }

@@ -42,7 +42,7 @@ export class MillstoneCalculatorComponent {
   }
 
   calculate() {
-    let mpf = Math.max(1, Math.min(512, this.in_rpm / 16));
+    let mpf = Math.max(1, Math.min(512, Math.floor(this.in_rpm / 16)));
     let gt = Math.ceil(this.recipeDuration / mpf) + 1;
     this.out2 = gt / 20;
     this.out1 = 1 / this.out2;

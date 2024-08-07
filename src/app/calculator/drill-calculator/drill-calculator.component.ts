@@ -61,7 +61,6 @@ export class DrillCalculatorComponent {
         continue;
 
       destroyProgress += clamp(Math.floor(breakSpeed / this.hardness), 1, 10 - destroyProgress);
-      console.log(frame);
 
       if(destroyProgress >= 10) {
         break;

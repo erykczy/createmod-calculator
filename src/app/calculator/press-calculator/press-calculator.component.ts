@@ -24,6 +24,10 @@ export class PressCalculatorComponent {
     return Math.floor(lerp(1, 60, clamp(this.in_rpm/512, 0, 1)));
   }
 
+  get hint1(): string {
+    return "Includes time it takes to lift the press";
+  }
+
   calculate() {
     let runningTicks = 0;
     let frame: number;

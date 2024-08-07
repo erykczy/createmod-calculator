@@ -18,6 +18,10 @@ export class BeltCalculatorComponent {
   out2: number = 0;
   out3: number = 0;
 
+  get hint1(): string {
+    return "Traverse time may be shorter depending on how you input and output items"
+  }
+
   calculate() {
     let ticksOneBlock = 1 / (this.in_rpm / 480);
     let secondsOneBlock = ticksOneBlock/20;

@@ -19,11 +19,17 @@ export class BeltCalculatorComponent {
   out3: number = 0;
 
   calculate() {
-    let stacksPerMinute = 75/32 * this.in_rpm;
-    let stacksPerSecond = stacksPerMinute / 60;
-    this.out2 = stacksPerSecond;
-    this.out1 = stacksPerSecond * this.in_stackSize;
-    this.out3 = 1/stacksPerSecond*this.in_beltLength;
+    let ticksOneBlock = 1 / (this.in_rpm / 480);
+    let secondsOneBlock = ticksOneBlock/20;
+    this.out2 = 1/secondsOneBlock;
+    this.out1 = this.out2 * this.in_stackSize;
+    this.out3 = Math.ceil(ticksOneBlock * this.in_beltLength) / 20;
+
+    // let stacksPerMinute = 75/32 * this.in_rpm;
+    // let stacksPerSecond = stacksPerMinute / 60;
+    // this.out2 = stacksPerSecond;
+    // this.out1 = stacksPerSecond * this.in_stackSize;
+    // this.out3 = 1/stacksPerSecond*this.in_beltLength;
   }
 
   ngOnInit() { this.calculate(); }

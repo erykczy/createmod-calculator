@@ -7,8 +7,14 @@
       <app-number class="variable" [(value)]="in_customRecipeDuration" [min]="0" [help]="recipeDurationHint">Custom Recipe Duration</app-number>
     }
   </div>
+  <div class="variable-container">
+    <app-enum class="enum" [values]="delayValues" [(value)]="in_delayIndex" [help]="delayHint">Input Delay</app-enum>
+    @if(in_delayIndex === 0) {
+      <app-number class="variable" [(value)]="in_customDelay" [min]="0">Custom Delay (ticks)</app-number>
+    }
+  </div>
 </app-input-side>
 <app-output-side>
-  <app-number [output]="true" [unit]="'/s'" [(value)]="out1">Recipes/Second</app-number>
-  <app-number [output]="true" [unit]="'s'" [(value)]="out2">Processing Time</app-number>
+  <app-number [output]="true" [unit]="'/s'" [(value)]="out1" [help]="warning">Recipes/Second</app-number>
+  <app-number [output]="true" [unit]="'s'" [(value)]="out2" [help]="warning">Processing Time</app-number>
 </app-output-side>

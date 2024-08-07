@@ -61,7 +61,13 @@ export var g_hardness = new Map<string, number>([
 
 export var g_delays = new Map<string, number>([
  ["generator (any)", 1.5] 
-])
+]);
+
+export var g_inputDelays = new Map<string, number>([
+  ["funnel (fastest)", 1],
+  ["chute (slower)", 3],
+  ["thrown (slowest, not recommended)", 27]
+]);
 
 export var g_millstoneRecipes = new Map<string, number>([
   ["clay block", 50],

@@ -9,7 +9,7 @@
   <div class="variable-container">
     <app-enum class="enum" [values]="delayValues" [(value)]="in_delayIndex" [help]="delayHint">Delay</app-enum>
     @if(in_delayIndex === 0) {
-      <app-number class="variable" [(value)]="in_customDelay" [min]="0">Custom Delay</app-number>
+      <app-number class="variable" [(value)]="in_customDelay" [min]="0">Custom Delay (sec)</app-number>
     }
   </div>
 </app-input-side>

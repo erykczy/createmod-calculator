@@ -60,7 +60,8 @@ export var g_hardness = new Map<string, number>([
 ]);
 
 export var g_delays = new Map<string, number>([
- ["generator (any)", 1.5] 
+  ["no delay", 0],
+  ["generator (any)", 1.5] 
 ]);
 
 export var g_inputDelays = new Map<string, number>([

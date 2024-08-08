@@ -21,8 +21,6 @@ export class DrillCalculatorComponent {
   in_customDelay: number = 0;
   out1: number = 0;
   out2: number = 0;
-  out3: number = 0;
-  out4: number = 0;
 
   get hardnessValues(): string[] {
     let arr: string[] = Array.from(g_hardness.keys());
@@ -73,17 +71,13 @@ export class DrillCalculatorComponent {
       frame += 1; // this weird frame of delay
       let totalFrames = frame+1;
   
-      this.out1 = totalFrames / 20;
-      this.out2 = 1 / this.out1;
       let delayInFrames = this.delay*20;
-      this.out3 = ((totalFrames-Math.min(1, delayInFrames)) + delayInFrames) / 20;
-      this.out4 = 1 / this.out3;
+      this.out2 = ((totalFrames-Math.min(1, delayInFrames)) + delayInFrames) / 20;
+      this.out1 = 1 / this.out2;
     }
     else {
       this.out1 = 0;
       this.out2 = 0;
-      this.out3 = 0;
-      this.out4 = 0;
     }
     
   }

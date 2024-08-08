@@ -17,6 +17,30 @@
   flex-direction: column;
 }
 
+.repolink img {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  opacity: 20%;
+  transition: opacity 0.15s;
+  width: 30px;
+  height: 30px;
+  visibility: hidden;
+}
+
+.repolink:hover img {
+  opacity: 100%;
+}
+/* .repolink {
+  position: absolute;
+  bottom: 0;
+  color: rgb(154, 154, 154);
+}
+
+.repolink a {
+  color: rgb(134, 134, 134);
+} */
+
 app-content {
   flex: 1.0;
 }
@@ -42,6 +66,9 @@ app-content {
   .window {
     width: 80%;
     height: 80%;
+  }
+  .repolink img {
+    visibility: visible;
   }
 }
 

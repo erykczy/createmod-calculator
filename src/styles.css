@@ -4,6 +4,10 @@
   font-style: normal;
 }
 
+b {
+  font-weight: bold;
+}
+
 input {
   -moz-appearance: textfield;
   background-color: rgba(0, 0, 0, 0);

@@ -18,7 +18,7 @@ export class MixerCalculatorComponent {
   out2: number = 0;
 
   calculate() {
-    this.out2 = (clamp((Math.log2(Math.floor(512 / this.in_rpm))) * Math.ceil(1 * 15) + 1, 1, 512)+1) / 20;
+    this.out2 = (clamp(Math.floor(Math.log2(Math.floor(512 / this.in_rpm))) * Math.ceil(1 * 15) + 1, 1, 512)+1) / 20;
     this.out1 = 1 / this.out2;
   }
 

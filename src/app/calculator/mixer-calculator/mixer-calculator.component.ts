@@ -3,11 +3,12 @@ import { InputSideComponent } from "../shared/input-side/input-side.component";
 import { NumberComponent } from "../shared/number/number.component";
 import { OutputSideComponent } from "../shared/output-side/output-side.component";
 import { clamp } from '../constants';
+import { WarningComponent } from "../shared/warning/warning.component";
 
 @Component({
   selector: 'app-mixer-calculator',
   standalone: true,
-  imports: [InputSideComponent, NumberComponent, OutputSideComponent],
+  imports: [InputSideComponent, NumberComponent, OutputSideComponent, WarningComponent],
   templateUrl: './mixer-calculator.component.html',
   styleUrl: './mixer-calculator.component.css'
 })

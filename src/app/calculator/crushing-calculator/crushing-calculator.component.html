@@ -1,5 +1,5 @@
 <app-input-side>
-  <app-number [(value)]="in_rpm" [min]="1">RPM</app-number>
+  <app-number [(value)]="in_rpm" [min]="0">RPM</app-number>
   <app-number [(value)]="in_stackSize" [min]="1">Stack Size</app-number>
   <div class="variable-container">
     <app-enum class="enum" [values]="recipesValues" [(value)]="in_recipeIndex" [help]="recipeInputHint">Recipe Input</app-enum>

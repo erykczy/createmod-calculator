@@ -63,28 +63,34 @@ export class CrushingCalculatorComponent {
   }
 
   calculate() {
-    let speed = this.in_rpm/50*4;
-
-    let remainingTime = this.recipeDuration;
-    let appliedRecipe = false;
-    let frame: number;
-    for(frame = 0; true; frame++) {
-      let processingSpeed = clamp((speed) / (!appliedRecipe ? Math.log2(this.in_stackSize) : 1), 0.25, 20);//clamp(speed / Math.log2(this.in_stackSize), 0.25, 20);
-      remainingTime -= processingSpeed;
-      
-      if(remainingTime < 20 && !appliedRecipe) {
-        appliedRecipe = true;
-        remainingTime = 0;
-        continue;
+    if(this.in_rpm > 0) {
+      let speed = this.in_rpm/50*4;
+  
+      let remainingTime = this.recipeDuration;
+      let appliedRecipe = false;
+      let frame: number;
+      for(frame = 0; true; frame++) {
+        let processingSpeed = clamp((speed) / (!appliedRecipe ? Math.log2(this.in_stackSize) : 1), 0.25, 20);//clamp(speed / Math.log2(this.in_stackSize), 0.25, 20);
+        remainingTime -= processingSpeed;
+        
+        if(remainingTime < 20 && !appliedRecipe) {
+          appliedRecipe = true;
+          remainingTime = 0;
+          continue;
+        }
+        if(remainingTime <= 0)
+          break;
       }
-      if(remainingTime <= 0)
-        break;
+      let frames: number = frame + 1;
+      frames += this.delay;
+  
+      this.out2 = frames / 20;
+      this.out1 = this.in_stackSize / this.out2;
     }
-    let frames: number = frame + 1;
-    frames += this.delay;
-
-    this.out2 = frames / 20;
-    this.out1 = this.in_stackSize / this.out2;
+    else {
+      this.out1 = 0;
+      this.out2 = 0;
+    }
     // let a = this.recipeDuration - 20;
     // let _b = this.in_rpm * 4 / 50 / Math.log2(this.in_stackSize);
     // let b = Math.max(0.25, Math.min(20, _b));

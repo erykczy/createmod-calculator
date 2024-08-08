@@ -29,24 +29,31 @@ export class PressCalculatorComponent {
   }
 
   calculate() {
-    let runningTicks = 0;
-    let frame: number;
-    for(frame = 0; true; frame++) {
-      if(runningTicks > this.cycle)
-        break;
+    if(this.in_rpm > 0) {
+      let runningTicks = 0;
+      let frame: number;
+      for(frame = 0; true; frame++) {
+        if(runningTicks > this.cycle)
+          break;
 
-      let prevRunningTicks = runningTicks;
-      runningTicks += this.runningTickSpeed;
-      
-      if(prevRunningTicks < this.cycle / 2 && runningTicks >= this.cycle / 2) {
-        runningTicks = this.cycle / 2;
+        let prevRunningTicks = runningTicks;
+        runningTicks += this.runningTickSpeed;
+        
+        if(prevRunningTicks < this.cycle / 2 && runningTicks >= this.cycle / 2) {
+          runningTicks = this.cycle / 2;
+        }
       }
-    }
-    frame += 1; // 1 lost frame while enabling 'running' state
-    let totalFrames: number = frame+1;
+      frame += 1; // 1 lost frame while enabling 'running' state
+      let totalFrames: number = frame+1;
 
-    this.out2 = totalFrames / 20;
-    this.out1 = 1 / this.out2;
+      this.out2 = totalFrames / 20;
+      this.out1 = 1 / this.out2;
+    }
+    else {
+      this.out1 = 0;
+      this.out2 = 0;
+    }
+
   }
 
   ngOnInit() { this.calculate(); }

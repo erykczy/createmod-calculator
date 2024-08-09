@@ -20,7 +20,6 @@ export class NumberComponent {
   @Input() min?: number = undefined;
   @Input() max?: number = undefined;
   @Input() help?: string = undefined;
-  @Input() helpUrl?: string = undefined;
   @Input() value: number = 0;
   @Output() valueChange = new EventEmitter();
   private calculatorService = inject(CalculatorService);

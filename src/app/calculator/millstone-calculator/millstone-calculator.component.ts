@@ -4,34 +4,26 @@ import { NumberComponent } from "../shared/number/number.component";
 import { OutputSideComponent } from "../shared/output-side/output-side.component";
 import { EnumComponent } from "../shared/enum/enum.component";
 import { g_millstoneRecipes } from '../constants';
+import { NuenumComponent } from "../shared/nuenum/nuenum.component";
 
 @Component({
   selector: 'app-millstone-calculator',
   standalone: true,
-  imports: [InputSideComponent, NumberComponent, OutputSideComponent, EnumComponent],
+  imports: [InputSideComponent, NumberComponent, OutputSideComponent, EnumComponent, NuenumComponent],
   templateUrl: './millstone-calculator.component.html',
   styleUrl: './millstone-calculator.component.css'
 })
 export class MillstoneCalculatorComponent {
   in_rpm: number = 256;
-  in_recipeIndex: number = 0;
-  in_customRecipeDuration: number = 100;
+  in_recipeDuration: number = 0;
   out1: number = 0;
   out2: number = 0;
 
-  get recipesValues(): string[] {
-    let arr: string[] = Array.from(g_millstoneRecipes.keys());
-    arr.unshift("<all other recipes>")
-    arr.unshift("<custom>");
-    return arr;
+  get recipesKeys(): string[] {
+    return Array.from(g_millstoneRecipes.keys());
   }
-
-  get recipeDuration(): number {
-    if(this.in_recipeIndex == 0)
-      return this.in_customRecipeDuration;
-    if(this.in_recipeIndex == 1)
-      return 100;
-    return Array.from(g_millstoneRecipes.values())[this.in_recipeIndex-2];
+  get recipesValues(): number[] {
+    return Array.from(g_millstoneRecipes.values());
   }
 
   get recipeInputHint(): string {
@@ -44,7 +36,7 @@ export class MillstoneCalculatorComponent {
   calculate() {
     if(this.in_rpm > 0) {
       let mpf = Math.max(1, Math.min(512, Math.floor(this.in_rpm / 16)));
-      let gt = Math.ceil(this.recipeDuration / mpf) + 1;
+      let gt = Math.ceil(this.in_recipeDuration / mpf) + 1;
       this.out2 = gt / 20;
       this.out1 = 1 / this.out2;
     }

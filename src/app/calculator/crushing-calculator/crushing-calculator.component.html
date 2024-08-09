@@ -1,18 +1,9 @@
 <app-input-side>
   <app-number [(value)]="in_rpm" [min]="0" id="rpm">RPM</app-number>
   <app-number [(value)]="in_stackSize" [min]="1" id="stack-size">Stack Size</app-number>
-  <div class="variable-container">
-    <app-enum class="enum" [values]="recipesValues" [(value)]="in_recipeIndex" [help]="recipeInputHint" id="recipe-input">Recipe Input</app-enum>
-    @if(in_recipeIndex === 0) {
-      <app-number class="variable" [(value)]="in_customRecipeDuration" [min]="0" [help]="recipeDurationHint" id="custom-recipe-duration">Custom Recipe Duration</app-number>
-    }
-  </div>
-  <div class="variable-container">
-    <app-enum class="enum" [values]="delayValues" [(value)]="in_delayIndex" [help]="delayHint" id="input-delay">Input Delay</app-enum>
-    @if(in_delayIndex === 0) {
-      <app-number class="variable" [(value)]="in_customDelay" [min]="0" id="custom-input-delay">Custom Delay (ticks)</app-number>
-    }
-  </div>
+  
+  <app-nuenum id="recipe-duration" label_custom="Custom Recipe Duration" [keys]="recipesKeys" [values]="recipesValues" [hint]="recipeInputHint" [hint_custom]="recipeDurationHint" [(value)]="in_recipeDuration">Recipe Input</app-nuenum>
+  <app-nuenum id="input-delay" label_custom="Custom Delay (ticks)" [keys]="delayKeys" [values]="delayValues" [hint]="delayHint" [(value)]="in_delay">Input Delay</app-nuenum>
 </app-input-side>
 <app-output-side>
   <app-number [output]="true" [unit]="'/s'" [(value)]="out1" [help]="warning">Recipes/Second</app-number>

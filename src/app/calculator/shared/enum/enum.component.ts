@@ -14,11 +14,9 @@ export class EnumComponent {
   @Input({required: true}) values!: string[];
   @Input() output: boolean = false;
   @Input() help?: string = undefined;
-  @Input() helpUrl?: string = undefined;
   @Input() value: number = 0;
   @Output() valueChange = new EventEmitter();
   private calculatorService = inject(CalculatorService);
-  private cdRef = inject(ChangeDetectorRef);
   
   get ngModelValue(): string {
     return this.value.toString();
@@ -41,7 +39,6 @@ export class EnumComponent {
         this.value = savedValue;
         this.valueChange.emit(this.value);
       });
-      //this.cdRef.detectChanges();
     }
   }
 }

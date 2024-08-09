@@ -1,17 +1,7 @@
 <app-input-side>
   <app-number [(value)]="in_rpm" [min]="0" id="rpm">RPM</app-number>
-  <div class="variable-container">
-    <app-enum class="enum" [values]="hardnessValues" [(value)]="in_hardnessIndex" id="hardness">Hardness</app-enum>
-    @if(in_hardnessIndex === 0) {
-      <app-number class="variable" [(value)]="in_customHardness" [min]="0" id="custom-hardness">Custom Hardness</app-number>
-    }
-  </div>
-  <div class="variable-container">
-    <app-enum class="enum" [values]="delayValues" [(value)]="in_delayIndex" [help]="delayHint" id="delay">Delay</app-enum>
-    @if(in_delayIndex === 0) {
-      <app-number class="variable" [(value)]="in_customDelay" [min]="0" id="custom=delay">Custom Delay (sec)</app-number>
-    }
-  </div>
+  <app-nuenum id="hardness" label_custom="Custom Hardness" [keys]="hardnessKeys" [values]="hardnessValues" [(value)]="in_hardness">Hardness</app-nuenum>
+  <app-nuenum id="delay" label_custom="Custom Delay (sec)" [keys]="delayKeys" [values]="delayValues" [(value)]="in_delay" [hint]="delayHint">Delay</app-nuenum>
 </app-input-side>
 <app-output-side>
   <app-number [output]="true" [unit]="'/s'" [(value)]="out1">Blocks/Second</app-number>

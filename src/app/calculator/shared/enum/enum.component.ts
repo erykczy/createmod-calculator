@@ -34,13 +34,14 @@ export class EnumComponent {
     if(this.output)
       return;
     if(this.id === undefined)
-      console.error("id is undefinded");
-    window.setTimeout(() => {
-      let savedValue = this.calculatorService.getSavedProperty(this.id!);
-      if(savedValue !== null) {
+      console.error("id is undefinded")
+    let savedValue = this.calculatorService.getSavedProperty(this.id!);
+    if(savedValue !== null) {
+      Promise.resolve().then(() => {
         this.value = savedValue;
         this.valueChange.emit(this.value);
-      }
-    });
+      });
+      //this.cdRef.detectChanges();
+    }
   }
 }

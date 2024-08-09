@@ -53,7 +53,7 @@ export class NumberComponent {
       return;
     if(this.id === undefined)
       console.error("id is undefinded");
-    window.setTimeout(() => {
+    Promise.resolve().then(() => {
       let savedValue = this.calculatorService.getSavedProperty(this.id!);
       if(savedValue !== null) {
         this.value = savedValue;

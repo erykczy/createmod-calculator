@@ -19,4 +19,15 @@ export class CalculatorService {
   setSelectedCalculator(id: string) {
     this.selectedCalculatorId = id;
   }
+
+  saveProperty(propertyName: string, value: number) {
+    window.localStorage.setItem(this.getSelectedCalculator().id+"."+propertyName, value.toString());
+  }
+
+  getSavedProperty(propetyName: string): number | null {
+    let val = window.localStorage.getItem(this.getSelectedCalculator().id+"."+propetyName);
+    if(val === null)
+      return null;
+    return Number(val);
+  }
 }

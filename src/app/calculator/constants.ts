@@ -2,8 +2,8 @@ import { CalculatorData } from "./calculator.model"
 
 export var g_invisibleChar: string = "​";
 
-export function decimal(num: number): number {
-  return Number(num.toFixed(3));
+export function decimal(num?: number): number | undefined {
+  return num === undefined ? undefined : Number(num.toFixed(3));
 }
 
 export function clamp(num: number, min: number, max: number) {

@@ -1,16 +1,16 @@
 <app-input-side>
-  <app-number [(value)]="in_rpm" [min]="0">RPM</app-number>
-  <app-number [(value)]="in_stackSize" [min]="1">Stack Size</app-number>
+  <app-number [(value)]="in_rpm" [min]="0" id="rpm">RPM</app-number>
+  <app-number [(value)]="in_stackSize" [min]="1" id="stack-size">Stack Size</app-number>
   <div class="variable-container">
-    <app-enum class="enum" [values]="recipesValues" [(value)]="in_recipeIndex" [help]="recipeInputHint">Recipe Input</app-enum>
+    <app-enum class="enum" [values]="recipesValues" [(value)]="in_recipeIndex" [help]="recipeInputHint" id="recipe-input">Recipe Input</app-enum>
     @if(in_recipeIndex === 0) {
-      <app-number class="variable" [(value)]="in_customRecipeDuration" [min]="0" [help]="recipeDurationHint">Custom Recipe Duration</app-number>
+      <app-number class="variable" [(value)]="in_customRecipeDuration" [min]="0" [help]="recipeDurationHint" id="custom-recipe-duration">Custom Recipe Duration</app-number>
     }
   </div>
   <div class="variable-container">
-    <app-enum class="enum" [values]="delayValues" [(value)]="in_delayIndex" [help]="delayHint">Input Delay</app-enum>
+    <app-enum class="enum" [values]="delayValues" [(value)]="in_delayIndex" [help]="delayHint" id="input-delay">Input Delay</app-enum>
     @if(in_delayIndex === 0) {
-      <app-number class="variable" [(value)]="in_customDelay" [min]="0">Custom Delay (ticks)</app-number>
+      <app-number class="variable" [(value)]="in_customDelay" [min]="0" id="custom-input-delay">Custom Delay (ticks)</app-number>
     }
   </div>
 </app-input-side>

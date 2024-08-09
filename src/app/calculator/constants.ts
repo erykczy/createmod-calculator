@@ -17,36 +17,43 @@ export function lerp(a: number, b: number, t: number) {
 export var g_calculatorsData: CalculatorData[] = [
   {
     name: "Mechanical Drill",
+    id: "drill",
     iconPath: "assets/icons/drill.png",
     wikiPage: "https://create.fandom.com/wiki/Mechanical_Drill"
   },
   {
     name: "Mechanical Mixer",
+    id: "mixer",
     iconPath: "assets/icons/mixer.png",
     wikiPage: "https://create.fandom.com/wiki/Mechanical_Mixer"
   },
   {
     name: "Bulk Processing",
+    id: "fan",
     iconPath: "assets/icons/fan.png",
     wikiPage: "https://create.fandom.com/wiki/Encased_Fan"
   },
   {
     name: "Mechanical Press",
+    id: "press",
     iconPath: "assets/icons/press.png",
     wikiPage: "https://create.fandom.com/wiki/Mechanical_Press"
   },
   {
     name: "Millstone",
+    id: "millstone",
     iconPath: "assets/icons/millstone.png",
     wikiPage: "https://create.fandom.com/wiki/Millstone#Recipe_Table"
   },
   {
     name: "Crushing",
+    id: "crushing",
     iconPath: "assets/icons/crushing.png",
     wikiPage: "https://create.fandom.com/wiki/Crushing_Wheel#Recipe_Duration_Table"
   },
   {
     name: "Mechanical Belt",
+    id: "belt",
     iconPath: "assets/icons/belt.png",
     wikiPage: "https://create.fandom.com/wiki/Mechanical_Belt"
   }

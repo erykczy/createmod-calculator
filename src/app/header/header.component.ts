@@ -1,26 +1,16 @@
 import { Component, inject } from '@angular/core';
-import { CalculatorService } from '../calculator/calculator.service';
 import { g_calculatorsData } from '../calculator/constants';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  private calculatorService = inject(CalculatorService);
-
   get calculatorsData() {
     return g_calculatorsData;
-  }
-
-  get activeCalculatorIndex() {
-    return this.calculatorService.activeCalculatorIndex;
-  }
-
-  onTabChanged(index: number) {
-    this.calculatorService.setActiveCalculatorIndex(index);
   }
 }

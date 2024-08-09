@@ -13,6 +13,6 @@ export class InputSideComponent {
   private calculatorService = inject(CalculatorService);
 
   get calculatorName() {
-    return g_calculatorsData[this.calculatorService.activeCalculatorIndex].name;
+    return this.calculatorService.getSelectedCalculator().name;
   }
 }

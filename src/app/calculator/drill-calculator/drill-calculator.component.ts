@@ -82,6 +82,9 @@ export class DrillCalculatorComponent {
     
   }
 
-  ngOnInit() { this.calculate(); }
+  ngOnInit() {
+    this.calculate();
+  }
+
   ngDoCheck() { this.calculate(); }
 }

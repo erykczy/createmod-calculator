@@ -1,15 +1,15 @@
 <app-input-side>
-  <app-number [(value)]="in_rpm" [min]="0">RPM</app-number>
+  <app-number [(value)]="in_rpm" [min]="0" id="rpm">RPM</app-number>
   <div class="variable-container">
-    <app-enum class="enum" [values]="hardnessValues" [(value)]="in_hardnessIndex">Hardness</app-enum>
+    <app-enum class="enum" [values]="hardnessValues" [(value)]="in_hardnessIndex" id="hardness">Hardness</app-enum>
     @if(in_hardnessIndex === 0) {
-      <app-number class="variable" [(value)]="in_customHardness" [min]="0">Custom Hardness</app-number>
+      <app-number class="variable" [(value)]="in_customHardness" [min]="0" id="custom-hardness">Custom Hardness</app-number>
     }
   </div>
   <div class="variable-container">
-    <app-enum class="enum" [values]="delayValues" [(value)]="in_delayIndex" [help]="delayHint">Delay</app-enum>
+    <app-enum class="enum" [values]="delayValues" [(value)]="in_delayIndex" [help]="delayHint" id="delay">Delay</app-enum>
     @if(in_delayIndex === 0) {
-      <app-number class="variable" [(value)]="in_customDelay" [min]="0">Custom Delay (sec)</app-number>
+      <app-number class="variable" [(value)]="in_customDelay" [min]="0" id="custom=delay">Custom Delay (sec)</app-number>
     }
   </div>
 </app-input-side>

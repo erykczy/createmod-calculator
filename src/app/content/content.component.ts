@@ -14,6 +14,6 @@ export class ContentComponent {
   private calculatorService = inject(CalculatorService);
 
   get activeCalculatorData() {
-    return g_calculatorsData[this.calculatorService.activeCalculatorIndex];
+    return this.calculatorService.getSelectedCalculator();
   }
 }

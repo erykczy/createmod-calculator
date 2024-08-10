@@ -43,23 +43,9 @@ export class CrushingCalculatorComponent {
     if(this.in_rpm > 0) {
       let speed = this.in_rpm/50*4;
   
-      let remainingTime = this.in_recipeDuration;
-      let appliedRecipe = false;
-      let frame: number;
-      for(frame = 0; true; frame++) {
-        let processingSpeed = clamp((speed) / (!appliedRecipe ? Math.log2(this.in_stackSize) : 1), 0.25, 20);//clamp(speed / Math.log2(this.in_stackSize), 0.25, 20);
-        remainingTime -= processingSpeed;
-        
-        if(remainingTime < 20 && !appliedRecipe) {
-          appliedRecipe = true;
-          remainingTime = 0;
-          continue;
-        }
-        if(remainingTime <= 0)
-          break;
-      }
-      let frames: number = frame + 1;
-      frames += this.in_delay;
+      let step = clamp(speed/Math.log2(this.in_stackSize), 0.25, 20);
+      let processTicks = Math.ceil((this.in_recipeDuration - 19.999999)/step);
+      let frames = processTicks+1+this.in_delay;
   
       this.out2 = frames / 20;
       this.out1 = this.in_stackSize / this.out2;

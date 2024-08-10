@@ -30,21 +30,9 @@ export class PressCalculatorComponent {
 
   calculate() {
     if(this.in_rpm > 0) {
-      let runningTicks = 0;
-      let frame: number;
-      for(frame = 0; true; frame++) {
-        if(runningTicks > this.cycle)
-          break;
-
-        let prevRunningTicks = runningTicks;
-        runningTicks += this.runningTickSpeed;
-        
-        if(prevRunningTicks < this.cycle / 2 && runningTicks >= this.cycle / 2) {
-          runningTicks = this.cycle / 2;
-        }
-      }
-      frame += 1; // 1 lost frame while enabling 'running' state
-      let totalFrames: number = frame+1;
+      let a = Math.ceil((this.cycle/2)/this.runningTickSpeed);
+      let b = Math.ceil((this.cycle/2 + 1)/this.runningTickSpeed);
+      let totalFrames: number = a + b + 2; // 2 frames are lost while checking for this.runningTicks>this.cycle and enabling 'running' state;
 
       this.out2 = totalFrames / 20;
       this.out1 = 1 / this.out2;

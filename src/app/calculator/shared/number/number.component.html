@@ -1,2 +1,5 @@
-<label [class.output]="output" [class.tooltip]="help !== undefined"><ng-content /><span class="tooltip-text">{{help}}</span></label>
+<div class="head">
+  <label [class.output]="output" [class.tooltip]="help !== undefined"><ng-content /><span class="tooltip-text">{{help}}</span></label>
+  @if(!output){<button>As output</button>}
+</div>
 <input [clickSelect]="output" [class.output]="output" [readonly]="output" [type]="output ? 'text' : 'number'" [ngModel]="ngModelValue" (ngModelChange)="onNgModelChange($event)">  

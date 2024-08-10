@@ -44,23 +44,10 @@ export class DrillCalculatorComponent {
   calculate() {
     if(this.in_rpm > 0) {
       let breakSpeed = this.in_rpm / 100;
-      let ticksUntilNextProgress = 0;
-      let destroyProgress = 0;
-      let frame: number;
-      for(frame = 0; true; frame++) {
-        if(ticksUntilNextProgress-- > 0)
-          continue;
-  
-        destroyProgress += clamp(Math.floor(breakSpeed / this.in_hardness), 1, 10 - destroyProgress);
-  
-        if(destroyProgress >= 10) {
-          break;
-        }
-  
-        ticksUntilNextProgress = Math.floor(this.in_hardness / breakSpeed);
-      }
-      frame += 1; // this weird frame of delay
-      let totalFrames = frame+1;
+
+      let a = Math.ceil(10/Math.max(1, Math.floor(breakSpeed/this.in_hardness)));
+      let b = Math.floor(this.in_hardness/breakSpeed)+1;
+      let totalFrames = (a-1) * b + 1 + 1; //+1 is frame of delay
   
       let delayInFrames = this.in_delay*20;
       this.out2 = ((totalFrames-Math.min(1, delayInFrames)) + delayInFrames) / 20;

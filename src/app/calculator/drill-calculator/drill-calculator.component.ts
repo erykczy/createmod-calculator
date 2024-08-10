@@ -1,26 +1,37 @@
 import { Component } from '@angular/core';
-import { g_delays, g_hardness } from '../../constants';
-import { InputSideComponent } from "../../shared/input-side/input-side.component";
-import { OutputSideComponent } from "../../shared/output-side/output-side.component";
-import { EnumComponent } from "../../shared/enum/enum.component";
-import { NumberComponent } from "../../shared/number/number.component";
-import { WarningComponent } from "../../shared/warning/warning.component";
-import { NuenumComponent } from "../../shared/nuenum/nuenum.component";
+import { clamp, g_delays, g_hardness } from '../constants';
+import { InputSideComponent } from "../shared/input-side/input-side.component";
+import { OutputSideComponent } from "../shared/output-side/output-side.component";
+import { EnumComponent } from "../shared/enum/enum.component";
+import { NumberComponent } from "../shared/number/number.component";
+import { WarningComponent } from "../shared/warning/warning.component";
+import { NuenumComponent } from "../shared/nuenum/nuenum.component";
 
 @Component({
-  selector: 'app-drill-time-speed-calculator',
+  selector: 'app-drill-calculator',
   standalone: true,
   imports: [InputSideComponent, OutputSideComponent, NumberComponent, EnumComponent, WarningComponent, NuenumComponent],
-  templateUrl: './drill-time-speed-calculator.component.html',
-  styleUrl: './drill-time-speed-calculator.component.css'
+  templateUrl: './drill-calculator.component.html',
+  styleUrl: './drill-calculator.component.css'
 })
-export class DrillTimeSpeedCalculatorComponent {
+export class DrillCalculatorComponent {
   in_rpm: number = 256;
   in_hardness: number = 0;
   in_delay: number = 0;
   out1: number = 0;
   out2: number = 0;
 
+  // get hardnessValues(): string[] {
+  //   let arr: string[] = Array.from(g_hardness.keys());
+  //   arr.unshift("<custom>");
+  //   return arr;
+  // }
+
+  // get hardness(): number {
+  //   if(this.in_hardnessIndex == 0)
+  //     return this.in_customHardness;
+  //   return Array.from(g_hardness.values())[this.in_hardnessIndex-1];
+  // }
   get hardnessKeys(): string[] { return Array.from(g_hardness.keys()); }
   get hardnessValues(): number[] { return Array.from(g_hardness.values()); }
   get delayKeys(): string[] { return Array.from(g_delays.keys()); }

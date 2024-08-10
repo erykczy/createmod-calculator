@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { WarningType } from './warning.model';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-warning',
@@ -9,6 +8,5 @@ import { WarningType } from './warning.model';
   styleUrl: './warning.component.css'
 })
 export class WarningComponent {
-  WarningType = WarningType;
-  @Input({required: true}) warningType!: WarningType;
+
 }

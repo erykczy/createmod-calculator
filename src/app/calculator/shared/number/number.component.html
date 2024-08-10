@@ -1,5 +1,5 @@
 <div class="head">
-  <label [class.tooltip]="help !== undefined"><ng-content /><span class="tooltip-text">{{help}}</span></label>
-  @if(revLink !== undefined){<button [routerLink]="'../'+revLink">{{output ? "As input" : "As output"}}</button>}
+  <label [class.output]="output" [class.tooltip]="help !== undefined"><ng-content /><span class="tooltip-text">{{help}}</span></label>
+  <!-- @if(!output){<button>As output</button>} -->
 </div>
-<input [clickSelect]="output" [class.withRevLink]="revLink" [readonly]="output" [type]="output ? 'text' : 'number'" [ngModel]="ngModelValue" (ngModelChange)="onNgModelChange($event)">  
+<input [clickSelect]="output" [class.output]="output" [readonly]="output" [type]="output ? 'text' : 'number'" [ngModel]="ngModelValue" (ngModelChange)="onNgModelChange($event)">  

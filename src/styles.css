@@ -10,7 +10,7 @@ b {
 
 input {
   -moz-appearance: textfield;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
 }
 
 input::-webkit-outer-spin-button,

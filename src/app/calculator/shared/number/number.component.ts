@@ -4,11 +4,12 @@ import { decimal, g_invisibleChar } from '../../constants';
 import { MinMaxDirective } from '../../../min-max.directive';
 import { ClickSelectDirective } from '../../../click-select';
 import { CalculatorService } from '../../calculator.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-number',
   standalone: true,
-  imports: [FormsModule, MinMaxDirective, ClickSelectDirective],
+  imports: [FormsModule, MinMaxDirective, ClickSelectDirective, RouterLink],
   templateUrl: './number.component.html',
   styleUrl: './number.component.css'
 })
@@ -20,6 +21,7 @@ export class NumberComponent {
   @Input() min?: number = undefined;
   @Input() max?: number = undefined;
   @Input() help?: string = undefined;
+  @Input() revLink?: string = undefined;
   @Input() value: number = 0;
   @Output() valueChange = new EventEmitter();
   private calculatorService = inject(CalculatorService);

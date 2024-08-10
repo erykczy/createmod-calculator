@@ -4,6 +4,7 @@ import { NumberComponent } from "../shared/number/number.component";
 import { OutputSideComponent } from "../shared/output-side/output-side.component";
 import { clamp } from '../constants';
 import { WarningComponent } from "../shared/warning/warning.component";
+import { WarningType } from '../shared/warning/warning.model';
 
 @Component({
   selector: 'app-mixer-calculator',
@@ -13,6 +14,7 @@ import { WarningComponent } from "../shared/warning/warning.component";
   styleUrl: './mixer-calculator.component.css'
 })
 export class MixerCalculatorComponent {
+  WarningType = WarningType;
   in_rpm: number = 256;
   out1: number = 0;
   out2: number = 0;

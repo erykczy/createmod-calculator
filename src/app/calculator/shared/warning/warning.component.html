@@ -1,1 +1,1 @@
-<p><ng-content /></p>
+<p [class.info]="warningType === WarningType.INFO" [class.warning]="warningType === WarningType.WARNING"><ng-content /></p>

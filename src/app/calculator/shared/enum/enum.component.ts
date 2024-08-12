@@ -10,12 +10,12 @@ import { CalculatorService } from '../../calculator.service';
   styleUrl: './enum.component.css'
 })
 export class EnumComponent {
-  @Input() id?: string;
+  @Input({required: true}) id!: string;
   @Input({required: true}) values!: string[];
-  @Input() output: boolean = false;
   @Input() help?: string = undefined;
   @Input() value: number = 0;
-  @Output() valueChange = new EventEmitter();
+  @Output() valueChange = new EventEmitter<number>();
+  @Output() userChange = new EventEmitter<number>();
   private calculatorService = inject(CalculatorService);
   
   get ngModelValue(): string {
@@ -25,15 +25,12 @@ export class EnumComponent {
   onngModelValueChange(newValue: string) {
     this.value = Number(newValue);
     this.valueChange.emit(this.value);
-    this.calculatorService.saveProperty(this.id!, this.value);
+    this.calculatorService.saveProperty(this.id, this.value);
+    this.userChange.emit(this.value);
   }
 
   ngOnInit() {
-    if(this.output)
-      return;
-    if(this.id === undefined)
-      console.error("id is undefinded")
-    let savedValue = this.calculatorService.getSavedProperty(this.id!);
+    let savedValue = this.calculatorService.getSavedProperty(this.id);
     if(savedValue !== null) {
       Promise.resolve().then(() => {
         this.value = savedValue;

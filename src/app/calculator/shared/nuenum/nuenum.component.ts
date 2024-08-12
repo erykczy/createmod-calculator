@@ -21,6 +21,7 @@ export class NuenumComponent {
   @Input()
   set value(newValue: number) {}
   @Output() valueChange = new EventEmitter<number>();
+  @Output() userChange = new EventEmitter<number>();
   in_index: number = 0;
   in_custom: number = 0;
 
@@ -35,7 +36,11 @@ export class NuenumComponent {
       return this.values[this.in_index-1];
   }
 
-  update() {
+  onValueChange() {
     this.valueChange.emit(this.value);
+  }
+
+  onUserChange() {
+    this.userChange.emit(this.value);
   }
 }

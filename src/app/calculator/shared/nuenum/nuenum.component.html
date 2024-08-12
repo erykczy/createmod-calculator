@@ -1,4 +1,4 @@
-<app-enum [values]="displayedKeys" [(value)]="in_index" (valueChange)="update()" [help]="hint" [id]="id"><ng-content /></app-enum>
+<app-enum [values]="displayedKeys" [(value)]="in_index" (valueChange)="onValueChange()" (userChange)="onUserChange()" [help]="hint" [id]="id"><ng-content /></app-enum>
 @if(in_index === 0) {
-  <app-number [(value)]="in_custom" (valueChange)="update()" [min]="min" [max]="max" [help]="hint_custom" [id]="'custom'+id">{{label_custom}}</app-number>
+  <app-number [(value)]="in_custom" (valueChange)="onValueChange()" (userChange)="onUserChange()" [min]="min" [max]="max" [help]="hint_custom" [id]="'custom'+id">{{label_custom}}</app-number>
 }

@@ -6,7 +6,7 @@ import { EnumComponent } from "../shared/enum/enum.component";
 import { NumberComponent } from "../shared/number/number.component";
 import { WarningComponent } from "../shared/warning/warning.component";
 import { NuenumComponent } from "../shared/nuenum/nuenum.component";
-import { DrillCalculator } from './drill.calculator';
+import { DrillCalculator, Result } from './drill.calculator';
 
 @Component({
   selector: 'app-drill-calculator',
@@ -33,25 +33,21 @@ export class DrillCalculatorComponent {
   }
 
   calculateFromRpm() {
-    this.cdRef.detectChanges(); // detect changes because I will change variables in a moment
-    let result = DrillCalculator.calculateFromRpm(this.in_hardness, this.in_delay, this.val_rpm);
-    this.val_speed = result.speed;
-    this.val_time = result.time;
+    this.updateValues(DrillCalculator.calculateFromRpm(this.in_hardness, this.in_delay, this.val_rpm));
   }
 
   calculateFromTime() {
-    this.cdRef.detectChanges(); // detect changes because I will change variables in a moment
-    let result = DrillCalculator.calculateFromTime(this.in_hardness, this.in_delay, this.val_time);
-    this.val_time = result.time;
-    this.val_rpm = result.rpm;
-    this.val_speed = result.speed;
+    this.updateValues(DrillCalculator.calculateFromTime(this.in_hardness, this.in_delay, this.val_time));
   }
 
   calculateFromSpeed() {
+    this.updateValues(DrillCalculator.calculateFromSpeed(this.in_hardness, this.in_delay, this.val_speed));
+  }
+
+  updateValues(result: Result) {
     this.cdRef.detectChanges(); // detect changes because I will change variables in a moment
-    let result = DrillCalculator.calculateFromSpeed(this.in_hardness, this.in_delay, this.val_speed);
-    this.val_time = result.time;
     this.val_rpm = result.rpm;
+    this.val_time = result.time;
     this.val_speed = result.speed;
   }
 }

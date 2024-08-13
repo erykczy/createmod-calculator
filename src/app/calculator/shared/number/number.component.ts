@@ -13,18 +13,25 @@ import { CalculatorService } from '../../calculator.service';
 })
 export class NumberComponent {
   decimal = decimal;
-  @Input() id!: string; // TODO: make required
-  @Input() output: boolean = false; // TODO: deprecated
+  @Input({required: true}) id!: string;
   @Input() unit: string = "";
   @Input() min?: number = undefined;
   @Input() max?: number = undefined;
   @Input() help?: string = undefined;
   @Input()
-  set value(newValue: number) {
+  set value(newValue: number | undefined) {
+    if(this.defaultValue === undefined) {
+      this.defaultValue = newValue;
+      return;
+    }
+    if(newValue === undefined)
+      return;
+
     if(this.focused)
       this.bluredValue = newValue;
     else
       this.realValue = newValue;
+    this.calculatorService.saveProperty(this.id, newValue);
   }
   @Output() valueChange = new EventEmitter();
   @Output() userChange = new EventEmitter();
@@ -33,6 +40,7 @@ export class NumberComponent {
   private calculatorService = inject(CalculatorService);
   private cdRef = inject(ChangeDetectorRef);
   focused: boolean = false;
+  defaultValue?: number = undefined;
   
   get ngModelValue(): string {
     if(this.focused)
@@ -64,8 +72,12 @@ export class NumberComponent {
       let savedValue = this.calculatorService.getSavedProperty(this.id);
       if(savedValue !== null) {
         this.realValue = savedValue;
-        this.valueChange.emit(this.realValue);
       }
+      else {
+        this.realValue = this.defaultValue === undefined ? 0 : this.defaultValue;
+        this.calculatorService.saveProperty(this.id, this.realValue);
+      }
+      this.valueChange.emit(this.realValue);
     });
   }
 
@@ -77,7 +89,6 @@ export class NumberComponent {
     this.focused = false;
     if(this.bluredValue !== null) {
       this.realValue = this.bluredValue;
-      this.calculatorService.saveProperty(this.id, this.realValue);
       this.bluredValue = null;
     }
   }

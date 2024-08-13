@@ -1,4 +1,4 @@
 <div class="head">
-  <label [class.output]="output" [class.tooltip]="help !== undefined"><ng-content /><span class="tooltip-text">{{help}}</span></label>
+  <label [class.tooltip]="help !== undefined"><ng-content /><span class="tooltip-text">{{help}}</span></label>
 </div>
 <input #in (focus)="onFocus()" (blur)="onBlur()" [ngModel]="ngModelValue" (ngModelChange)="onNgModelChange($event)">  

@@ -1,10 +1,10 @@
 <app-input-side>
-  <app-number [(value)]="in_rpm" [min]="0" id="rpm">RPM</app-number>
-  @if(in_rpm < 30) {
+  <app-number [min]="0" id="rpm" [(value)]="val_rpm" (valueChange)="calculateFromRpm()">RPM</app-number>
+  @if(val_rpm! < 30) {
     <app-warning>Remember that the Mechanical Mixer will only work if <b>RPM ≥ 30</b>!</app-warning>
   }
 </app-input-side>
 <app-output-side>
-  <app-number [output]="true" [unit]="'/s'" [(value)]="out1">Recipes/Second</app-number>
-  <app-number [output]="true" [unit]="'s'" [(value)]="out2">Processing Time</app-number>
+  <app-number [unit]="'/s'" id="speed" [(value)]="val_speed">Recipes/Second</app-number>
+  <app-number [unit]="'s'" id="time" [(value)]="val_time">Processing Time</app-number>
 </app-output-side>

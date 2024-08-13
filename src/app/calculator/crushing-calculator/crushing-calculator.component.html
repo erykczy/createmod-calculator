@@ -6,6 +6,6 @@
   <app-nuenum id="input-delay" label_custom="Custom Delay (ticks)" [keys]="delayKeys" [values]="delayValues" [hint]="delayHint" [(value)]="in_delay">Input Delay</app-nuenum>
 </app-input-side>
 <app-output-side>
-  <app-number [output]="true" [unit]="'/s'" [(value)]="out1" [help]="warning">Recipes/Second</app-number>
-  <app-number [output]="true" [unit]="'s'" [(value)]="out2" [help]="warning">Processing Time</app-number>
+  <app-number [unit]="'/s'" [(value)]="out1" [help]="warning" id="speed">Recipes/Second</app-number>
+  <app-number [unit]="'s'" [(value)]="out2" [help]="warning" id="time">Processing Time</app-number>
 </app-output-side>

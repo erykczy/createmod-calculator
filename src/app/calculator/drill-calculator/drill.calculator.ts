@@ -1,7 +1,7 @@
 import { decimal } from "../constants";
 
 export abstract class DrillCalculator {
-  public static calculateFromRpm(hardness: number, delay: number, rpm: number): {time:number, speed:number} {
+  public static calculateFromRpm(hardness: number, delay: number, rpm: number): Result {
     if(rpm > 0) {
       let breakSpeed = rpm / 100;
   
@@ -12,19 +12,21 @@ export abstract class DrillCalculator {
       let delayInFrames = delay*20;
       let time = ((totalFrames-Math.min(1, delayInFrames)) + delayInFrames) / 20;
       return {
+        rpm: rpm,
         time: decimal(time)!,
         speed: decimal(1 / time)!
       };
     }
     else {
       return {
+        rpm: rpm,
         time: 0,
         speed: 0
       };
     }
   }
 
-  public static calculateFromTime(hardness: number, delay: number, time: number): {rpm:number, speed:number, time:number} {
+  public static calculateFromTime(hardness: number, delay: number, time: number): Result {
     let result = this.search(hardness, delay, 0, 1000, time*20, 1000, 0, -1, Number.POSITIVE_INFINITY);
     return {
       rpm: decimal(result.rpm)!,
@@ -33,7 +35,7 @@ export abstract class DrillCalculator {
     };
   }
 
-  public static calculateFromSpeed(hardness: number, delay: number, speed: number): {rpm:number, speed:number, time:number} {
+  public static calculateFromSpeed(hardness: number, delay: number, speed: number): Result {
     let result = this.calculateFromTime(hardness, delay, 1/speed);
     return {
       rpm: result.rpm,
@@ -61,4 +63,11 @@ export abstract class DrillCalculator {
     else
       return this.search(hardness, delay, minRpm, middleRpm-1, targetTicks, maxIndex, index+1, solution, solutionDistance);
   }
+
+}
+
+export interface Result {
+  rpm: number,
+  time: number,
+  speed: number
 }

@@ -24,15 +24,15 @@ export class MixerCalculatorComponent {
   }
 
   calculateFromRpm() {
-    this.updateValues(MixerCalculator.calculateFromRpm(this.val_rpm!));
+    this.updateValues(MixerCalculator.calculateFromRpm(this.val_rpm));
   }
 
   calculateFromSpeed() {
-    this.updateValues(MixerCalculator.calculateFromSpeed(this.val_speed!));
+    this.updateValues(MixerCalculator.calculateFromSpeed(this.val_speed));
   }
 
   calculateFromTime() {
-    this.updateValues(MixerCalculator.calculateFromTime(this.val_time!));
+    this.updateValues(MixerCalculator.calculateFromTime(this.val_time));
   }
 
   updateValues(result: Result) {

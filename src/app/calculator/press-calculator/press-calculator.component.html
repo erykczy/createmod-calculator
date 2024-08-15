@@ -1,7 +1,7 @@
 <app-input-side>
-  <app-number [(value)]="in_rpm" [min]="0" id="rpm">RPM</app-number>
+  <app-number [(value)]="val_rpm" [min]="0" id="rpm" (userChange)="calculateFromRpm()">RPM</app-number>
 </app-input-side>
 <app-output-side>
-  <app-number [unit]="'/s'" [(value)]="out1" id=speed>Recipes/Second</app-number>
-  <app-number [unit]="'s'" [(value)]="out2" [help]="hint1" id="time">Processing Time</app-number>
+  <app-number [unit]="'/s'" [(value)]="val_speed" id=speed (userChange)="calculateFromSpeed()">Recipes/Second</app-number>
+  <app-number [unit]="'s'" [(value)]="val_time" [help]="hint1" id="time" (userChange)="calculateFromTime()">Processing Time</app-number>
 </app-output-side>

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { NumberComponent } from "../shared/number/number.component";
 import { OutputSideComponent } from "../shared/output-side/output-side.component";
 import { InputSideComponent } from "../shared/input-side/input-side.component";
 import { clamp, lerp } from '../constants';
+import { PressCalculator, Result } from './press-calculator.calculator';
 
 @Component({
   selector: 'app-press-calculator',
@@ -12,38 +13,35 @@ import { clamp, lerp } from '../constants';
   styleUrl: './press-calculator.component.css'
 })
 export class PressCalculatorComponent {
-  in_rpm: number = 256;
-  out1: number = 0;
-  out2: number = 0;
+  val_rpm: number = 256;
+  val_time: number = 0;
+  val_speed: number = 0;
+  private cdRef = inject(ChangeDetectorRef);
 
-  get cycle(): number {
-    return 240;
-  }
-
-  get runningTickSpeed(): number {
-    return Math.floor(lerp(1, 60, clamp(this.in_rpm/512, 0, 1)));
+  ngOnInit() {
+    this.calculateFromRpm();
   }
 
   get hint1(): string {
     return "Includes time it takes to lift the press";
   }
 
-  calculate() {
-    if(this.in_rpm > 0) {
-      let a = Math.ceil((this.cycle/2)/this.runningTickSpeed);
-      let b = Math.ceil((this.cycle/2 + 1)/this.runningTickSpeed);
-      let totalFrames: number = a + b + 2; // 2 frames are lost while checking for this.runningTicks>this.cycle and enabling 'running' state;
-
-      this.out2 = totalFrames / 20;
-      this.out1 = 1 / this.out2;
-    }
-    else {
-      this.out1 = 0;
-      this.out2 = 0;
-    }
-
+  calculateFromRpm() {
+    this.updateValues(PressCalculator.calculateFromRpm(this.val_rpm));
   }
 
-  ngOnInit() { this.calculate(); }
-  ngDoCheck() { this.calculate(); }
+  calculateFromSpeed() {
+    this.updateValues(PressCalculator.calculateFromSpeed(this.val_speed));
+  }
+
+  calculateFromTime() {
+    this.updateValues(PressCalculator.calculateFromTime(this.val_time));
+  }
+
+  updateValues(result: Result) {
+    this.cdRef.detectChanges(); // update DOM with values given by user ( change detector is blind :( )
+    this.val_rpm = result.rpm;
+    this.val_time = result.time;
+    this.val_speed = result.speed;
+  }
 }

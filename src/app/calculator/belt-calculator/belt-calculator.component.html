@@ -1,10 +1,10 @@
 <app-input-side>
-  <app-number [(value)]="in_rpm" [min]="0" id="rpm">RPM</app-number>
-  <app-number [(value)]="in_stackSize" [min]="1" id="stack-size">Stack Size</app-number>
-  <app-number [(value)]="in_beltLength" [min]="1" id="belt-length">Belt Length</app-number>
+  <app-number [(value)]="val_rpm" [min]="0" id="rpm" (userChange)="calculateFromRpm()">RPM</app-number>
+  <app-number [(value)]="in_stackSize" [min]="1" id="stack-size" (userChange)="calculateFromRpm()">Stack Size</app-number>
+  <app-number [(value)]="in_beltLength" [min]="1" id="belt-length" (userChange)="calculateFromRpm()">Belt Length</app-number>
 </app-input-side>
 <app-output-side>
-  <app-number [unit]="'/s'" [(value)]="out1" id=item-speed>Items/Second</app-number>
-  <app-number [unit]="'/s'" [(value)]="out2" id="stack-speed">Stacks/Second</app-number>
-  <app-number [unit]="'s'" [(value)]="out3" [help]="hint1" id="time">Traverse Time</app-number>
+  <app-number [unit]="'/s'" [(value)]="val_itemsSpeed" id=item-speed (userChange)="calculateFromItemsSpeed()">Items/Second</app-number>
+  <app-number [unit]="'/s'" [(value)]="val_stacksSpeed" id="stack-speed" (userChange)="calculateFromStacksSpeed()">Stacks/Second</app-number>
+  <app-number [unit]="'s'" [(value)]="val_time" [help]="hint1" id="time" (userChange)="calculateFromTime()">Traverse Time</app-number>
 </app-output-side>

@@ -8,8 +8,8 @@ export abstract class MillstoneCalculator {
 
       return {
         rpm: rpm,
-        time: gt/20,
-        speed: 1/(gt/20)
+        time: decimal(gt/20)!,
+        speed: decimal(1/(gt/20))!
       };
     }
     else {
@@ -24,20 +24,12 @@ export abstract class MillstoneCalculator {
   public static calculateFromTime(time: number, recipeDuration: number): Result {
     let resultRpm = this.searchForRpm(0, 1024, time, recipeDuration);
     let result = this.calculateFromRpm(resultRpm, recipeDuration);
-    return {
-      rpm: decimal(resultRpm)!,
-      time: decimal(result.time)!,
-      speed: decimal(result.speed)!
-    };
+    return result;
   }
 
   public static calculateFromSpeed(speed: number, recipeDuration: number): Result {
     let result = this.calculateFromTime(1/speed, recipeDuration);
-    return {
-      rpm: result.rpm,
-      time: result.time,
-      speed: result.speed
-    };
+    return result;
   }
 
   private static searchForRpm(rpm: number, maxRpm: number, targetTime: number, recipeDuration: number): number {

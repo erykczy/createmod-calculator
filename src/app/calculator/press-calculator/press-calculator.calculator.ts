@@ -28,20 +28,12 @@ export abstract class PressCalculator {
   public static calculateFromTime(time: number): Result {
     let resultRpm = this.searchForRpm(0, 1024, time);
     let result = this.calculateFromRpm(resultRpm);
-    return {
-      rpm: decimal(resultRpm)!,
-      time: decimal(result.time)!,
-      speed: decimal(result.speed)!
-    };
+    return result;
   }
 
   public static calculateFromSpeed(speed: number): Result {
     let result = this.calculateFromTime(1/speed);
-    return {
-      rpm: result.rpm,
-      time: result.time,
-      speed: result.speed
-    };
+    return result;
   }
 
   private static searchForRpm(rpm: number, maxRpm: number, targetTime: number): number {

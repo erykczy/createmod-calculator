@@ -27,20 +27,12 @@ export abstract class CrushingCalculator {
   public static calculateFromTime(time: number, recipeDuration: number, stackSize: number, delay: number): Result {
     let resultRpm = this.searchForRpm(0, 1024, time, recipeDuration, stackSize, delay);
     let result = this.calculateFromRpm(resultRpm, recipeDuration, stackSize, delay);
-    return {
-      rpm: decimal(resultRpm)!,
-      time: decimal(result.time)!,
-      speed: decimal(result.speed)!
-    };
+    return result;
   }
 
   public static calculateFromSpeed(speed: number, recipeDuration: number, stackSize: number, delay: number): Result {
     let result = this.calculateFromTime(stackSize/speed, recipeDuration, stackSize, delay);
-    return {
-      rpm: result.rpm,
-      time: result.time,
-      speed: result.speed
-    };
+    return result;
   }
 
   private static searchForRpm(rpm: number, maxRpm: number, targetTime: number, recipeDuration: number, stackSize: number, delay: number): number {

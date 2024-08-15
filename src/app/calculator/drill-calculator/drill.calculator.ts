@@ -29,20 +29,12 @@ export abstract class DrillCalculator {
   public static calculateFromTime(hardness: number, delay: number, time: number): Result {
     let resultRpm = this.searchForRpm(0, 1024, time, hardness, delay);
     let result = this.calculateFromRpm(hardness, delay, resultRpm);
-    return {
-      rpm: decimal(result.rpm)!,
-      time: decimal(result.time)!,
-      speed: decimal(result.speed)!
-    };
+    return result;
   }
 
   public static calculateFromSpeed(hardness: number, delay: number, speed: number): Result {
     let result = this.calculateFromTime(hardness, delay, 1/speed);
-    return {
-      rpm: result.rpm,
-      time: result.time,
-      speed: result.speed
-    };
+    return result;
   }
 
   private static searchForRpm(rpm: number, maxRpm: number, targetTime: number, hardness: number, delay: number): number {

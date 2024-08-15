@@ -1,11 +1,11 @@
 <app-input-side>
-  <app-number [(value)]="in_rpm" [min]="0" id="rpm">RPM</app-number>
-  <app-number [(value)]="in_stackSize" [min]="1" id="stack-size">Stack Size</app-number>
+  <app-number [(value)]="val_rpm" [min]="0" id="rpm" (userChange)="calculateFromRpm()">RPM</app-number>
+  <app-number [(value)]="in_stackSize" [min]="1" id="stack-size" (userChange)="calculateFromRpm()">Stack Size</app-number>
   
-  <app-nuenum id="recipe-duration" label_custom="Custom Recipe Duration" [keys]="recipesKeys" [values]="recipesValues" [hint]="recipeInputHint" [hint_custom]="recipeDurationHint" [(value)]="in_recipeDuration">Recipe Input</app-nuenum>
-  <app-nuenum id="input-delay" label_custom="Custom Delay (ticks)" [keys]="delayKeys" [values]="delayValues" [hint]="delayHint" [(value)]="in_delay">Input Delay</app-nuenum>
+  <app-nuenum id="recipe-duration" label_custom="Custom Recipe Duration" [keys]="recipesKeys" [values]="recipesValues" [hint]="recipeInputHint" [hint_custom]="recipeDurationHint" [(value)]="in_recipeDuration" (userChange)="calculateFromRpm()">Recipe Input</app-nuenum>
+  <app-nuenum id="input-delay" label_custom="Custom Delay (ticks)" [keys]="delayKeys" [values]="delayValues" [hint]="delayHint" [(value)]="in_delay" (userChange)="calculateFromRpm()">Input Delay</app-nuenum>
 </app-input-side>
 <app-output-side>
-  <app-number [unit]="'/s'" [(value)]="out1" [help]="warning" id="speed">Recipes/Second</app-number>
-  <app-number [unit]="'s'" [(value)]="out2" [help]="warning" id="time">Processing Time</app-number>
+  <app-number [unit]="'/s'" [(value)]="val_speed" [help]="warning" id="speed" (userChange)="calculateFromSpeed()">Recipes/Second</app-number>
+  <app-number [unit]="'s'" [(value)]="val_time" [help]="warning" id="time" (userChange)="calculateFromTime()">Processing Time</app-number>
 </app-output-side>

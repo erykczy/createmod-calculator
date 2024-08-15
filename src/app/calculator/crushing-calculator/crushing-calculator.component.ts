@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { NumberComponent } from "../shared/number/number.component";
 import { OutputSideComponent } from "../shared/output-side/output-side.component";
 import { EnumComponent } from "../shared/enum/enum.component";
 import { InputSideComponent } from "../shared/input-side/input-side.component";
 import { clamp, g_crushingRecipes, g_delays, g_inputDelays, g_millstoneRecipes } from '../constants';
 import { NuenumComponent } from "../shared/nuenum/nuenum.component";
+import { CrushingCalculator, Result } from './crushing.calculator';
 
 @Component({
   selector: 'app-crushing-calculator',
@@ -14,12 +15,15 @@ import { NuenumComponent } from "../shared/nuenum/nuenum.component";
   styleUrl: './crushing-calculator.component.css'
 })
 export class CrushingCalculatorComponent {
-  in_rpm: number = 256;
+  val_rpm: number = 256;
   in_stackSize: number = 1;
   in_recipeDuration: number = 100;
   in_delay: number = 0;
-  out1: number = 0;
-  out2: number = 0;
+  val_speed: number = 0;
+  val_time: number = 0;
+  cdRef = inject(ChangeDetectorRef);
+
+  ngOnInit() { this.calculateFromRpm(); }
 
   get recipesKeys(): string[] { return Array.from(g_millstoneRecipes.keys()); }
   get recipesValues(): number[] { return Array.from(g_millstoneRecipes.values()); }
@@ -39,23 +43,23 @@ export class CrushingCalculatorComponent {
     return "These results may be slightly inaccurate due to irregular input delay.";
   }
 
-  calculate() {
-    if(this.in_rpm > 0) {
-      let speed = this.in_rpm/50*4;
-  
-      let step = clamp(speed/Math.log2(this.in_stackSize), 0.25, 20);
-      let processTicks = Math.ceil((this.in_recipeDuration - 19.999999)/step);
-      let frames = processTicks+1+this.in_delay;
-  
-      this.out2 = frames / 20;
-      this.out1 = this.in_stackSize / this.out2;
-    }
-    else {
-      this.out1 = 0;
-      this.out2 = 0;
-    }
+  calculateFromRpm() {
+    this.updateValues(CrushingCalculator.calculateFromRpm(this.val_rpm, this.in_recipeDuration, this.in_stackSize, this.in_delay));
   }
 
-  ngOnInit() { this.calculate(); }
-  ngDoCheck() { this.calculate(); }
+  calculateFromTime() {
+    this.updateValues(CrushingCalculator.calculateFromTime(this.val_time, this.in_recipeDuration, this.in_stackSize, this.in_delay));
+  }
+
+  calculateFromSpeed() {
+    this.updateValues(CrushingCalculator.calculateFromSpeed(this.val_speed, this.in_recipeDuration, this.in_stackSize, this.in_delay));
+  }
+
+  updateValues(result: Result) {
+    this.cdRef.detectChanges(); // update DOM with values given by user ( change detector is blind :( )
+    this.val_rpm = result.rpm;
+    this.val_time = result.time;
+    this.val_speed = result.speed;
+  }
+
 }

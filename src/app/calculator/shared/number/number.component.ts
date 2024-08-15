@@ -52,7 +52,8 @@ export class NumberComponent {
   private cdRef = inject(ChangeDetectorRef);
   
   onNgModelChange(newValueStr: string) {
-    let newValue = Number(newValueStr);
+    let str = newValueStr.match(/\d+/);
+    let newValue = Number(str ? str[0] : '');
     this.realValue.set(newValue);
     this.cdRef.detectChanges(); // update DOM to possibly invalid value
 

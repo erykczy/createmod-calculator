@@ -23,11 +23,18 @@ export class MixerCalculatorComponent {
     this.updateValues(MixerCalculator.calculateFromRpm(this.val_rpm!));
   }
 
+  calculateFromSpeed() {
+    this.updateValues(MixerCalculator.calculateFromSpeed(this.val_speed!));
+  }
+
+  calculateFromTime() {
+    this.updateValues(MixerCalculator.calculateFromTime(this.val_time!));
+  }
+
   updateValues(result: Result) {
-    this.cdRef.detectChanges(); // detect changes because I will change variables in a moment
+    this.cdRef.detectChanges(); // update DOM with values given by user ( change detector is blind :( )
     this.val_rpm = result.rpm;
     this.val_time = result.time;
     this.val_speed = result.speed;
-    this.cdRef.detectChanges();
   }
 }

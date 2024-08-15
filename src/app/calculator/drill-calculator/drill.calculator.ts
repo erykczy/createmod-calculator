@@ -20,18 +20,19 @@ export abstract class DrillCalculator {
     else {
       return {
         rpm: rpm,
-        time: 0,
+        time: Number.POSITIVE_INFINITY,
         speed: 0
       };
     }
   }
 
   public static calculateFromTime(hardness: number, delay: number, time: number): Result {
-    let result = this.search(hardness, delay, 0, 1000, time*20, 1000, 0, -1, Number.POSITIVE_INFINITY);
+    let resultRpm = this.searchForRpm(0, 1024, time, hardness, delay);
+    let result = this.calculateFromRpm(hardness, delay, resultRpm);
     return {
       rpm: decimal(result.rpm)!,
       time: decimal(result.time)!,
-      speed: decimal(1/result.time)!
+      speed: decimal(result.speed)!
     };
   }
 
@@ -44,24 +45,14 @@ export abstract class DrillCalculator {
     };
   }
 
-  private static search(hardness: number, delay: number, minRpm: number, maxRpm: number, targetTicks: number, maxIndex: number, index: number, solution: number, solutionDistance: number): {rpm:number, time:number} {
-    let middleRpm = Math.floor((maxRpm - minRpm)/2 + minRpm);
-    let resultTicks = this.calculateFromRpm(hardness, delay, middleRpm).time*20;
-    let distance = Math.abs(resultTicks - targetTicks);
-    if(distance <= solutionDistance) {
-      solution = middleRpm;
-      solutionDistance = distance;
+  private static searchForRpm(rpm: number, maxRpm: number, targetTime: number, hardness: number, delay: number): number {
+    let time = this.calculateFromRpm(hardness, delay, rpm).time;
+    if(time <= targetTime || rpm >= maxRpm) {
+      return rpm;
     }
-    if(maxRpm - minRpm <= 1) {
-      return {
-        rpm: solution,
-        time: this.calculateFromRpm(hardness, delay, solution).time
-      };
+    else {
+      return this.searchForRpm(rpm+1, maxRpm, targetTime, hardness, delay);
     }
-    if(targetTicks < resultTicks)
-      return this.search(hardness, delay, middleRpm+1, maxRpm, targetTicks, maxIndex, index+1, solution, solutionDistance);
-    else
-      return this.search(hardness, delay, minRpm, middleRpm-1, targetTicks, maxIndex, index+1, solution, solutionDistance);
   }
 
 }

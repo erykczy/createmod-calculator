@@ -22,6 +22,10 @@ export class DrillCalculatorComponent {
   in_hardness: number = 0;
   in_delay: number = 0;
   private cdRef: ChangeDetectorRef = inject(ChangeDetectorRef);
+  
+  ngOnInit() {
+    this.calculateFromRpm(); // calculate default values
+  }
 
   get hardnessKeys(): string[] { return Array.from(g_hardness.keys()); }
   get hardnessValues(): number[] { return Array.from(g_hardness.values()); }
@@ -45,7 +49,7 @@ export class DrillCalculatorComponent {
   }
 
   updateValues(result: Result) {
-    this.cdRef.detectChanges(); // detect changes because I will change variables in a moment
+    this.cdRef.detectChanges(); // update DOM with values given by user ( change detector is blind :( )
     this.val_rpm = result.rpm;
     this.val_time = result.time;
     this.val_speed = result.speed;

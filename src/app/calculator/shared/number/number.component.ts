@@ -1,9 +1,10 @@
-import { ChangeDetectorRef, Component, EventEmitter, inject, Input, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, computed, EventEmitter, inject, input, Input, Output, signal, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { decimal, g_invisibleChar } from '../../constants';
 import { ClickSelectDirective } from '../../../click-select';
 import { CalculatorService } from '../../calculator.service';
 
+// I present to you THE CLEANEST CODE OF ALL TIME
 @Component({
   selector: 'app-number',
   standalone: true,
@@ -12,84 +13,77 @@ import { CalculatorService } from '../../calculator.service';
   styleUrl: './number.component.css'
 })
 export class NumberComponent {
-  decimal = decimal;
-  @Input({required: true}) id!: string;
-  @Input() unit: string = "";
-  @Input() min?: number = undefined;
-  @Input() max?: number = undefined;
-  @Input() help?: string = undefined;
+  id = input.required<string>();
+  min = input<number | undefined>(undefined);
+  max = input<number | undefined>(undefined);
+  unit = input<string>("");
+  help = input<string | undefined>(undefined);
   @Input()
-  set value(newValue: number | undefined) {
-    if(this.defaultValue === undefined) {
-      this.defaultValue = newValue;
-      return;
-    }
-    if(newValue === undefined)
-      return;
-
-    if(this.focused)
-      this.bluredValue = newValue;
-    else
-      this.realValue = newValue;
-    this.calculatorService.saveProperty(this.id, newValue);
-  }
-  @Output() valueChange = new EventEmitter();
-  @Output() userChange = new EventEmitter();
-  private realValue: number = 0;
-  private bluredValue: number | null = null;
-  private calculatorService = inject(CalculatorService);
-  private cdRef = inject(ChangeDetectorRef);
-  focused: boolean = false;
-  defaultValue?: number = undefined;
-  
-  get ngModelValue(): string {
-    if(this.focused)
-      return String(this.realValue);
-    else
-      return decimal(this.realValue)+this.unit;
-  }
-
-  onNgModelChange(newValueStr: string) {
-    let newValue = Number(newValueStr);
-    this.realValue = newValue;
-    this.cdRef.detectChanges();
-
-    if(newValue === null || Number.isNaN(newValue) || !Number.isFinite(newValue))
-      newValue = this.min === undefined ? 0 : this.min;
-    if(this.min !== undefined && newValue < this.min)
-      newValue = this.min;
-    if(this.max !== undefined && newValue > this.max)
-      newValue = this.max;
-    
-    this.realValue = newValue;
-    this.calculatorService.saveProperty(this.id, this.realValue);
-    this.valueChange.emit(this.realValue);
-    this.userChange.emit(this.realValue);
-  }
-
-  ngOnInit() {
-    Promise.resolve().then(() => {
-      let savedValue = this.calculatorService.getSavedProperty(this.id);
+  set value(newValue: number) {
+    if(!this.initialized) {
+      let savedValue = this.calculatorService.getSavedProperty(this.id());
       if(savedValue !== null) {
-        this.realValue = savedValue;
+        Promise.resolve().then(() => {
+          this.realValue.set(savedValue);
+          this.valueChange.emit(this.realValue());
+        });
       }
       else {
-        this.realValue = this.defaultValue === undefined ? 0 : this.defaultValue;
-        this.calculatorService.saveProperty(this.id, this.realValue);
+        this.realValue.set(newValue);
       }
-      this.valueChange.emit(this.realValue);
-    });
+      this.initialized = true;
+      return;
+    }
+
+    if(this.focused())
+      this.bluredValue = newValue;
+    else
+      this.realValue.set(newValue);
+    this.calculatorService.saveProperty(this.id(), newValue);
+  }
+  @Output() valueChange = new EventEmitter<number>();
+  @Output() userChange = new EventEmitter<number>();
+  realValue = signal<number>(0);
+  private bluredValue: number | null = null;
+  private focused = signal<boolean>(false);
+  private initialized: boolean = false;
+  private calculatorService = inject(CalculatorService);
+  private cdRef = inject(ChangeDetectorRef);
+  
+  onNgModelChange(newValueStr: string) {
+    let newValue = Number(newValueStr);
+    this.realValue.set(newValue);
+    this.cdRef.detectChanges(); // update DOM to possibly invalid value
+
+    if(newValue === null || Number.isNaN(newValue) || !Number.isFinite(newValue))
+      newValue = this.min() === undefined ? 0 : this.min()!;
+    if(this.min() !== undefined && newValue < this.min()!)
+      newValue = this.min()!;
+    if(this.max() !== undefined && newValue > this.max()!)
+      newValue = this.max()!;
+    
+    this.realValue.set(newValue);
+    this.calculatorService.saveProperty(this.id(), this.realValue());
+    this.valueChange.emit(this.realValue());
+    this.userChange.emit(this.realValue());
   }
 
   onFocus() {
-    this.focused = true;
+    this.focused.set(true);
   }
 
   onBlur() {
-    this.focused = false;
+    this.focused.set(false);
     if(this.bluredValue !== null) {
-      this.realValue = this.bluredValue;
+      this.realValue.set(this.bluredValue);
       this.bluredValue = null;
     }
   }
+  
+  ngModelValue = computed<string>(() => {
+    if(this.focused())
+      return String(this.realValue());
+    else
+      return decimal(this.realValue())+this.unit();
+  })
 }

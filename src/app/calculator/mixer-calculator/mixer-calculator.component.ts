@@ -15,8 +15,8 @@ import { MixerCalculator, Result } from './mixer.calculator';
 })
 export class MixerCalculatorComponent {
   val_rpm: number = 256;
-  val_speed?: number = undefined;
-  val_time?: number = undefined;
+  val_speed: number = 0;
+  val_time: number = 0;
   private cdRef = inject(ChangeDetectorRef);
 
   calculateFromRpm() {

@@ -1,11 +1,11 @@
-import { decimal } from "../constants";
+import { clamp, decimal } from "../constants";
 
 export abstract class DrillCalculator {
   public static calculateFromRpm(hardness: number, delay: number, rpm: number): Result {
     if(rpm > 0) {
       let breakSpeed = rpm / 100;
   
-      let a = Math.ceil(10/Math.max(1, Math.floor(breakSpeed/hardness)));
+      let a = Math.ceil(10/clamp(Math.floor(breakSpeed/hardness), 1, 10));
       let b = Math.floor(hardness/breakSpeed)+1;
       let totalFrames = (a-1) * b + 1 + 1; //+1 is frame of delay
   

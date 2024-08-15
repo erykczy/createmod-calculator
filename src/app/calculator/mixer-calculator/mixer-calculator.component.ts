@@ -19,6 +19,10 @@ export class MixerCalculatorComponent {
   val_time: number = 0;
   private cdRef = inject(ChangeDetectorRef);
 
+  ngOnInit() {
+    this.calculateFromRpm();
+  }
+
   calculateFromRpm() {
     this.updateValues(MixerCalculator.calculateFromRpm(this.val_rpm!));
   }

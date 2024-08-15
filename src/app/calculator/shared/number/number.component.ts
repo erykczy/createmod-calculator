@@ -18,6 +18,7 @@ export class NumberComponent {
   max = input<number | undefined>(undefined);
   unit = input<string>("");
   help = input<string | undefined>(undefined);
+  readonly = input<boolean>(false);
   @Input()
   set value(newValue: number) {
     if(!this.initialized) {

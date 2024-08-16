@@ -1,0 +1,4 @@
+<app-enum [id]="id" [values]="displayedKeys" [(value)]="in_index" (valueChange)="onValueChange()" (userChange)="onUserChange()" [help]="hint"><ng-content /></app-enum>
+@if(in_index === 0) {
+  <app-number [id]="'custom'+id" [(value)]="in_custom" (valueChange)="onValueChange()" (userChange)="onUserChange()" [min]="min" [max]="max" [help]="hint_custom">{{label_custom}}</app-number>
+}

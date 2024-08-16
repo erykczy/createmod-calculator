@@ -16,12 +16,7 @@ export class ClickSelectDirective {
       return;
     let element: HTMLInputElement = this.ref.nativeElement;
 
-    element.focus();
-    let end = element.value.indexOf(g_invisibleChar);
-    if(end === -1)
-      element.select();
-    else
-      element.setSelectionRange(0, end);
+    element.select();
   }
 
 }

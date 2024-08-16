@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: end;
+}
+
+app-enum {
+  flex: 3;
+}
+
+app-number {
+  flex: 1;
+}

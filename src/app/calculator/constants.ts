@@ -78,6 +78,7 @@ export var g_inputDelays = new Map<string, number>([
 ]);
 
 export var g_millstoneRecipes = new Map<string, number>([
+  ["<all other recipes>", 100],
   ["clay block", 50],
   ["cactus", 50],
   ["sea pickle", 50],
@@ -129,6 +130,7 @@ export var g_millstoneRecipes = new Map<string, number>([
 ]);
 
 export var g_crushingRecipes = new Map<string, number>([
+  ["<all other recipes>", 100],
   ["clay block", 50],
   ["cactus", 50],
   ["sea pickle", 50],

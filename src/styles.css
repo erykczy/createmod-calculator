@@ -32,21 +32,6 @@ router-outlet.calculator-router + * {
   flex-direction: column;
 }
 
-.variable-container {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  align-items: end;
-}
-
-.enum {
-  flex: 3;
-}
-
-.variable {
-  flex: 1;
-}
-
 .tooltip {
   display: inline-block;
   position: relative;

@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { InputSideComponent } from "../shared/input-side/input-side.component";
 import { NumberComponent } from "../shared/number/number.component";
 import { OutputSideComponent } from "../shared/output-side/output-side.component";
 import { clamp } from '../constants';
 import { WarningComponent } from "../shared/warning/warning.component";
+import { MixerCalculator, Result } from './mixer.calculator';
 
 @Component({
   selector: 'app-mixer-calculator',
@@ -13,15 +14,31 @@ import { WarningComponent } from "../shared/warning/warning.component";
   styleUrl: './mixer-calculator.component.css'
 })
 export class MixerCalculatorComponent {
-  in_rpm: number = 256;
-  out1: number = 0;
-  out2: number = 0;
+  val_rpm: number = 256;
+  val_speed: number = 0;
+  val_time: number = 0;
+  private cdRef = inject(ChangeDetectorRef);
 
-  calculate() {
-    this.out2 = (clamp(Math.floor(Math.log2(Math.floor(512 / this.in_rpm))) * Math.ceil(1 * 15) + 1, 1, 512)+1) / 20;
-    this.out1 = 1 / this.out2;
+  ngOnInit() {
+    this.calculateFromRpm();
   }
 
-  ngOnInit() { this.calculate(); }
-  ngDoCheck() { this.calculate(); }
+  calculateFromRpm() {
+    this.updateValues(MixerCalculator.calculateFromRpm(this.val_rpm));
+  }
+
+  calculateFromSpeed() {
+    this.updateValues(MixerCalculator.calculateFromSpeed(this.val_speed));
+  }
+
+  calculateFromTime() {
+    this.updateValues(MixerCalculator.calculateFromTime(this.val_time));
+  }
+
+  updateValues(result: Result) {
+    this.cdRef.detectChanges(); // update DOM with values given by user ( change detector is blind :( )
+    this.val_rpm = result.rpm;
+    this.val_time = result.time;
+    this.val_speed = result.speed;
+  }
 }

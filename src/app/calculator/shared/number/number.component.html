@@ -1,2 +1,4 @@
-<label [class.output]="output" [class.tooltip]="help !== undefined"><ng-content /><span class="tooltip-text">{{help}}</span></label>
-<input [clickSelect]="output" [class.output]="output" [readonly]="output" [type]="output ? 'text' : 'number'" [ngModel]="ngModelValue" (ngModelChange)="onNgModelChange($event)">  
+<div class="head">
+  <label [class.tooltip]="help() !== undefined"><ng-content /><span class="tooltip-text">{{help()}}</span></label>
+</div>
+<input [clickSelect]="readonly()" [readOnly]="readonly()" (focus)="onFocus()" (blur)="onBlur()" [ngModel]="ngModelValue()" (ngModelChange)="onNgModelChange($event)">  

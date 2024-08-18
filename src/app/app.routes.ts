@@ -6,6 +6,11 @@ import { PressCalculatorComponent } from './calculator/press-calculator/press-ca
 import { MillstoneCalculatorComponent } from './calculator/millstone-calculator/millstone-calculator.component';
 import { CrushingCalculatorComponent } from './calculator/crushing-calculator/crushing-calculator.component';
 import { BeltCalculatorComponent } from './calculator/belt-calculator/belt-calculator.component';
+import { SawCalculatorComponent } from './calculator/saw-calculator/saw-calculator.component';
+import { DeployerCalculatorComponent } from './calculator/deployer-calculator/deployer-calculator.component';
+import { ArmCalculatorComponent } from './calculator/arm-calculator/arm-calculator.component';
+import { CrafterCalculatorComponent } from './calculator/crafter-calculator/crafter-calculator.component';
+import { PumpCalculatorComponent } from './calculator/pump-calculator/pump-calculator.component';
 
 export const routes: Routes = [
   {
@@ -40,5 +45,25 @@ export const routes: Routes = [
   {
     path: 'belt',
     component: BeltCalculatorComponent
+  },
+  {
+    path: 'saw',
+    component: SawCalculatorComponent
+  },
+  {
+    path: "deployer",
+    component: DeployerCalculatorComponent
+  },
+  {
+    path: "arm",
+    component: ArmCalculatorComponent
+  },
+  {
+    path: "crafter",
+    component: CrafterCalculatorComponent
+  },
+  {
+    path: "pump",
+    component: PumpCalculatorComponent
   }
 ];

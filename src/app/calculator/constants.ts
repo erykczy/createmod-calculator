@@ -56,15 +56,53 @@ export var g_calculatorsData: CalculatorData[] = [
     id: "belt",
     iconPath: "assets/icons/belt.png",
     wikiPage: "https://create.fandom.com/wiki/Mechanical_Belt"
+  },
+  {
+    name: "Mechanical Saw",
+    id: "saw",
+    iconPath: "assets/icons/saw.png",
+    wikiPage: "https://create.fandom.com/wiki/Mechanical_Saw"
+  },
+  {
+    name: "Deployer",
+    id: "deployer",
+    iconPath: "assets/icons/deployer.png",
+    wikiPage: "https://create.fandom.com/wiki/Deployer"
+  },
+  {
+    name: "Mechanical Arm",
+    id: "arm",
+    iconPath: "assets/icons/arm.png",
+    wikiPage: "https://create.fandom.com/wiki/Mechanical_Arm"
+  },
+  {
+    name: "Mechanical Crafter",
+    id: "crafter",
+    iconPath: "assets/icons/crafter.png",
+    wikiPage: "https://create.fandom.com/wiki/Mechanical_Crafter"
+  },
+  {
+    name: "Mechanical Pump",
+    id: "pump",
+    iconPath: "assets/icons/pump.png",
+    wikiPage: "https://create.fandom.com/wiki/Mechanical_Pump"
   }
 ];
 
-export var g_hardness = new Map<string, number>([
+export var g_drillHardness = new Map<string, number>([
   ["cobblestone", 2],
   ["stone", 1.5],
   ["basalt", 1.25],
   ["obsidian", 50]
 ]);
+
+export var g_sawHardness = new Map<string, number>([
+  ["log (any)", 2],
+  ["wood (any)", 2],
+  ["mangrove roots", 0.7],
+  ["mushroom stem", 0.2],
+  ["cactus", 0.4]
+])
 
 export var g_delays = new Map<string, number>([
   ["no delay", 0],
@@ -76,6 +114,24 @@ export var g_inputDelays = new Map<string, number>([
   ["chute (slower)", 3],
   ["thrown (slowest, not recommended)", 27]
 ]);
+
+export var g_cuttingRecipes = new Map<string, number>(
+  [
+    ["<all other recipes>", 50], // stone cutting recipes
+    // ["log (any)", 50],
+    // ["wood (any)", 50],
+    // ["warped/crimson stem", 50],
+    // ["warped/crimson hyphae", 50],
+    // ["stripped log (any)", 50],
+    // ["stipped wood (any)", 50],
+    // ["stripped warped/crimson stem", 50],
+    // ["stripped warped/crimson hyphae", 50],
+    //["bamboo block", 50],
+    ["andesite alloy → shaft", 200],
+    ["andesite alloy", 50],
+    ["bamboo planks", 20]
+  ]
+)
 
 export var g_millstoneRecipes = new Map<string, number>([
   ["<all other recipes>", 100],

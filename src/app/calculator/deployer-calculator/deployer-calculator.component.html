@@ -1,7 +1,36 @@
 <app-input-side>
-  <app-number [(value)]="val_rpm" [min]="0" id="rpm" (userChange)="calculateFromRpm()">RPM</app-number>
+  <app-enum id="process" [(value)]="in_process" [values]="processes" (userChange)="calculateFromRpm()">Process</app-enum>
+  <app-number id="rpm" [(value)]="val_rpm" [min]="0" (userChange)="calculateFromRpm()">RPM</app-number>
+  @if(in_process === Process.KILLING) {
+    <app-number id="health" [(value)]="in_health" [min]="0" (userChange)="calculateFromRpm()">Mob Health</app-number>
+    <app-number id="damage" [(value)]="in_damage" [min]="0" (userChange)="calculateFromRpm()">Item Damage</app-number>
+  }
 </app-input-side>
 <app-output-side>
-  <app-number [unit]="'/s'" [(value)]="val_speed" id=speed (userChange)="calculateFromSpeed()">Recipes/Second</app-number>
-  <app-number [unit]="'s'" [(value)]="val_time" id="time" (userChange)="calculateFromTime()">Processing Time</app-number>
+  <app-number [unit]="'/s'" [(value)]="val_speed" id=speed (userChange)="calculateFromSpeed()">
+    @switch (in_process) {
+      @case (Process.KILLING) {
+        Mobs/Second
+      }
+      @case (Process.USING_ITEM) {
+        Usages/Second
+      }
+      @default {
+        Recipes/Second
+      }
+    }
+  </app-number>
+  <app-number [unit]="'s'" [(value)]="val_time" id="time" (userChange)="calculateFromTime()">
+    @switch (in_process) {
+      @case (Process.KILLING) {
+        Killing Time
+      }
+      @case (Process.USING_ITEM) {
+        Time Between Usages
+      }
+      @default {
+        Processing Time
+      }
+    }
+  </app-number>
 </app-output-side>

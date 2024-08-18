@@ -1,27 +1,41 @@
 import { clamp, decimal } from "../constants";
 
 export abstract class DeployerCalculator {
-  public static calculateFromRpm(rpm: number, process: Process, health: number, damage: number): Result {
-    if(rpm > 0 && damage > 0) {
+  public static calculateFromRpm(rpm: number, options: Options): Result {
+    if(rpm > 0) {
       let timerSpeed = Math.floor(clamp(rpm * 2, 8, 512));
 
       let framesWaiting = Math.ceil(500 / timerSpeed) + 1;
       let framesExpanding = Math.ceil(1000 / timerSpeed) + 1;
       let framesRetracting = Math.ceil(1000 / timerSpeed) + 1;
+      let framesOutputting = 10 + 1;
 
-      let totalFrames = 0;
-      switch(process) {
-        case Process.BELT_PROCESSING:
+      let totalFrames = undefined;
+      if(options.process === Process.PROCESSING) {
+        totalFrames = framesExpanding + framesRetracting;
+      }
+      else if(options.process === Process.OTHER) {
+        if(options.onContraption) {
           totalFrames = framesExpanding + framesRetracting;
-          break;
-        case Process.USING_ITEM:
+        }
+        else {
           totalFrames = framesWaiting + framesExpanding + framesRetracting;
-          break;
-        case Process.KILLING:
-          let hits = Math.ceil(health / damage);
-          totalFrames = hits * (framesWaiting + framesExpanding + framesRetracting);
-          totalFrames += 10 + 1; // output overflow items
-          break;
+          if(options.gathersItems)
+            totalFrames += framesOutputting;
+        }
+      }
+      else {
+        if(options.onContraption)
+          totalFrames = framesExpanding + framesRetracting;
+        else {
+          totalFrames = framesWaiting + framesExpanding + framesRetracting
+          if(options.gathersItems)
+            totalFrames += framesOutputting;
+        }
+
+        let hits = Math.ceil(options.health / options.damage);
+        totalFrames = hits * totalFrames;
+        totalFrames += framesOutputting; // output overflow items
       }
 
       return {
@@ -39,24 +53,24 @@ export abstract class DeployerCalculator {
     }
   }
 
-  public static calculateFromTime(time: number, process: Process, health: number, damage: number): Result {
-    let resultRpm = this.searchForRpm(0, 1024, time, process, health, damage);
-    let result = this.calculateFromRpm(resultRpm, process, health, damage);
+  public static calculateFromTime(time: number, options: Options): Result {
+    let resultRpm = this.searchForRpm(0, 1024, time, options);
+    let result = this.calculateFromRpm(resultRpm, options);
     return result;
   }
 
-  public static calculateFromSpeed(speed: number, process: Process, health: number, damage: number): Result {
-    let result = this.calculateFromTime(1/speed, process, health, damage);
+  public static calculateFromSpeed(speed: number, options: Options): Result {
+    let result = this.calculateFromTime(1/speed, options);
     return result;
   }
 
-  private static searchForRpm(rpm: number, maxRpm: number, targetTime: number, process: Process, health: number, damage: number): number {
-    let time = this.calculateFromRpm(rpm, process, health, damage).time;
+  private static searchForRpm(rpm: number, maxRpm: number, targetTime: number, options: Options): number {
+    let time = this.calculateFromRpm(rpm, options).time;
     if(time <= targetTime || rpm >= maxRpm) {
       return rpm;
     }
     else {
-      return this.searchForRpm(rpm+1, maxRpm, targetTime, process, health, damage);
+      return this.searchForRpm(rpm+1, maxRpm, targetTime, options);
     }
   }
 }
@@ -68,7 +82,15 @@ export interface Result {
 }
 
 export enum Process {
-  BELT_PROCESSING,
+  PROCESSING,
   KILLING,
-  USING_ITEM
+  OTHER
+}
+
+export interface Options {
+  process: Process,
+  onContraption: number,
+  gathersItems: number,
+  health: number,
+  damage: number
 }

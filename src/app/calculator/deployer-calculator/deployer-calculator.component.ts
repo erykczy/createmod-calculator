@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { NumberComponent } from "../shared/number/number.component";
 import { OutputSideComponent } from "../shared/output-side/output-side.component";
 import { InputSideComponent } from "../shared/input-side/input-side.component";
-import { DeployerCalculator, Process, Result } from './deployer.calculator';
+import { DeployerCalculator, Options, Process, Result } from './deployer.calculator';
 import { EnumComponent } from "../shared/enum/enum.component";
 import { NuenumComponent } from "../shared/nuenum/nuenum.component";
 
@@ -18,16 +18,26 @@ export class DeployerCalculatorComponent {
   val_rpm: number = 256;
   val_time: number = 0;
   val_speed: number = 0;
-  in_process: Process = 0;
-  in_health: number = 10;
-  in_damage: number = 4;
+  in_options: Options = {
+     process: Process.OTHER,
+     onContraption: 0,
+     gathersItems: 0,
+     health: 100,
+     damage: 4
+  };
   private cdRef = inject(ChangeDetectorRef);
 
   get processes(): string[] {
     return [
-      "Belt processing",
+      "Processing",
       "Killing",
-      "Using/Placing/Inserting item"
+      "Other"
+    ]
+  }
+  get noYes(): string[] {
+    return [
+      "No",
+      "Yes"
     ]
   }
 
@@ -36,15 +46,15 @@ export class DeployerCalculatorComponent {
   }
 
   calculateFromRpm() {
-    this.updateValues(DeployerCalculator.calculateFromRpm(this.val_rpm, this.in_process, this.in_health, this.in_damage));
+    this.updateValues(DeployerCalculator.calculateFromRpm(this.val_rpm, this.in_options));
   }
 
   calculateFromSpeed() {
-    this.updateValues(DeployerCalculator.calculateFromSpeed(this.val_speed, this.in_process, this.in_health, this.in_damage));
+    this.updateValues(DeployerCalculator.calculateFromSpeed(this.val_speed, this.in_options));
   }
 
   calculateFromTime() {
-    this.updateValues(DeployerCalculator.calculateFromTime(this.val_time, this.in_process, this.in_health, this.in_damage));
+    this.updateValues(DeployerCalculator.calculateFromTime(this.val_time, this.in_options));
   }
 
   updateValues(result: Result) {

@@ -8,6 +8,7 @@ export abstract class ArmCalculator {
       const ticksPerPhase = Math.ceil(1 / (Math.min(256, rpm) / 1024));
       const ticksForHalfPhase = Math.ceil(ticksPerPhase/2);
 
+      let shortTime = 0;
       let executions = 0;
       let totalFrames = 0;
       while(executions < this.maxExecutions) {
@@ -21,22 +22,30 @@ export abstract class ArmCalculator {
         //console.log("ex: "+executions+" | frames: "+frames+" | searchOutputsFrames: "+searchOutputsDuration, "searchOutputsDurationByLazyTick: "+searchOutputsDurationByLazyTick);
         executions++;
         totalFrames += frames;
-        if(executedByLazyTick && executions > 1)
+        if(executedByLazyTick && executions > 1) {
+          shortTime = frames;
           break;
+        }
       }
       let averageTimeSec = (totalFrames / executions) / 20;
 
       return {
         rpm: rpm,
-        time: averageTimeSec,
-        speed: 1/averageTimeSec
+        time: decimal(averageTimeSec)!,
+        speed: decimal(1/averageTimeSec)!,
+        shortTime: decimal(shortTime/20)!,
+        longTime: decimal((ticksPerPhase*4)/20)!,
+        count: executions-1
       };
     }
     else {
       return {
         rpm: rpm,
         time: Number.POSITIVE_INFINITY,
-        speed: 0
+        speed: 0,
+        shortTime: Number.POSITIVE_INFINITY,
+        longTime: Number.POSITIVE_INFINITY,
+        count: 0
       }
     }
   }
@@ -66,7 +75,10 @@ export abstract class ArmCalculator {
 export interface Result {
   rpm: number,
   time: number,
-  speed: number
+  speed: number,
+  shortTime: number,
+  longTime: number,
+  count: number
 }
 
 enum Phase {

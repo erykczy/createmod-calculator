@@ -3,11 +3,12 @@ import { NumberComponent } from "../shared/number/number.component";
 import { OutputSideComponent } from "../shared/output-side/output-side.component";
 import { InputSideComponent } from "../shared/input-side/input-side.component";
 import { ArmCalculator, Result } from './arm.calculator';
+import { WarningComponent } from "../shared/warning/warning.component";
 
 @Component({
   selector: 'app-arm-calculator',
   standalone: true,
-  imports: [NumberComponent, OutputSideComponent, InputSideComponent],
+  imports: [NumberComponent, OutputSideComponent, InputSideComponent, WarningComponent],
   templateUrl: './arm-calculator.component.html',
   styleUrl: './arm-calculator.component.css'
 })
@@ -15,6 +16,9 @@ export class ArmCalculatorComponent {
   val_rpm: number = 256;
   val_time: number = 0;
   val_speed: number = 0;
+  val_shortTime: number = 0;
+  val_longTime: number = 0;
+  val_count: number = 0;
   private cdRef = inject(ChangeDetectorRef);
 
   ngOnInit() {
@@ -38,5 +42,8 @@ export class ArmCalculatorComponent {
     this.val_rpm = result.rpm;
     this.val_time = result.time;
     this.val_speed = result.speed;
+    this.val_shortTime = result.shortTime;
+    this.val_longTime = result.longTime;
+    this.val_count = result.count;
   }
 }

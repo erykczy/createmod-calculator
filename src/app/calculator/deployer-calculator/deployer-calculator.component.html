@@ -21,6 +21,9 @@
       @case (Process.KILLING) {
         Mobs/Second
       }
+      @case (Process.OTHER) {
+        Bumps/Second
+      }
       @default {
         Recipes/Second
       }
@@ -30,6 +33,9 @@
     @switch (in_options.process) {
       @case (Process.KILLING) {
         Killing Time
+      }
+      @case (Process.OTHER) {
+        Time Between Bumps
       }
       @default {
         Processing Time

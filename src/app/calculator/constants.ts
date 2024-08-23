@@ -109,10 +109,15 @@ export var g_delays = new Map<string, number>([
   ["generator (any)", 1.5] 
 ]);
 
-export var g_inputDelays = new Map<string, number>([
+export var g_crushingInputDelays = new Map<string, number>([
   ["funnel (fastest)", 1],
   ["chute (slower)", 3],
   ["thrown (slowest, not recommended)", 27]
+]);
+
+export var g_crafterInputDelays = new Map<string, number>([
+  ["funnel (faster)", 0],
+  ["chute (slower)", 2]
 ]);
 
 export var g_cuttingRecipes = new Map<string, number>(

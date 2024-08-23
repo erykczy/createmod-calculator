@@ -3,11 +3,14 @@ import { NumberComponent } from "../shared/number/number.component";
 import { OutputSideComponent } from "../shared/output-side/output-side.component";
 import { InputSideComponent } from "../shared/input-side/input-side.component";
 import { CrafterCalculator, Result } from './crafter.calculator';
+import { NuenumComponent } from "../shared/nuenum/nuenum.component";
+import { g_crafterInputDelays } from '../constants';
+import { WarningComponent } from "../shared/warning/warning.component";
 
 @Component({
   selector: 'app-crafter-calculator',
   standalone: true,
-  imports: [NumberComponent, OutputSideComponent, InputSideComponent],
+  imports: [NumberComponent, OutputSideComponent, InputSideComponent, NuenumComponent, WarningComponent],
   templateUrl: './crafter-calculator.component.html',
   styleUrl: './crafter-calculator.component.css'
 })
@@ -15,22 +18,27 @@ export class CrafterCalculatorComponent {
   val_rpm: number = 256;
   val_time: number = 0;
   val_speed: number = 0;
+  in_chainLength: number = 1;
+  in_inputDelay: number = 0;
   private cdRef = inject(ChangeDetectorRef);
+
+  get delayKeys(): string[] { return Array.from(g_crafterInputDelays.keys()); }
+  get delayValues(): number[] { return Array.from(g_crafterInputDelays.values()); }
 
   ngOnInit() {
     this.calculateFromRpm();
   }
 
   calculateFromRpm() {
-    this.updateValues(CrafterCalculator.calculateFromRpm(this.val_rpm));
+    this.updateValues(CrafterCalculator.calculateFromRpm(this.val_rpm, this.in_chainLength, this.in_inputDelay));
   }
 
   calculateFromSpeed() {
-    this.updateValues(CrafterCalculator.calculateFromSpeed(this.val_speed));
+    this.updateValues(CrafterCalculator.calculateFromSpeed(this.val_speed, this.in_chainLength, this.in_inputDelay));
   }
 
   calculateFromTime() {
-    this.updateValues(CrafterCalculator.calculateFromTime(this.val_time));
+    this.updateValues(CrafterCalculator.calculateFromTime(this.val_time, this.in_chainLength, this.in_inputDelay));
   }
 
   updateValues(result: Result) {

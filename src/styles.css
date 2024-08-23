@@ -42,18 +42,22 @@ router-outlet.calculator-router + * {
 
 .tooltip-text {
   text-transform: none;
-  position: absolute;
   visibility: hidden;
   opacity: 0;
-  width: 240px;
-  bottom: 120%;
-  left: calc(50% - 240px/2);
+  text-align: center;
   background-color: rgb(154, 154, 154);
   color: white;
   padding: 5px;
   border-radius: 5px;
   display: block;
   transition: opacity 0.1s;
+
+  position: absolute;
+  z-index: 1;
+  bottom: 120%;
+  left: 50%;
+  width: 240px;
+  margin-left: -120px;
 }
 
 .tooltip-text::after {

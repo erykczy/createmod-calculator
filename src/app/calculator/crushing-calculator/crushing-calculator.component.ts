@@ -3,7 +3,7 @@ import { NumberComponent } from "../shared/number/number.component";
 import { OutputSideComponent } from "../shared/output-side/output-side.component";
 import { EnumComponent } from "../shared/enum/enum.component";
 import { InputSideComponent } from "../shared/input-side/input-side.component";
-import { clamp, g_crushingRecipes, g_delays, g_inputDelays, g_millstoneRecipes } from '../constants';
+import { clamp, g_crushingRecipes, g_delays, g_crushingInputDelays, g_millstoneRecipes } from '../constants';
 import { NuenumComponent } from "../shared/nuenum/nuenum.component";
 import { CrushingCalculator, Result } from './crushing.calculator';
 
@@ -27,8 +27,8 @@ export class CrushingCalculatorComponent {
 
   get recipesKeys(): string[] { return Array.from(g_millstoneRecipes.keys()); }
   get recipesValues(): number[] { return Array.from(g_millstoneRecipes.values()); }
-  get delayKeys(): string[] { return Array.from(g_inputDelays.keys()); }
-  get delayValues(): number[] { return Array.from(g_inputDelays.values()); }
+  get delayKeys(): string[] { return Array.from(g_crushingInputDelays.keys()); }
+  get delayValues(): number[] { return Array.from(g_crushingInputDelays.values()); }
 
   get recipeInputHint(): string {
     return "Different recipes have different durations. If you can't see your input, select <all other recipes> or <custom>";

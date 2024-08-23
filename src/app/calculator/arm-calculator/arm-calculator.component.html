@@ -1,0 +1,11 @@
+<app-input-side>
+  <app-number [(value)]="val_rpm" [min]="0" id="rpm" (userChange)="calculateFromRpm()">RPM</app-number>
+</app-input-side>
+<app-output-side>
+  <app-number [unit]="'/s'" [(value)]="val_speed" id=speed (userChange)="calculateFromSpeed()">Average Cycles/Second</app-number>
+  <app-number [unit]="'s'" [(value)]="val_time" id="time" (userChange)="calculateFromTime()">Average Cycle Time</app-number>
+  <h2>Advanced</h2>
+  <app-number [readonly]="true" [unit]="'s'" [(value)]="val_shortTime" id="short-time">Short Cycle Time</app-number>
+  <app-number [readonly]="true" [unit]="'s'" [(value)]="val_longTime" id="long-time">Normal Cycle Time</app-number>
+  <app-number [readonly]="true" [(value)]="val_count" id="count">Count of Normal Cycles between Short Cycles</app-number>
+</app-output-side>

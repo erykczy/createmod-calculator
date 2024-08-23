@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
-import { clamp, g_delays, g_hardness } from '../constants';
+import { clamp, g_delays, g_drillHardness } from '../constants';
 import { InputSideComponent } from "../shared/input-side/input-side.component";
 import { OutputSideComponent } from "../shared/output-side/output-side.component";
 import { EnumComponent } from "../shared/enum/enum.component";
@@ -27,8 +27,8 @@ export class DrillCalculatorComponent {
     this.calculateFromRpm(); // calculate default values
   }
 
-  get hardnessKeys(): string[] { return Array.from(g_hardness.keys()); }
-  get hardnessValues(): number[] { return Array.from(g_hardness.values()); }
+  get hardnessKeys(): string[] { return Array.from(g_drillHardness.keys()); }
+  get hardnessValues(): number[] { return Array.from(g_drillHardness.values()); }
   get delayKeys(): string[] { return Array.from(g_delays.keys()); }
   get delayValues(): number[] { return Array.from(g_delays.values()); }
 

@@ -83,7 +83,7 @@ export class NumberComponent {
   }
   
   ngModelValue = computed<string>(() => {
-    if(this.focused())
+    if(this.focused() || !Number.isFinite(this.realValue()))
       return String(this.realValue());
     else
       return decimal(this.realValue())+this.unit();

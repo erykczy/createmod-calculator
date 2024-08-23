@@ -3,24 +3,10 @@ import { clamp } from "../constants";
 export abstract class SawCalculator {
   public static calculateFromRpm(rpm: number, recipeDuration: number): Result {
     if(rpm > 0) {
-      let remainingTime = recipeDuration;
-      let appliedRecipe = false;
-
-      let frame = 0;
-      for(; true; frame++) {
-        let processingTime = clamp(rpm / 24, 1, 128);
-        remainingTime -= processingTime;
-
-        if(remainingTime < 5 && !appliedRecipe) {
-          appliedRecipe = true;
-          remainingTime = 20;
-          continue;
-        }
-        if(remainingTime > 0)
-          continue;
-        break;
-      }
-      let frames = frame + 1;
+      let processingTime = clamp(rpm / 24, 1, 128);
+      let frames = 0;
+      frames += Math.floor((recipeDuration-5)/processingTime + 1);
+      frames += Math.ceil(20/processingTime);
 
       return {
         rpm: rpm,

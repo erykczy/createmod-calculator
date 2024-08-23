@@ -15,6 +15,7 @@ export class PumpCalculatorComponent {
   val_rpm: number = 256;
   val_time: number = 0;
   val_speed: number = 0;
+  in_amount: number = 0;
   private cdRef = inject(ChangeDetectorRef);
 
   ngOnInit() {
@@ -22,15 +23,15 @@ export class PumpCalculatorComponent {
   }
 
   calculateFromRpm() {
-    this.updateValues(PumpCalculator.calculateFromRpm(this.val_rpm));
+    this.updateValues(PumpCalculator.calculateFromRpm(this.val_rpm, this.in_amount));
   }
 
   calculateFromSpeed() {
-    this.updateValues(PumpCalculator.calculateFromSpeed(this.val_speed));
+    this.updateValues(PumpCalculator.calculateFromSpeed(this.val_speed, this.in_amount));
   }
 
   calculateFromTime() {
-    this.updateValues(PumpCalculator.calculateFromTime(this.val_time));
+    this.updateValues(PumpCalculator.calculateFromTime(this.val_time, this.in_amount));
   }
 
   updateValues(result: Result) {

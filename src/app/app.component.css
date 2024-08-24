@@ -1,4 +1,4 @@
-.canvas {
+:host {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,14 +7,21 @@
   right: 0;
   top: 0;
   bottom: 0;
+  background-color: rgb(12, 12, 12);
 }
 
 .window {
+  /* margin-top: 100px; */
   position: absolute;
-  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  width: 50%;
+  height: 80%;
+}
+
+app-calculator-side {
+  flex: 1;
 }
 
 .repolink img {
@@ -31,28 +38,10 @@
 .repolink:hover img {
   opacity: 100%;
 }
-/* .repolink {
-  position: absolute;
-  bottom: 0;
-  color: rgb(154, 154, 154);
-}
-
-.repolink a {
-  color: rgb(134, 134, 134);
-} */
-
-app-content {
-  flex: 1.0;
-}
 
 @media (min-width: 0) {
   app-header {
     height: 40px;
-  }
-
-  .window {
-    width: 100%;
-    height: 100%;
   }
 }
 
@@ -63,25 +52,7 @@ app-content {
 }
 
 @media (min-width: 768px) {
-  .window {
-    width: 80%;
-    height: 80%;
-  }
   .repolink img {
     visibility: visible;
-  }
-}
-
-@media (min-width: 1024px) {
-  .window {
-    width: 60%;
-    height: 80%;
-  }
-}
-
-@media (min-width: 1440px) {
-  .window {
-    width: 50%;
-    height: 80%;
   }
 }

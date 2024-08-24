@@ -1,6 +1,5 @@
 :host {
   height: 40%;
-  background-color: rgba(0, 0, 0, 0.1);
   padding: 10px;
   display: flex;
   flex-direction: column;

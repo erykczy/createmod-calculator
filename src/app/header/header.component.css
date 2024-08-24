@@ -3,32 +3,57 @@
   height: 100%;
   border-radius: 10px 10px 0 0;
   display: flex;
+  justify-content: space-between;
 }
 
 button {
+  width: 56px;
+  height: 56px;
   aspect-ratio: 1.0;
   border: 0;
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0);
-  transition: background-color 0.1s;
+  padding: 5px;
+  background-color: black;
   cursor: pointer;
-  border-radius: 10px 10px 0 0;
+  image-rendering: pixelated;
+  /* background-image: url("../../assets/background/button.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; */
+  border-width: 2px;
+  border-style: solid;
+  border-image: linear-gradient(to bottom, #4a4a61 0%, #262632 100%) 1;
+  transition: border-image 0.1s;
+  position: relative;
+  outline: 2px solid black;
 }
 
-/* button:first-child {
-  border-radius: 10px 0 0 0;
-} */
+button:hover {
+  border-image: linear-gradient(to bottom, #b5b5f0 0%, #7979a1 100%) 1;
+}
+
+button:focus {
+  animation-name: click;
+  animation-duration: 400ms;
+}
+
+@keyframes click {
+  0% {
+    border-image: linear-gradient(to bottom, #b5b5f0 0%, #7979a1 100%) 1;
+  }
+  20% {
+    border-image: linear-gradient(to bottom, #f0f0fc 0%, #ceced8 100%) 1;
+  }
+  100% {
+    border-image: linear-gradient(to bottom, #b5b5f0 0%, #7979a1 100%) 1;
+  }
+}
+
+button.selected {
+  border-image: linear-gradient(to bottom, #b5b5f0 0%, #7979a1 100%) 1;
+}
 
 img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-button:hover {
-  background-color: white;
-}
-
-button.selected {
-  background-color: white;
 }

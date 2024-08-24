@@ -8,21 +8,27 @@
 label {
   text-transform: uppercase;
   font-weight: bold;
-  color: rgb(154, 154, 154);
+  color: rgb(161, 161, 161);
   font-size: 12px;
   text-align: center;
   margin-bottom: 2px;
 }
 
 input {
-  width: 100%;
-  height: 20px;
-  border-radius: 5px;
-  border: solid 1px rgb(154, 154, 154);
-  text-align: center;
-  color: rgb(92, 92, 92);
-  cursor: text;
   box-sizing: border-box;
+  width: 700px;
+  height: 21px;
+  border-radius: 1px;
+  /* border: solid 1px rgb(161, 161, 161); */
+  text-align: center;
+  color: rgb(235, 235, 235);
+  cursor: text;
+  border-image: linear-gradient(to bottom, #403c37 0%, #201e1c 100%) 1;
+  outline: 2px solid black;
+}
+
+input:focus {
+  border-image: linear-gradient(to bottom, #504b45 0%, #403c37 100%) 1;
 }
 
 .head {

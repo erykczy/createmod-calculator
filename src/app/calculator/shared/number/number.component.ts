@@ -25,12 +25,12 @@ export class NumberComponent {
       let savedValue = this.calculatorService.getSavedProperty(this.id());
       if(savedValue !== null) {
         Promise.resolve().then(() => {
-          this.realValue.set(savedValue);
-          this.valueChange.emit(this.realValue());
+          this.enteredValue.set(savedValue.toString());
+          this.valueChange.emit(savedValue);
         });
       }
       else {
-        this.realValue.set(newValue);
+        this.enteredValue.set(newValue.toString());
       }
       this.initialized = true;
       return;
@@ -39,12 +39,12 @@ export class NumberComponent {
     if(this.focused())
       this.bluredValue = newValue;
     else
-      this.realValue.set(newValue);
+      this.enteredValue.set(newValue.toString());
     this.calculatorService.saveProperty(this.id(), newValue);
   }
   @Output() valueChange = new EventEmitter<number>();
   @Output() userChange = new EventEmitter<number>();
-  realValue = signal<number>(0);
+  enteredValue = signal<string>("0");
   private bluredValue: number | null = null;
   private focused = signal<boolean>(false);
   private initialized: boolean = false;
@@ -52,22 +52,12 @@ export class NumberComponent {
   private cdRef = inject(ChangeDetectorRef);
   
   onNgModelChange(newValueStr: string) {
-    let str = newValueStr.match(/\d+(\.\d+)?/);
-    let newValue = Number(str ? str[0] : '');
-    this.realValue.set(newValue);
-    this.cdRef.detectChanges(); // update DOM to possibly invalid value
-
-    if(newValue === null || Number.isNaN(newValue) || !Number.isFinite(newValue))
-      newValue = this.min() === undefined ? 0 : this.min()!;
-    if(this.min() !== undefined && newValue < this.min()!)
-      newValue = this.min()!;
-    if(this.max() !== undefined && newValue > this.max()!)
-      newValue = this.max()!;
+    this.enteredValue.set(newValueStr);
+    let newNumber = this.inputToNumber(newValueStr);
     
-    this.realValue.set(newValue);
-    this.calculatorService.saveProperty(this.id(), this.realValue());
-    this.valueChange.emit(this.realValue());
-    this.userChange.emit(this.realValue());
+    this.calculatorService.saveProperty(this.id(), newNumber);
+    this.valueChange.emit(newNumber);
+    this.userChange.emit(newNumber);
   }
 
   onFocus() {
@@ -77,15 +67,30 @@ export class NumberComponent {
   onBlur() {
     this.focused.set(false);
     if(this.bluredValue !== null) {
-      this.realValue.set(this.bluredValue);
+      this.enteredValue.set(this.bluredValue.toString());
       this.bluredValue = null;
+    }
+    else {
+      this.enteredValue.set(this.inputToNumber(this.enteredValue()).toString());
     }
   }
   
+  inputToNumber(str: string) {
+    let splitStr = str.match(/\d+(\.\d+)?/);
+    let num = Number(splitStr ? splitStr[0] : '');
+    if(num === null || Number.isNaN(num) || !Number.isFinite(num))
+      num = this.min() === undefined ? 0 : this.min()!;
+    if(this.min() !== undefined && num < this.min()!)
+      num = this.min()!;
+    if(this.max() !== undefined && num > this.max()!)
+      num = this.max()!;
+    return num;
+  }
+
   ngModelValue = computed<string>(() => {
-    if(this.focused() || !Number.isFinite(this.realValue()))
-      return String(this.realValue());
+    if(this.focused() || !Number.isFinite(this.enteredValue()))
+      return this.enteredValue();
     else
-      return decimal(this.realValue())+this.unit();
+      return this.enteredValue()+this.unit();
   })
 }

@@ -7,4 +7,5 @@
   gap: 10px;
   border-radius: 0 0 10px 0;
   overflow-y: auto;
+  overflow-x: hidden;
 }

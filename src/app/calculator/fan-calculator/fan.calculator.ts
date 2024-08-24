@@ -1,7 +1,7 @@
 import { clamp, decimal, lerp } from "../constants";
 
 export abstract class FanCalculator {
-  public static calculate(rpm: number, stackSize: number, fansAmount: number): Result {
+  public static calculate(rpm: number, stackSize: number, fansAmount: number, chance: number): Result {
     if(rpm > 0) {
       let time: number;
       if(stackSize <= 16)
@@ -18,7 +18,7 @@ export abstract class FanCalculator {
       return {
         rpm: rpm,
         time: decimal(time)!,
-        speed: decimal(stackSize/time)!,
+        speed: decimal(stackSize/time * chance/100)!,
         distance: decimal(distance)!
       };
     }
@@ -32,19 +32,19 @@ export abstract class FanCalculator {
     }
   }
 
-  public static calculateFromDistance(distance: number, stackSize: number, fansAmount: number): Result {
-    let resultRpm = this.searchForRpm(0, 1024, distance, stackSize, fansAmount);
-    let result = this.calculate(resultRpm, stackSize, fansAmount);
+  public static calculateFromDistance(distance: number, stackSize: number, fansAmount: number, chance: number): Result {
+    let resultRpm = this.searchForRpm(0, 1024, distance, stackSize, fansAmount, chance);
+    let result = this.calculate(resultRpm, stackSize, fansAmount, chance);
     return result;
   }
 
-  private static searchForRpm(rpm: number, maxRpm: number, targetDistance: number, stackSize: number, fansAmount: number): number {
-    let distance = this.calculate(rpm, stackSize, fansAmount).distance;
+  private static searchForRpm(rpm: number, maxRpm: number, targetDistance: number, stackSize: number, fansAmount: number, chance: number): number {
+    let distance = this.calculate(rpm, stackSize, fansAmount, chance).distance;
     if(distance >= targetDistance || rpm >= maxRpm) {
       return rpm;
     }
     else {
-      return this.searchForRpm(rpm+1, maxRpm, targetDistance, stackSize, fansAmount);
+      return this.searchForRpm(rpm+1, maxRpm, targetDistance, stackSize, fansAmount, chance);
     }
   }
 }

@@ -88,7 +88,7 @@ export class NumberComponent {
   }
 
   ngModelValue = computed<string>(() => {
-    if(this.focused() || !Number.isFinite(this.enteredValue()))
+    if(this.focused() || !Number.isFinite(this.inputToNumber(this.enteredValue())))
       return this.enteredValue();
     else
       return this.enteredValue()+this.unit();

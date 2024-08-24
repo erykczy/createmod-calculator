@@ -15,6 +15,7 @@ import { FanCalculator, Result } from './fan.calculator';
 export class FanCalculatorComponent {
   in_stackSize: number = 1;
   in_fansAmount: number = 1;
+  in_chance: number = 100;
   val_rpm: number = 256;
   val_distance: number = 0;
   out_time: number = 0;
@@ -31,11 +32,11 @@ export class FanCalculatorComponent {
   }
 
   calculate() {
-    this.updateValues(FanCalculator.calculate(this.val_rpm, this.in_stackSize, this.in_fansAmount));
+    this.updateValues(FanCalculator.calculate(this.val_rpm, this.in_stackSize, this.in_fansAmount, this.in_chance));
   }
 
   calculateFromDistance() {
-    this.updateValues(FanCalculator.calculateFromDistance(this.val_distance, this.in_stackSize, this.in_fansAmount));
+    this.updateValues(FanCalculator.calculateFromDistance(this.val_distance, this.in_stackSize, this.in_fansAmount, this.in_chance));
   }
 
   updateValues(result: Result) {

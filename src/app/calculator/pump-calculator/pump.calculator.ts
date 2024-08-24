@@ -8,7 +8,7 @@ export abstract class PumpCalculator {
       let transferSpeedSec = transferSpeed * 20;
       return {
         rpm: rpm,
-        time: amount/transferSpeedSec,
+        time: decimal(amount/transferSpeedSec)!,
         speed: transferSpeedSec
       };
     }

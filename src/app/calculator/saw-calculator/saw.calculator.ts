@@ -1,4 +1,4 @@
-import { clamp } from "../constants";
+import { clamp, decimal } from "../constants";
 
 export abstract class SawCalculator {
   public static calculateFromRpm(rpm: number, recipeDuration: number): Result {
@@ -10,8 +10,8 @@ export abstract class SawCalculator {
 
       return {
         rpm: rpm,
-        time: frames/20,
-        speed: 1/(frames/20)
+        time: decimal(frames/20)!,
+        speed: decimal(1/(frames/20))!
       }
     }
     else {

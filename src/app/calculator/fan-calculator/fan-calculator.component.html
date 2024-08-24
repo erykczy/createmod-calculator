@@ -1,0 +1,10 @@
+<app-input-side>
+  <app-number [(value)]="val_rpm" [min]="0" id="rpm" (userChange)="calculate()">RPM</app-number>
+  <app-number [(value)]="in_stackSize" [min]="1" id="stack-size" (userChange)="calculate()">Stack Size</app-number>
+  <app-number [(value)]="in_fansAmount" [min]="1" [help]="fansHint" id="fans-amount" (userChange)="calculate()">Amount of Fans</app-number>
+</app-input-side>
+<app-output-side>
+  <app-number [unit]="'/s'" [(value)]="out_speed" id=speed [readonly]="true">Recipes/Second</app-number>
+  <app-number [unit]="'s'" [(value)]="out_time" id="time" [readonly]="true">Processing Time</app-number>
+  <app-number [(value)]="val_distance" id="distance" (userChange)="calculateFromDistance()">Distance</app-number>
+</app-output-side>

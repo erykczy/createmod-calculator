@@ -28,7 +28,7 @@ export var g_calculatorsData: CalculatorData[] = [
     wikiPage: "https://create.fandom.com/wiki/Mechanical_Mixer"
   },
   {
-    name: "Bulk Processing",
+    name: "Encased Fan",
     id: "fan",
     iconPath: "assets/icons/fan.png",
     wikiPage: "https://create.fandom.com/wiki/Encased_Fan"

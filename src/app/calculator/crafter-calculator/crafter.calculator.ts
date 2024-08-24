@@ -17,8 +17,8 @@ export abstract class CrafterCalculator {
 
       return {
         rpm: rpm,
-        time: frames,
-        speed: 0
+        time: decimal(frames/20)!,
+        speed: decimal(1/(frames/20))!
       };
     }
     else {

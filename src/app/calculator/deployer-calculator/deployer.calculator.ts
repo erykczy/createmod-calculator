@@ -40,8 +40,8 @@ export abstract class DeployerCalculator {
 
       return {
         rpm: rpm,
-        time: totalFrames/20,
-        speed: 1/(totalFrames/20)
+        time: decimal(totalFrames/20)!,
+        speed: decimal(1/(totalFrames/20))!
       };
     }
     else {

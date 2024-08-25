@@ -64,14 +64,61 @@ router-outlet.calculator-router + * {
 }
 
 .tooltip {
-  display: inline-block;
+  /* display: inline-block; */
   position: relative;
   text-decoration: underline;
   text-decoration-style: dotted;
   cursor: help;
+  container-type: normal;
 }
 
-.tooltip-text {
+.tooltip-content-up::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, 2px);
+
+  background-image: url("assets/background/arrow.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  image-rendering: pixelated;
+}
+
+.tooltip-content-up {
+  font-size: 16px;
+  text-transform: none;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, -20px);
+  width: max-content;
+  max-width: 400px;
+
+  background-color: black;
+  padding: 3px 5px;
+  color: #f3f3e2;
+  margin: 0;
+  outline: 2px solid black;
+  border-width: 2px;
+  border-style: solid;
+  border-image: var(--secondaryGradient) 1;
+  animation: fadein 200ms ease-out;
+  line-height: 18px;
+  transition: opacity 200ms, transform 200ms ease-out;
+}
+
+.tooltip:hover .tooltip-content-up {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, -10px);
+}
+
+/* .tooltip-text {
   text-transform: none;
   visibility: hidden;
   opacity: 0;
@@ -105,5 +152,4 @@ router-outlet.calculator-router + * {
 .tooltip:hover .tooltip-text {
   visibility: visible;
   opacity: 1;
-}
-
+} */

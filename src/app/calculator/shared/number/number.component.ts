@@ -3,12 +3,13 @@ import { FormsModule } from '@angular/forms';
 import { decimal, g_invisibleChar } from '../../constants';
 import { ClickSelectDirective } from '../../../click-select';
 import { CalculatorService } from '../../calculator.service';
+import { TooltipComponent } from "../tooltip/tooltip.component";
 
 // I present to you THE CLEANEST CODE OF ALL TIME
 @Component({
   selector: 'app-number',
   standalone: true,
-  imports: [FormsModule, ClickSelectDirective],
+  imports: [FormsModule, ClickSelectDirective, TooltipComponent],
   templateUrl: './number.component.html',
   styleUrl: './number.component.css'
 })

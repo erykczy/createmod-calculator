@@ -1,5 +1,9 @@
 <div class="head">
-  <!-- <label [class.tooltip]="help() !== undefined"><ng-content /><span class="tooltip-text">{{help()}}</span></label> -->
-  <label class="tooltip"><ng-content /><span class="tooltip-content-up">The delay should be taken into account, for example, when using a cobblestone generator. This is the time it takes to generate a new block.</span></label>
+  <label>
+    <ng-content />
+    @if(help() !== undefined) {
+      <app-tooltip>{{help()}}</app-tooltip>
+    }
+  </label>
 </div>
 <input [clickSelect]="readonly()" [readOnly]="readonly()" (focus)="onFocus()" (blur)="onBlur()" [ngModel]="ngModelValue()" (ngModelChange)="onNgModelChange($event)">  

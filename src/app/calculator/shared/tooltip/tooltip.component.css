@@ -1,9 +1,0 @@
-ng-content {
-  text-decoration: underline;
-  text-decoration-style: dotted;
-  cursor: help;
-}
-
-:host:hover {
-  background-color: red;
-}

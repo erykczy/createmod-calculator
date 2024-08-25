@@ -63,7 +63,7 @@ router-outlet.calculator-router + * {
   }
 }
 
-.tooltip {
+*:has(> app-tooltip) {
   /* display: inline-block; */
   position: relative;
   text-decoration: underline;
@@ -72,7 +72,7 @@ router-outlet.calculator-router + * {
   container-type: normal;
 }
 
-.tooltip-content-up::after {
+app-tooltip::after {
   content: "";
   width: 20px;
   height: 20px;
@@ -87,7 +87,7 @@ router-outlet.calculator-router + * {
   image-rendering: pixelated;
 }
 
-.tooltip-content-up {
+app-tooltip {
   font-size: 16px;
   text-transform: none;
   visibility: hidden;
@@ -112,7 +112,7 @@ router-outlet.calculator-router + * {
   transition: opacity 200ms, transform 200ms ease-out;
 }
 
-.tooltip:hover .tooltip-content-up {
+*:has(> app-tooltip):hover app-tooltip {
   visibility: visible;
   opacity: 1;
   transform: translate(-50%, -10px);

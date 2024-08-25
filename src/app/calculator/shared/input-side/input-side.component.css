@@ -1,32 +1,9 @@
 :host {
-  flex: 1.0;
+  /* flex: 1.0; */
   padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  overflow-y: auto;
-  overflow-x: hidden;
   align-items: center;
-}
-
-h1 {
-  display: inline-block;
-  text-align: center;
-  margin-top: 0px;
-  margin-bottom: 10px;
-  font-size: 18px;
-  color: rgb(235, 235, 235);
-  cursor: default;
-  background-color: rgb(2, 2, 2);
-  border-width: 2px;
-  border-style: solid;
-  border-image: linear-gradient(to bottom, #4a4a61 0%, #262632 100%) 1;
-  outline: 2px solid black;
-  padding: 5px 30px;
-}
-
-@media (max-width: 768px) {
-  h1 {
-    font-size: 30px;
-  }
+  position: relative;
 }

@@ -1,4 +1,4 @@
-.tabs {
+:host {
   background-color: rgba(0, 0, 0, 0.1);
   height: 100%;
   border-radius: 10px 10px 0 0;
@@ -14,15 +14,10 @@ button {
   padding: 5px;
   background-color: black;
   cursor: pointer;
-  image-rendering: pixelated;
-  /* background-image: url("../../assets/background/button.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover; */
   border-width: 2px;
   border-style: solid;
   border-image: linear-gradient(to bottom, #4a4a61 0%, #262632 100%) 1;
-  transition: border-image 0.1s;
+  transition: border-image 100ms;
   position: relative;
   outline: 2px solid black;
 }

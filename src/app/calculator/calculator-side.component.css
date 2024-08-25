@@ -1,5 +1,45 @@
-:host {
+/* :host {
   background-image: url("../../assets/background/fan.png");
   background-position: center;
   background-repeat: no-repeat;
+} */
+
+/* .calculator {
+  width: 700px;
+} */
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.background-img {
+  position: absolute;
+  top: 120px;
+  z-index: -1;
+  filter: saturate(0);
+  opacity: 0.1;
+  height: 500px;
+}
+
+h1 {
+  display: inline-block;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: rgb(235, 235, 235);
+  cursor: pointer;
+  background-color: rgb(2, 2, 2);
+  border-width: 2px;
+  border-style: solid;
+  border-image: linear-gradient(to bottom, #4a4a61 0%, #262632 100%) 1;
+  outline: 2px solid black;
+  padding: 5px 30px;
+  transition: border-image 100ms;
+}
+
+h1:hover {
+  border-image: linear-gradient(to bottom, #b5b5f0 0%, #7979a1 100%) 1;
 }

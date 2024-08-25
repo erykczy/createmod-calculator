@@ -30,4 +30,7 @@ export class CalculatorSideComponent {
     })
   }
 
+  get calculator() {
+    return this.calculatorService.getSelectedCalculator();
+  }
 }

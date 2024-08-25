@@ -18,7 +18,7 @@ b {
 
 input {
   -moz-appearance: textfield;
-  background-color: rgba(0, 0, 0, 0);
+  /* background-color: rgba(0, 0, 0, 0); */
 }
 
 input::-webkit-outer-spin-button,
@@ -26,18 +26,18 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
-input[readonly] {
+/* input[readonly] {
   background-color: rgba(0, 0, 0, 0);
 }
 input[readonly]:focus {
   outline: none;
-}
+} */
 
 router-outlet.calculator-router + * {
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  /* height: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; */
 }
 
 .tooltip {

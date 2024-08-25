@@ -1,7 +1,7 @@
 :host {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: top;
   position: fixed;
   left: 0;
   right: 0;
@@ -11,17 +11,9 @@
 }
 
 .window {
-  /* margin-top: 100px; */
+  margin-top: 100px;
   position: absolute;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
   width: 50%;
-  height: 80%;
-}
-
-app-calculator-side {
-  flex: 1;
 }
 
 .repolink img {
@@ -32,27 +24,13 @@ app-calculator-side {
   transition: opacity 0.15s;
   width: 30px;
   height: 30px;
-  visibility: hidden;
 }
 
 .repolink:hover img {
   opacity: 100%;
 }
 
-@media (min-width: 0) {
-  app-header {
-    height: 40px;
-  }
+app-header {
+  height: 60px;
 }
 
-@media (min-width: 425px) {
-  app-header {
-    height: 60px;
-  }
-}
-
-@media (min-width: 768px) {
-  .repolink img {
-    visibility: visible;
-  }
-}

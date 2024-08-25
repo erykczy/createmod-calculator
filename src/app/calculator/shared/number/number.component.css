@@ -16,15 +16,16 @@ label {
 
 input {
   box-sizing: border-box;
-  width: 700px;
+  width: 100%;
   height: 21px;
-  border-radius: 1px;
-  /* border: solid 1px rgb(161, 161, 161); */
   text-align: center;
   color: rgb(235, 235, 235);
   cursor: text;
+  border-width: 2px;
+  border-style: solid;
   border-image: linear-gradient(to bottom, #403c37 0%, #201e1c 100%) 1;
   outline: 2px solid black;
+  background-color: transparent;
 }
 
 input:focus {
@@ -37,20 +38,6 @@ input:focus {
   display: flex;
   justify-content: center;
 }
-
-/* button {
-  display: block;
-  background-color: white;
-  border: solid 1px rgb(154, 154, 154);
-  border-radius: 2px;
-  color: rgb(154, 154, 154);
-  transition: background-color 0.15s, color 0.15s;
-  cursor: pointer;
-  box-sizing: border-box;
-  font-size: 10px;
-  width: 80px;
-  height: 15px;
-} */
 
 button {
   position: absolute;

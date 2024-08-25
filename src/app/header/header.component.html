@@ -1,7 +1,5 @@
-<div class="tabs">
-  @for(calculator of calculatorsData; track calculator.name; let i = $index) {
-    <button class="tab" [routerLink]="['/', calculator.id]" routerLinkActive="selected" >
-      <img [src]="calculator.iconPath" [alt]="calculator.name" class="tab-image" />
-    </button>
-  }
-</div>
+@for(calculator of calculatorsData; track calculator.name; let i = $index) {
+  <button class="tab" [routerLink]="['/', calculator.id]" routerLinkActive="selected" >
+    <img [src]="calculator.iconPath" [alt]="calculator.name" class="tab-image" />
+  </button>
+}

@@ -6,11 +6,12 @@ import { CrafterCalculator, Result } from './crafter.calculator';
 import { NuenumComponent } from "../shared/nuenum/nuenum.component";
 import { g_crafterInputDelays } from '../constants';
 import { WarningComponent } from "../shared/warning/warning.component";
+import { InfoComponent } from "../shared/info/info.component";
 
 @Component({
   selector: 'app-crafter-calculator',
   standalone: true,
-  imports: [NumberComponent, OutputSideComponent, InputSideComponent, NuenumComponent, WarningComponent],
+  imports: [NumberComponent, OutputSideComponent, InputSideComponent, NuenumComponent, WarningComponent, InfoComponent],
   templateUrl: './crafter-calculator.component.html',
   styleUrl: './crafter-calculator.component.css'
 })

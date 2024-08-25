@@ -6,7 +6,7 @@
 <app-output-side>
   <app-number [unit]="'/s'" [(value)]="val_speed" id=speed (userChange)="calculateFromSpeed()">Recipes/Second</app-number>
   <app-number [unit]="'s'" [(value)]="val_time" id="time" (userChange)="calculateFromTime()">Processing Time</app-number>
-  <app-warning>
+  <app-info>
     The actual result might be slightly different depending on the order in which Minecraft will tick your Mechanical Crafters!
     <br><br>
     For the best performance:
@@ -15,5 +15,5 @@
       <li>If a recipe produces multiple stacks of items (e.g. extra buckets), output items to a block that has space for more than 1 stack (e.g. use chest instead of depot)</li>
       <li>Don't connect crafters that accept the whole stack of item (e.g. minecart, milk bucket)</li>
     </ul>
-  </app-warning>
+  </app-info>
 </app-output-side>

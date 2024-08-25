@@ -16,6 +16,8 @@
   font-family: "Minecraft";
   font-weight: 400;
   font-style: normal;
+  font-smooth: never;
+  -webkit-font-smoothing : none;
 }
 
 @font-face {

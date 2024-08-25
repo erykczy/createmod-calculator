@@ -16,7 +16,8 @@ label {
 
 select {
   width: 100%;
-  height: 20px;
+  height: 25px;
+  font-size: 16px;
   text-align: center;
   color: var(--primaryTextColor);
   box-sizing: border-box;

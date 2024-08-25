@@ -46,9 +46,19 @@ input[readonly]:focus {
 
 router-outlet.calculator-router + * {
   width: 80%;
+  animation: fadein 200ms ease-out;
   /* height: 100%;
   display: flex;
   flex-direction: column; */
+}
+
+@keyframes fadein {
+  0% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .tooltip {

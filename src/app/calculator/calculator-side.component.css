@@ -13,7 +13,6 @@
   align-items: center;
 }
 
-
 .background-img {
   position: absolute;
   top: 120px;
@@ -21,6 +20,10 @@
   filter: saturate(0);
   opacity: 0.1;
   height: 500px;
+}
+
+.background-img.fadein {
+  animation: iconFadein 200ms ease-out;
 }
 
 h1 {
@@ -40,6 +43,32 @@ h1 {
   transition: border-image 100ms;
 }
 
+h1.fadein {
+  animation: titleFadein 200ms ease-out;
+}
+
 h1:hover {
   border-image: var(--primaryHoverGradient) 1;
+}
+
+@keyframes titleFadein {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+@keyframes iconFadein {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 0.1;
+    transform: scale(1);
+  }
 }

@@ -93,4 +93,8 @@ export class NumberComponent {
     else
       return this.enteredValue()+this.unit();
   })
+
+  onDragStart() {
+    console.log("start drag");
+  }
 }

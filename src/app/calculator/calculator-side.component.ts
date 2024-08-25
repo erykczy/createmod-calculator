@@ -19,6 +19,8 @@ import { PressCalculatorComponent } from "./press-calculator/press-calculator.co
   styleUrl: './calculator-side.component.css'
 })
 export class CalculatorSideComponent {
+  titleAnimation: boolean = false;
+  iconAnimation: boolean = false;
   private calculatorService = inject(CalculatorService);
   private router = inject(Router);
 
@@ -26,11 +28,17 @@ export class CalculatorSideComponent {
     this.router.events.subscribe((val) => {
       if(val instanceof ActivationStart) {
         this.calculatorService.setSelectedCalculator(val.snapshot.url[0].path);
+        this.onCalculatorChanged();
       }
     })
   }
 
   get calculator() {
     return this.calculatorService.getSelectedCalculator();
+  }
+
+  onCalculatorChanged() {
+    this.titleAnimation = true;
+    this.iconAnimation = true;
   }
 }

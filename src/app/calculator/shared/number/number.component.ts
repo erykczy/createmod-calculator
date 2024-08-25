@@ -50,7 +50,6 @@ export class NumberComponent {
   private focused = signal<boolean>(false);
   private initialized: boolean = false;
   private calculatorService = inject(CalculatorService);
-  private cdRef = inject(ChangeDetectorRef);
   
   onNgModelChange(newValueStr: string) {
     this.enteredValue.set(newValueStr);
@@ -94,8 +93,4 @@ export class NumberComponent {
     else
       return this.enteredValue()+this.unit();
   })
-
-  onDragStart() {
-    console.log("start drag");
-  }
 }

@@ -1,7 +1,7 @@
 <app-input-side>
   <app-number [(value)]="val_rpm" [min]="0" id="rpm" (userChange)="calculateFromRpm()">RPM</app-number>
-  <app-number [(value)]="in_chainLength" [min]="1" id="chain-length" (userChange)="calculateFromRpm()">Longest Chain Length</app-number>
-  <app-nuenum id="input-delay" label_custom="Custom Delay (ticks)" [keys]="delayKeys" [values]="delayValues" [(value)]="in_inputDelay" (userChange)="calculateFromRpm()">Input Delay</app-nuenum>
+  <app-number [unit]="'crafters'" [(value)]="in_chainLength" [min]="1" id="chain-length" (userChange)="calculateFromRpm()">Longest Chain Length</app-number>
+  <app-nuenum id="input-delay" [unit]="'t'" [label_custom]="'Custom Delay'" [keys]="delayKeys" [values]="delayValues" [(value)]="in_inputDelay" (userChange)="calculateFromRpm()">Input Delay</app-nuenum>
 </app-input-side>
 <app-output-side>
   <app-number [unit]="'/s'" [(value)]="val_speed" id=speed (userChange)="calculateFromSpeed()">Recipes/Second</app-number>

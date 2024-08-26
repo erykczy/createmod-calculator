@@ -106,7 +106,7 @@ export var g_sawHardness = new Map<string, number>([
 
 export var g_delays = new Map<string, number>([
   ["no delay", 0],
-  ["generator (any)", 1.5] 
+  ["generator (any)", 30] 
 ]);
 
 export var g_crushingInputDelays = new Map<string, number>([

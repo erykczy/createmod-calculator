@@ -16,6 +16,7 @@ export class NuenumComponent {
   @Input({required: true}) values!: number[];
   @Input() hint?: string;
   @Input() hint_custom?: string;
+  @Input() unit: string = "";
   @Input() min?: number;
   @Input() max?: number;
   @Input()

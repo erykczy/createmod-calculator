@@ -2,14 +2,28 @@
   <app-enum id="process" [(value)]="in_processIndex" [values]="processes" (userChange)="calculateFromRpm()">Process</app-enum>
   <app-number id="rpm" [(value)]="val_rpm" [min]="0" (userChange)="calculateFromRpm()">RPM</app-number>
   @if(isChopping) {
-    <app-nuenum id="hardness" label_custom="Custom Hardness" [keys]="hardnessKeys" [values]="hardnessValues" [(value)]="in_hardness" (userChange)="calculateFromRpm()">Hardness</app-nuenum>
+    <app-nuenum id="hardness" [label_custom]="'Custom Hardness'" [keys]="hardnessKeys" [values]="hardnessValues" [(value)]="in_hardness" (userChange)="calculateFromRpm()">Hardness</app-nuenum>
   }
   @else {
-    <app-nuenum id="recipe-duration" label_custom="Custom Recipe Duration" [keys]="recipesKeys" [values]="recipesValues" [(value)]="in_recipeDuration" (userChange)="calculateFromRpm()">Recipe Input</app-nuenum>
+    <app-nuenum id="recipe-duration" [unit]="'t'" [label_custom]="'Custom Recipe Duration'" [keys]="recipesKeys" [values]="recipesValues" [(value)]="in_recipeDuration" (userChange)="calculateFromRpm()">Recipe Input</app-nuenum>
   }
 </app-input-side>
 <app-output-side>
-  <app-number [unit]="'/s'" [(value)]="val_speed" id=speed (userChange)="calculateFromSpeed()">Recipes/Second</app-number>
-  <app-number [unit]="'s'" [(value)]="val_time" id="time" (userChange)="calculateFromTime()">Processing Time</app-number>
+  <app-number [unit]="'/s'" [(value)]="val_speed" id=speed (userChange)="calculateFromSpeed()">
+    @if(isChopping) {
+      Blocks/Second
+    }
+    @else {
+      Recipes/Second
+    }
+  </app-number>
+  <app-number [unit]="'s'" [(value)]="val_time" id="time" (userChange)="calculateFromTime()">
+    @if(isChopping) {
+      Chopping Time
+    }
+    @else {
+      Processing Time
+    }
+  </app-number>
   <app-number id="stress" [stress]="true" [unit]="'su'" [(value)]="val_stress" (userChange)="calculateFromStress()">Stress</app-number>
 </app-output-side>

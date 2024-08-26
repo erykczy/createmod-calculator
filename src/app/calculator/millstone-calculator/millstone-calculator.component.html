@@ -1,6 +1,6 @@
 <app-input-side>
   <app-number [(value)]="val_rpm" [min]="0" id="rpm" (userChange)="calculateFromRpm()">RPM</app-number>
-  <app-nuenum id="recipe-duration" label_custom="Custom Recipe Duration" [keys]="recipesKeys" [values]="recipesValues" [hint]="recipeInputHint" [hint_custom]="recipeDurationHint" [(value)]="in_recipeDuration" (userChange)="calculateFromRpm()">Recipe Input</app-nuenum>
+  <app-nuenum id="recipe-duration" [unit]="'t'" [label_custom]="'Custom Recipe Duration'" [keys]="recipesKeys" [values]="recipesValues" [hint]="recipeInputHint" [hint_custom]="recipeDurationHint" [(value)]="in_recipeDuration" (userChange)="calculateFromRpm()">Recipe Input</app-nuenum>
 </app-input-side>
 <app-output-side>
   <app-number [unit]="'/s'" [(value)]="val_speed" id=speed (userChange)="calculateFromSpeed()">Recipes/Second</app-number>

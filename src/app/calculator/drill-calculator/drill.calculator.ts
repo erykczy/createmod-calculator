@@ -9,8 +9,7 @@ export abstract class DrillCalculator {
       let b = Math.floor(hardness/breakSpeed)+1;
       let totalFrames = (a-1) * b + 1 + 1; //+1 is frame of delay
   
-      let delayInFrames = delay*20;
-      let time = ((totalFrames-Math.min(1, delayInFrames)) + delayInFrames) / 20;
+      let time = ((totalFrames-Math.min(1, delay)) + delay) / 20;
       return {
         rpm: rpm,
         time: decimal(time)!,

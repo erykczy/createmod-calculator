@@ -91,6 +91,6 @@ export class NumberComponent {
     if(this.focused() || !Number.isFinite(this.inputToNumber(this.enteredValue())))
       return this.enteredValue();
     else
-      return this.enteredValue()+this.unit();
+      return this.enteredValue()+" "+this.unit();
   })
 }

@@ -19,6 +19,7 @@ select {
   height: 25px;
   font-size: 16px;
   text-align: center;
+  text-align-last: center;
   color: var(--primaryTextColor);
   box-sizing: border-box;
   padding-left: 15px;

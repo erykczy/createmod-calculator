@@ -10,9 +10,6 @@
 }
 
 * {
-  /* font-family: "Ubuntu", sans-serif;
-  font-weight: 400;
-  font-style: normal; */
   font-family: "Minecraft";
   font-weight: 400;
   font-style: normal;
@@ -38,7 +35,6 @@ b {
 
 input {
   -moz-appearance: textfield;
-  /* background-color: rgba(0, 0, 0, 0); */
 }
 
 input::-webkit-outer-spin-button,
@@ -46,15 +42,7 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
-/* input[readonly] {
-  background-color: rgba(0, 0, 0, 0);
-}
-input[readonly]:focus {
-  outline: none;
-} */
-
 *:has(> app-tooltip) {
-  /* display: inline-block; */
   position: relative;
   text-decoration: underline;
   text-decoration-style: dotted;
@@ -89,7 +77,6 @@ app-tooltip {
   opacity: 0;
   position: fixed;
   
-  /* left: 50%; */
   width: 0;
   left: 0;
   top: 0;
@@ -128,39 +115,3 @@ router-outlet+* {
     transform: scale(1);
   }
 }
-
-/* .tooltip-text {
-  text-transform: none;
-  visibility: hidden;
-  opacity: 0;
-  text-align: center;
-  background-color: rgb(154, 154, 154);
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-  display: block;
-  transition: opacity 0.1s;
-
-  position: absolute;
-  z-index: 1;
-  bottom: 120%;
-  left: 50%;
-  width: 240px;
-  margin-left: -120px;
-}
-
-.tooltip-text::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: rgb(154, 154, 154) transparent transparent transparent;
-}
-
-.tooltip:hover .tooltip-text {
-  visibility: visible;
-  opacity: 1;
-} */

@@ -24,6 +24,7 @@ input {
   cursor: text;
   border-width: 2px;
   border-style: solid;
+  border-radius: 0;
   border-image: var(--secondaryGradient) 1;
   outline: 2px solid black;
   background-color: transparent;
@@ -38,26 +39,4 @@ input:focus {
   position: relative;
   display: flex;
   justify-content: center;
-}
-
-button {
-  position: absolute;
-  bottom: -1px;
-  right: 0;
-  width: 70px;
-  height: 17px;
-  padding: 1px 5px;
-  font-size: 12px;
-  background-color: white;
-  border: solid 1px rgb(154, 154, 154);
-  border-radius: 5px 5px 0px 0px;
-  color: rgb(154, 154, 154);
-  transition: background-color 0.15s, color 0.15s;
-  cursor: pointer;
-  box-sizing: border-box;
-}
-
-button:hover {
-  background-color: rgb(154, 154, 154);
-  color: white;
 }

@@ -1,8 +1,14 @@
 .header {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
   flex-wrap: wrap;
+}
+
+@media(max-width: 1024px) {
+  .header {
+    gap: 10px;
+  }
 }
 
 button {

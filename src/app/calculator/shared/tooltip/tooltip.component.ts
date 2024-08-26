@@ -15,12 +15,18 @@ export class TooltipComponent {
   }
 
   ngAfterViewInit() {
-    let el: HTMLElement = this.elementRef.nativeElement;
-    el.parentElement?.addEventListener("mouseenter", (e) => this.onEvent(this.elementRef));
+    let element: HTMLElement = this.elementRef.nativeElement;
+    let elementParent: HTMLElement = element.parentElement!;
+    // elementParent.addEventListener("mouseenter", (e) => elementParent.classList.add("hover"));
+    elementParent.addEventListener("mouseenter", (e) => this.updatePos(this.elementRef));
+    // elementParent.addEventListener("mouseout", (e) => elementParent.classList.remove("hover"));
+    // document.addEventListener("scroll", () => elementParent.classList.remove("hover"));
+    document.addEventListener("scroll", () => this.updatePos(this.elementRef));
+    
   }
 
   moved: boolean = false;
-  onEvent(elementRef: ElementRef) {
+  updatePos(elementRef: ElementRef) {
     if(!elementRef)
       return;
     let element: HTMLElement = elementRef.nativeElement;

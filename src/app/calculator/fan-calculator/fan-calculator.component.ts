@@ -13,11 +13,13 @@ import { FanCalculator, Result } from './fan.calculator';
   styleUrl: './fan-calculator.component.css'
 })
 export class FanCalculatorComponent {
+  stressRatio: number = 2;
   in_stackSize: number = 1;
   in_fansAmount: number = 1;
   in_chance: number = 100;
   val_rpm: number = 256;
   val_distance: number = 0;
+  val_stress: number = 0;
   out_time: number = 0;
   out_speed: number = 0;
   
@@ -39,11 +41,17 @@ export class FanCalculatorComponent {
     this.updateValues(FanCalculator.calculateFromDistance(this.val_distance, this.in_stackSize, this.in_fansAmount, this.in_chance));
   }
 
+  calculateFromStress() {
+    this.val_rpm = this.val_stress / this.stressRatio;
+    this.calculate();
+  }
+
   updateValues(result: Result) {
     this.cdRef.detectChanges(); // update DOM with values given by user ( change detector is blind :( )
     this.val_rpm = result.rpm;
     this.val_distance = result.distance;
     this.out_time = result.time;
     this.out_speed = result.speed;
+    this.val_stress = result.rpm * this.stressRatio;
   }
 }

@@ -6,4 +6,5 @@
 <app-output-side>
   <app-number id="speed" [unit]="'/s'" [(value)]="val_speed" (userChange)="calculateFromSpeed()">Blocks/Second</app-number>
   <app-number id="time" [unit]="'s'" [(value)]="val_time" (userChange)="calculateFromTime()">Mining Time</app-number>
+  <app-number id="stress" [stress]="true" [unit]="'su'" [(value)]="val_stress" (userChange)="calculateFromStress()">Stress</app-number>
 </app-output-side>

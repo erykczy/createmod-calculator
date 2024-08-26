@@ -12,10 +12,12 @@ import { PumpCalculator, Result } from './pump.calculator';
   styleUrl: './pump-calculator.component.css'
 })
 export class PumpCalculatorComponent {
+  stressRatio: number = 4;
   val_rpm: number = 256;
   val_time: number = 0;
   val_speed: number = 0;
   in_amount: number = 0;
+  val_stress: number = 0;
   private cdRef = inject(ChangeDetectorRef);
 
   ngOnInit() {
@@ -34,10 +36,16 @@ export class PumpCalculatorComponent {
     this.updateValues(PumpCalculator.calculateFromTime(this.val_time, this.in_amount));
   }
 
+  calculateFromStress() {
+    this.val_rpm = this.val_stress / this.stressRatio;
+    this.calculateFromRpm();
+  }
+
   updateValues(result: Result) {
     this.cdRef.detectChanges(); // update DOM with values given by user ( change detector is blind :( )
     this.val_rpm = result.rpm;
     this.val_time = result.time;
     this.val_speed = result.speed;
+    this.val_stress = result.rpm * this.stressRatio;
   }
 }

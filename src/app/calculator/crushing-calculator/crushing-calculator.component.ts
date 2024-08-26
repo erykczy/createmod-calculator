@@ -15,6 +15,8 @@ import { CrushingCalculator, Result } from './crushing.calculator';
   styleUrl: './crushing-calculator.component.css'
 })
 export class CrushingCalculatorComponent {
+  stressRatio: number = 8;
+  val_stress: number = 0;
   val_rpm: number = 256;
   in_stackSize: number = 1;
   in_recipeDuration: number = 100;
@@ -55,11 +57,17 @@ export class CrushingCalculatorComponent {
     this.updateValues(CrushingCalculator.calculateFromSpeed(this.val_speed, this.in_recipeDuration, this.in_stackSize, this.in_delay));
   }
 
+  calculateFromStress() {
+    this.val_rpm = this.val_stress / this.stressRatio;
+    this.calculateFromRpm();
+  }
+
   updateValues(result: Result) {
     this.cdRef.detectChanges(); // update DOM with values given by user ( change detector is blind :( )
     this.val_rpm = result.rpm;
     this.val_time = result.time;
     this.val_speed = result.speed;
+    this.val_stress = this.stressRatio * result.rpm;
   }
 
 }

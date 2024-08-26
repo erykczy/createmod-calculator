@@ -16,6 +16,8 @@ import { DrillCalculator, Result } from './drill.calculator';
   styleUrl: './drill-calculator.component.css'
 })
 export class DrillCalculatorComponent {
+  stressRatio: number = 4;
+  val_stress: number = 0;
   val_rpm: number = 256;
   val_speed: number = 0;
   val_time: number = 0;
@@ -48,10 +50,16 @@ export class DrillCalculatorComponent {
     this.updateValues(DrillCalculator.calculateFromSpeed(this.in_hardness, this.in_delay, this.val_speed));
   }
 
+  calculateFromStress() {
+    this.val_rpm = this.val_stress / this.stressRatio;
+    this.calculateFromRpm();
+  }
+
   updateValues(result: Result) {
     this.cdRef.detectChanges(); // update DOM with values given by user ( change detector is blind :( )
     this.val_rpm = result.rpm;
     this.val_time = result.time;
     this.val_speed = result.speed;
+    this.val_stress = this.stressRatio * result.rpm;
   }
 }

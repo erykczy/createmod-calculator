@@ -19,6 +19,7 @@ export class NumberComponent {
   unit = input<string>("");
   help = input<string | undefined>(undefined);
   readonly = input<boolean>(false);
+  stress = input<boolean>(false);
   @Input()
   set value(newValue: number) {
     if(!this.initialized) {

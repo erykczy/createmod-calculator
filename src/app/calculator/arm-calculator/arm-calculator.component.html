@@ -8,4 +8,5 @@
   <app-number [readonly]="true" [unit]="'s'" [(value)]="val_shortTime" id="short-time">Short Cycle Time</app-number>
   <app-number [readonly]="true" [unit]="'s'" [(value)]="val_longTime" id="long-time">Normal Cycle Time</app-number>
   <app-number [readonly]="true" [(value)]="val_count" id="count">Count of Normal Cycles between Short Cycles</app-number>
+  <app-number id="stress" [stress]="true" [unit]="'su'" [(value)]="val_stress" (userChange)="calculateFromStress()">Stress</app-number>
 </app-output-side>

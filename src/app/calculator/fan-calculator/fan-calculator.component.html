@@ -8,4 +8,5 @@
   <app-number [unit]="'/s'" [(value)]="out_speed" id=speed [readonly]="true">Average Recipes/Second</app-number>
   <app-number [unit]="'s'" [(value)]="out_time" id="time" [readonly]="true">Processing Time</app-number>
   <app-number [(value)]="val_distance" id="distance" (userChange)="calculateFromDistance()">Distance</app-number>
+  <app-number id="stress" [stress]="true" [unit]="'su'" [(value)]="val_stress" (userChange)="calculateFromStress()">Stress</app-number>
 </app-output-side>

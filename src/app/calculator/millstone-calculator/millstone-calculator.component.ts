@@ -15,10 +15,12 @@ import { MillstoneCalculator, Result } from './millstone.calculator';
   styleUrl: './millstone-calculator.component.css'
 })
 export class MillstoneCalculatorComponent {
+  stressRatio: number = 4;
   val_rpm: number = 256;
   in_recipeDuration: number = 0;
   val_time: number = 0;
   val_speed: number = 0;
+  val_stress: number = 0;
   private cdRef = inject(ChangeDetectorRef);
 
   ngOnInit() { this.calculateFromRpm(); }
@@ -48,12 +50,18 @@ export class MillstoneCalculatorComponent {
   calculateFromTime() {
     this.updateValues(MillstoneCalculator.calculateFromTime(this.val_time, this.in_recipeDuration));
   }
+  
+  calculateFromStress() {
+    this.val_rpm = this.val_stress / this.stressRatio;
+    this.calculateFromRpm();
+  }
 
   updateValues(result: Result) {
     this.cdRef.detectChanges(); // update DOM with values given by user ( change detector is blind :( )
     this.val_rpm = result.rpm;
     this.val_time = result.time;
     this.val_speed = result.speed;
+    this.val_stress = result.rpm * this.stressRatio;
   }
 
 }

@@ -13,6 +13,9 @@ label {
   text-align: center;
   margin-bottom: 2px;
 }
+label.stress {
+  color: #a16b65;
+}
 
 input {
   box-sizing: border-box;
@@ -30,8 +33,17 @@ input {
   background-color: transparent;
 }
 
+input.stress {
+  border-image: linear-gradient(to bottom, #5f363b 0%, #331d20 100%) 1;
+  color: #fcaca2;
+}
+
 input:focus {
   border-image: var(--secondaryFocusGradient) 1;
+}
+
+input:focus.stress {
+  border-image: linear-gradient(to bottom, #8c5057 0%, #5f363b 100%) 1;
 }
 
 .head {

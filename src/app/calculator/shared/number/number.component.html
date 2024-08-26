@@ -1,6 +1,6 @@
 <div class="head">
-  <label [tooltip]="help()">
+  <label [class.stress]="stress()" [tooltip]="help()">
     <ng-content />
   </label>
 </div>
-<input [clickSelect]="readonly()" [readOnly]="readonly()" (focus)="onFocus()" (blur)="onBlur()" [ngModel]="ngModelValue()" (ngModelChange)="onNgModelChange($event)">  
+<input [class.stress]="stress()" [clickSelect]="readonly()" [readOnly]="readonly()" (focus)="onFocus()" (blur)="onBlur()" [ngModel]="ngModelValue()" (ngModelChange)="onNgModelChange($event)">  

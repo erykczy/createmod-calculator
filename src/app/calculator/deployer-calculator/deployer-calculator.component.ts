@@ -15,6 +15,8 @@ import { NuenumComponent } from "../shared/nuenum/nuenum.component";
 })
 export class DeployerCalculatorComponent {
   Process = Process;
+  stressRatio: number = 4;
+  val_stress: number = 0;
   val_rpm: number = 256;
   val_time: number = 0;
   val_speed: number = 0;
@@ -57,10 +59,16 @@ export class DeployerCalculatorComponent {
     this.updateValues(DeployerCalculator.calculateFromTime(this.val_time, this.in_options));
   }
 
+  calculateFromStress() {
+    this.val_rpm = this.val_stress / this.stressRatio;
+    this.calculateFromRpm();
+  }
+
   updateValues(result: Result) {
     this.cdRef.detectChanges(); // update DOM with values given by user ( change detector is blind :( )
     this.val_rpm = result.rpm;
     this.val_time = result.time;
     this.val_speed = result.speed;
+    this.val_stress = this.stressRatio * result.rpm;
   }
 }

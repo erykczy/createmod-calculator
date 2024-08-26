@@ -5,4 +5,5 @@
 <app-output-side>
   <app-number [unit]="' mB/s'" [(value)]="val_speed" id=speed (userChange)="calculateFromSpeed()">MB/Second</app-number>
   <app-number [unit]="'s'" [(value)]="val_time" id="time" (userChange)="calculateFromTime()">Traverse Time for Specified Amount</app-number>
+  <app-number id="stress" [stress]="true" [unit]="'su'" [(value)]="val_stress" (userChange)="calculateFromStress()">Stress</app-number>
 </app-output-side>

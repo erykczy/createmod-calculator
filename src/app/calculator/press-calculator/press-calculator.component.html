@@ -4,4 +4,5 @@
 <app-output-side>
   <app-number [unit]="'/s'" [(value)]="val_speed" id=speed (userChange)="calculateFromSpeed()">Recipes/Second</app-number>
   <app-number [unit]="'s'" [(value)]="val_time" [help]="hint1" id="time" (userChange)="calculateFromTime()">Processing Time</app-number>
+  <app-number id="stress" [stress]="true" [unit]="'su'" [(value)]="val_stress" (userChange)="calculateFromStress()">Stress</app-number>
 </app-output-side>

@@ -27,6 +27,12 @@ export class CrafterCalculatorComponent {
 
   get delayKeys(): string[] { return Array.from(g_crafterInputDelays.keys()); }
   get delayValues(): number[] { return Array.from(g_crafterInputDelays.values()); }
+  get delayHint(): string {
+    return "Different input methods have different delays.";
+  }
+  get hint1() {
+    return "The length of the longest chain/chains of connected crafters in the crafting setup. A chain of connected crafters is a chain of crafters targeting each other with the next crafter in the chain being the crafter targeted";
+  }
 
   ngOnInit() {
     this.calculateFromRpm();

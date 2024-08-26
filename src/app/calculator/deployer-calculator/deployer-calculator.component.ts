@@ -42,6 +42,12 @@ export class DeployerCalculatorComponent {
       "Yes"
     ]
   }
+  get hint1(): string {
+    return "Outputting items causes extra delay";
+  }
+  get hint2(): string {
+    return "Deployer on Contraption doesn't have several delays";
+  }
 
   ngOnInit() {
     this.calculateFromRpm();

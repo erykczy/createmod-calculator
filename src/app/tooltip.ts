@@ -22,6 +22,6 @@ export class TooltipDirective {
 
   ngOnInit() {
     if(this.tooltip)
-      tippy(this.el.nativeElement, {content: this.tooltip, theme: "create", arrow: true, animation: "fadein", offset: [0, 0]});
+      tippy(this.el.nativeElement, {content: this.tooltip, theme: "create", arrow: true, animation: "fadein", offset: [0, 10]});
   }
 }

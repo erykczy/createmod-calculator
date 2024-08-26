@@ -1,10 +1,10 @@
 <app-input-side>
   <app-enum id="process" [(value)]="in_options.process" [values]="processes" (userChange)="calculateFromRpm()">Process</app-enum>
   @if(in_options.process !== Process.PROCESSING) {
-    <app-enum id="on-contraption" [(value)]="in_options.onContraption" [values]="noYes" (userChange)="calculateFromRpm()">On Contraption?</app-enum>
+    <app-enum id="on-contraption" [hint]="hint2" [(value)]="in_options.onContraption" [values]="noYes" (userChange)="calculateFromRpm()">On Contraption?</app-enum>
 
     @if(!in_options.onContraption) {
-      <app-enum id="gathers-items" [(value)]="in_options.gathersItems" [values]="noYes" (userChange)="calculateFromRpm()">Outputs Items?</app-enum>
+      <app-enum id="gathers-items" [hint]="hint1" [(value)]="in_options.gathersItems" [values]="noYes" (userChange)="calculateFromRpm()">Outputs Items?</app-enum>
     }
     
     @if(in_options.process === Process.KILLING) {

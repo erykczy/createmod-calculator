@@ -13,7 +13,7 @@ import { CalculatorService } from '../../calculator.service';
 export class EnumComponent {
   @Input({required: true}) id!: string;
   @Input({required: true}) values!: string[];
-  @Input() help?: string = undefined;
+  @Input() hint?: string = undefined;
   @Input() value: number = 0;
   @Output() valueChange = new EventEmitter<number>();
   @Output() userChange = new EventEmitter<number>();

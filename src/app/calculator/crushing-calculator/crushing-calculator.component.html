@@ -6,7 +6,7 @@
   <app-nuenum id="input-delay" [unit]="'t'" label_custom="Custom Delay" [keys]="delayKeys" [values]="delayValues" [hint]="delayHint" [(value)]="in_delay" (userChange)="calculateFromRpm()">Input Delay</app-nuenum>
 </app-input-side>
 <app-output-side>
-  <app-number [unit]="'/s'" [(value)]="val_speed" [help]="warning" id="speed" (userChange)="calculateFromSpeed()">Recipes/Second</app-number>
-  <app-number [unit]="'s'" [(value)]="val_time" [help]="warning" id="time" (userChange)="calculateFromTime()">Processing Time</app-number>
+  <app-number [unit]="'/s'" [(value)]="val_speed" [hint]="warning" id="speed" (userChange)="calculateFromSpeed()">Recipes/Second</app-number>
+  <app-number [unit]="'s'" [(value)]="val_time" [hint]="warning" id="time" (userChange)="calculateFromTime()">Processing Time</app-number>
   <app-number id="stress" [stress]="true" [unit]="'su'" [(value)]="val_stress" (userChange)="calculateFromStress()">Stress/Wheel</app-number>
 </app-output-side>

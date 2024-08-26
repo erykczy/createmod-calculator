@@ -35,7 +35,7 @@ export class DrillCalculatorComponent {
   get delayValues(): number[] { return Array.from(g_delays.values()); }
 
   get delayHint(): string {
-    return "The delay should be taken into account, for example, when using a cobblestone generator. This is the time it takes to generate a new block.";
+    return "The delay should be taken into account, for example, when using a Cobblestone Generator. This is the time it takes to generate a new block.";
   }
 
   calculateFromRpm() {

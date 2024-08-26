@@ -17,7 +17,7 @@ export class NumberComponent {
   min = input<number | undefined>(undefined);
   max = input<number | undefined>(undefined);
   unit = input<string>("");
-  help = input<string | undefined>(undefined);
+  hint = input<string | undefined>(undefined);
   readonly = input<boolean>(false);
   stress = input<boolean>(false);
   @Input()
@@ -88,9 +88,9 @@ export class NumberComponent {
   }
 
   ngModelValue = computed<string>(() => {
-    if(this.focused() || !Number.isFinite(this.inputToNumber(this.enteredValue())))
-      return this.enteredValue();
-    else
+    if(!this.focused() && Number.isFinite(this.inputToNumber(this.enteredValue())) && this.unit())
       return this.enteredValue()+" "+this.unit();
+    else
+      return this.enteredValue();
   })
 }

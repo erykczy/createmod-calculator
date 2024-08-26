@@ -1,36 +1,43 @@
-/* :host {
-  background-image: url("../../assets/background/fan.png");
-  background-position: center;
-  background-repeat: no-repeat;
-} */
-
-/* .calculator {
-  width: 700px;
-} */
 :host {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
-.background-img {
+img {
+  --pos: translate(-50%, 40px);
   position: absolute;
-  top: 120px;
-  z-index: -1;
+  top: 0;
+  left: 50%;
+  transform: var(--pos);
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1;
+  z-index: -10;
   filter: saturate(0);
   opacity: 0.1;
-  height: 500px;
 }
 
-.background-img.fadein {
+img.fadein {
   animation: iconFadein 200ms ease-out;
 }
 
+@keyframes iconFadein {
+  0% {
+    opacity: 0;
+    transform: var(--pos) scale(0.8);
+  }
+  100% {
+    opacity: 0.1;
+    transform: var(--pos) scale(1);
+  }
+}
+
 h1 {
+  margin: 0;
   display: inline-block;
   text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
   font-size: 18px;
   color: var(--primaryTextColor);
   cursor: pointer;
@@ -54,21 +61,10 @@ h1:hover {
 @keyframes titleFadein {
   0% {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateY(20px);
   }
   100% {
     opacity: 1;
-    transform: translateX(0px);
-  }
-}
-
-@keyframes iconFadein {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  100% {
-    opacity: 0.1;
-    transform: scale(1);
+    transform: translateY(0px);
   }
 }

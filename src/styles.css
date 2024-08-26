@@ -18,11 +18,18 @@
   font-style: normal;
   font-smooth: never;
   -webkit-font-smoothing : none;
+  scrollbar-color: rgb(45, 45, 45) rgb(12, 12, 12);
+  scrollbar-width: thin;
 }
 
 @font-face {
   font-family: Minecraft;
   src: url("assets/fonts/minecraft.otf");
+}
+
+body {
+  background-color: rgb(12, 12, 12);
+  overflow-y: auto;
 }
 
 b {
@@ -45,23 +52,6 @@ input::-webkit-inner-spin-button {
 input[readonly]:focus {
   outline: none;
 } */
-
-router-outlet.calculator-router + * {
-  width: 80%;
-  animation: fadein 200ms ease-out;
-  /* height: 100%;
-  display: flex;
-  flex-direction: column; */
-}
-
-@keyframes fadein {
-  0% {
-    transform: scale(0.8);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
 
 *:has(> app-tooltip) {
   /* display: inline-block; */
@@ -88,6 +78,7 @@ app-tooltip::after {
 }
 
 app-tooltip {
+  z-index: 10;
   font-size: 16px;
   text-transform: none;
   visibility: hidden;
@@ -116,6 +107,21 @@ app-tooltip {
   visibility: visible;
   opacity: 1;
   transform: translate(-50%, -10px);
+}
+
+router-outlet+* {
+  width: 100%;
+  max-width: 700px;
+  animation: fadein 200ms ease-out;
+}
+
+@keyframes fadein {
+  0% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* .tooltip-text {

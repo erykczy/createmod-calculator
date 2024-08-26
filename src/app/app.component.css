@@ -1,19 +1,43 @@
-:host {
+.content {
   display: flex;
-  justify-content: center;
-  align-items: top;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background-color: rgb(12, 12, 12);
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+  
+  /* position: absolute;
+  top: 50px;
+  left: 50px;
+  right: 50px; */
 }
 
-.window {
-  margin-top: 100px;
-  position: absolute;
-  width: 50%;
+@media(max-width: 425px) {
+  .content {
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+/*
+
+@media(max-width: 375px) {
+  .content {
+    margin-top: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+} */
+
+app-header {
+  width: 100%;
+  max-width: 1000px;
+}
+
+app-calculator-info {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 .repolink img {
@@ -29,8 +53,3 @@
 .repolink:hover img {
   opacity: 100%;
 }
-
-app-header {
-  height: 60px;
-}
-

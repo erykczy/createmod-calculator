@@ -12,13 +12,13 @@ import { PressCalculatorComponent } from "./press-calculator/press-calculator.co
 
 
 @Component({
-  selector: 'app-calculator-side',
+  selector: 'app-calculator-info',
   standalone: true,
   imports: [HeaderComponent, DrillCalculatorComponent, MixerCalculatorComponent, FanCalculatorComponent, PressCalculatorComponent, MillstoneCalculatorComponent, CrushingCalculatorComponent, BeltCalculatorComponent, RouterOutlet],
-  templateUrl: './calculator-side.component.html',
-  styleUrl: './calculator-side.component.css'
+  templateUrl: './calculator-info.component.html',
+  styleUrl: './calculator-info.component.css'
 })
-export class CalculatorSideComponent {
+export class CalculatorInfoComponent {
   titleAnimation: boolean = false;
   iconAnimation: boolean = false;
   private calculatorService = inject(CalculatorService);

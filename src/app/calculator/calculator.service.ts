@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { g_calculatorsData } from "./constants";
 import { CalculatorData } from "./calculator.model";
+import { g_calculatorsData } from "./constants";
 
 @Injectable({
   'providedIn': 'root'

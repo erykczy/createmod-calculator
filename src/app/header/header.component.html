@@ -1,8 +1,7 @@
 <div class="header">
   @for(calculator of calculatorsData; track calculator.name; let i = $index) {
-    <button class="tab" [routerLink]="['/', calculator.id]" routerLinkActive="selected" >
+    <button class="tab" [routerLink]="['/', calculator.id]" routerLinkActive="selected" [tooltip]="calculator.name">
       <img [src]="calculator.iconPath" [alt]="calculator.name" class="tab-image" />
-      <app-tooltip>{{calculator.name}}</app-tooltip>
     </button>
   }
 </div>

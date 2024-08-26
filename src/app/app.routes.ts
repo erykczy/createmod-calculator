@@ -1,16 +1,16 @@
 import { Routes } from '@angular/router';
-import { DrillCalculatorComponent } from './calculator/drill-calculator/drill-calculator.component';
-import { MixerCalculatorComponent } from './calculator/mixer-calculator/mixer-calculator.component';
-import { FanCalculatorComponent } from './calculator/fan-calculator/fan-calculator.component';
-import { PressCalculatorComponent } from './calculator/press-calculator/press-calculator.component';
-import { MillstoneCalculatorComponent } from './calculator/millstone-calculator/millstone-calculator.component';
-import { CrushingCalculatorComponent } from './calculator/crushing-calculator/crushing-calculator.component';
-import { BeltCalculatorComponent } from './calculator/belt-calculator/belt-calculator.component';
-import { SawCalculatorComponent } from './calculator/saw-calculator/saw-calculator.component';
-import { DeployerCalculatorComponent } from './calculator/deployer-calculator/deployer-calculator.component';
 import { ArmCalculatorComponent } from './calculator/arm-calculator/arm-calculator.component';
+import { BeltCalculatorComponent } from './calculator/belt-calculator/belt-calculator.component';
 import { CrafterCalculatorComponent } from './calculator/crafter-calculator/crafter-calculator.component';
+import { CrushingCalculatorComponent } from './calculator/crushing-calculator/crushing-calculator.component';
+import { DeployerCalculatorComponent } from './calculator/deployer-calculator/deployer-calculator.component';
+import { DrillCalculatorComponent } from './calculator/drill-calculator/drill-calculator.component';
+import { FanCalculatorComponent } from './calculator/fan-calculator/fan-calculator.component';
+import { MillstoneCalculatorComponent } from './calculator/millstone-calculator/millstone-calculator.component';
+import { MixerCalculatorComponent } from './calculator/mixer-calculator/mixer-calculator.component';
+import { PressCalculatorComponent } from './calculator/press-calculator/press-calculator.component';
 import { PumpCalculatorComponent } from './calculator/pump-calculator/pump-calculator.component';
+import { SawCalculatorComponent } from './calculator/saw-calculator/saw-calculator.component';
 
 export const routes: Routes = [
   {

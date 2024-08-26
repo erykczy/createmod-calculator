@@ -1,4 +1,4 @@
-import { CalculatorData } from "./calculator.model"
+import { CalculatorData } from "./calculator.model";
 
 export var g_invisibleChar: string = "​";
 
@@ -15,12 +15,6 @@ export function lerp(a: number, b: number, t: number) {
 }
 
 export var g_calculatorsData: CalculatorData[] = [
-  {
-    name: "Deployer",
-    id: "deployer",
-    iconPath: "assets/icons/deployer.png",
-    wikiPage: "https://create.fandom.com/wiki/Deployer"
-  },
   {
     name: "Mechanical Drill",
     id: "drill",
@@ -40,6 +34,12 @@ export var g_calculatorsData: CalculatorData[] = [
     wikiPage: "https://create.fandom.com/wiki/Encased_Fan"
   },
   {
+    name: "Mechanical Press",
+    id: "press",
+    iconPath: "assets/icons/press.png",
+    wikiPage: "https://create.fandom.com/wiki/Mechanical_Press"
+  },
+  {
     name: "Millstone",
     id: "millstone",
     iconPath: "assets/icons/millstone.png",
@@ -52,12 +52,6 @@ export var g_calculatorsData: CalculatorData[] = [
     wikiPage: "https://create.fandom.com/wiki/Crushing_Wheel#Recipe_Duration_Table"
   },
   {
-    name: "Mechanical Press",
-    id: "press",
-    iconPath: "assets/icons/press.png",
-    wikiPage: "https://create.fandom.com/wiki/Mechanical_Press"
-  },
-  {
     name: "Mechanical Belt",
     id: "belt",
     iconPath: "assets/icons/belt.png",
@@ -68,6 +62,12 @@ export var g_calculatorsData: CalculatorData[] = [
     id: "saw",
     iconPath: "assets/icons/saw.png",
     wikiPage: "https://create.fandom.com/wiki/Mechanical_Saw"
+  },
+  {
+    name: "Deployer",
+    id: "deployer",
+    iconPath: "assets/icons/deployer.png",
+    wikiPage: "https://create.fandom.com/wiki/Deployer"
   },
   {
     name: "Mechanical Arm",

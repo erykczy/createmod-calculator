@@ -1,4 +1,4 @@
-import { clamp, decimal, lerp } from "../constants";
+import { decimal, lerp } from "../constants";
 
 export abstract class FanCalculator {
   public static calculate(rpm: number, stackSize: number, fansAmount: number, chance: number): Result {

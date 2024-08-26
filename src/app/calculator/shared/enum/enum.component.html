@@ -1,8 +1,5 @@
-<label>
+<label [tooltip]="help">
   <ng-content />
-  @if(help !== undefined) {
-    <app-tooltip>{{help}}</app-tooltip>
-  }
 </label>
 <select [ngModel]="ngModelValue" (ngModelChange)="onngModelValueChange($event)">
   @for(opt of values; track opt; let i = $index) {

@@ -1,12 +1,12 @@
-import { Component, inject } from '@angular/core';
-import { g_calculatorsData } from '../calculator/constants';
+import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { TooltipComponent } from "../calculator/shared/tooltip/tooltip.component";
+import { g_calculatorsData } from '../calculator/constants';
+import { TooltipDirective } from '../tooltip';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, TooltipComponent],
+  imports: [RouterLink, RouterLinkActive, TooltipDirective],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })

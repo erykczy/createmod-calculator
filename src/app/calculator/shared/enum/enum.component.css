@@ -8,7 +8,7 @@
 label {
   text-transform: uppercase;
   font-weight: bold;
-  color: rgb(154, 154, 154);
+  color: var(--secondaryTextColor);
   font-size: 12px;
   text-align: center;
   margin-bottom: 2px;
@@ -16,12 +16,25 @@ label {
 
 select {
   width: 100%;
-  height: 20px;
-  border-radius: 5px;
-  border: solid 1px rgb(154, 154, 154);
+  height: 25px;
+  font-size: 16px;
   text-align: center;
-  color: rgb(92, 92, 92);
+  text-align-last: center;
+  color: var(--primaryTextColor);
   box-sizing: border-box;
   padding-left: 15px;
-  background-color: white;
+  background-color: transparent;
+  border-width: 2px;
+  border-style: solid;
+  border-image: var(--primaryGradient) 1;
+  outline: 2px solid black;
+  transition: border-image 100ms;
+}
+
+select:focus {
+  border-image: var(--primaryFocusGradient) 1;
+}
+
+option {
+  background-color: rgb(12, 12, 12);
 }

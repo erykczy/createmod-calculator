@@ -1,4 +1,4 @@
-import { clamp, decimal } from "../constants";
+import { decimal } from "../constants";
 
 export abstract class BeltCalculator {
   public static calculateFromRpm(rpm: number, stackSize: number, beltLength: number): Result {

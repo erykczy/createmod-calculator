@@ -1,14 +1,14 @@
-import { ChangeDetectorRef, Component, computed, EventEmitter, inject, input, Input, Output, signal, ViewChild } from '@angular/core';
+import { Component, computed, EventEmitter, inject, input, Input, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { decimal, g_invisibleChar } from '../../constants';
 import { ClickSelectDirective } from '../../../click-select';
+import { TooltipDirective } from '../../../tooltip';
 import { CalculatorService } from '../../calculator.service';
 
 // I present to you THE CLEANEST CODE OF ALL TIME
 @Component({
   selector: 'app-number',
   standalone: true,
-  imports: [FormsModule, ClickSelectDirective],
+  imports: [FormsModule, ClickSelectDirective, TooltipDirective],
   templateUrl: './number.component.html',
   styleUrl: './number.component.css'
 })
@@ -49,7 +49,6 @@ export class NumberComponent {
   private focused = signal<boolean>(false);
   private initialized: boolean = false;
   private calculatorService = inject(CalculatorService);
-  private cdRef = inject(ChangeDetectorRef);
   
   onNgModelChange(newValueStr: string) {
     this.enteredValue.set(newValueStr);

@@ -1,11 +1,12 @@
-import { ChangeDetectorRef, Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TooltipDirective } from '../../../tooltip';
 import { CalculatorService } from '../../calculator.service';
 
 @Component({
   selector: 'app-enum',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, TooltipDirective],
   templateUrl: './enum.component.html',
   styleUrl: './enum.component.css'
 })

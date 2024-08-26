@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
-import { NumberComponent } from "../shared/number/number.component";
-import { OutputSideComponent } from "../shared/output-side/output-side.component";
+import { g_crushingInputDelays, g_millstoneRecipes } from '../constants';
 import { EnumComponent } from "../shared/enum/enum.component";
 import { InputSideComponent } from "../shared/input-side/input-side.component";
-import { clamp, g_crushingRecipes, g_delays, g_crushingInputDelays, g_millstoneRecipes } from '../constants';
 import { NuenumComponent } from "../shared/nuenum/nuenum.component";
+import { NumberComponent } from "../shared/number/number.component";
+import { OutputSideComponent } from "../shared/output-side/output-side.component";
 import { CrushingCalculator, Result } from './crushing.calculator';
 
 @Component({

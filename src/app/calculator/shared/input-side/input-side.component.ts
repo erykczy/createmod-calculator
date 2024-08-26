@@ -1,6 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { CalculatorService } from '../../calculator.service';
-import { g_calculatorsData } from '../../constants';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-input-side',
@@ -10,9 +8,4 @@ import { g_calculatorsData } from '../../constants';
   styleUrl: './input-side.component.css'
 })
 export class InputSideComponent {
-  private calculatorService = inject(CalculatorService);
-
-  get calculatorName() {
-    return this.calculatorService.getSelectedCalculator().name;
-  }
 }

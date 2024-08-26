@@ -1,5 +1,4 @@
-import { Directive, Input, ElementRef, HostListener } from '@angular/core';
-import { g_invisibleChar } from './calculator/constants';
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
   selector: '[clickSelect]',

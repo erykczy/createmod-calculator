@@ -1,25 +1,8 @@
 :host {
-  flex: 1.0;
   padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  overflow-y: auto;
-}
-
-h1 {
-  margin-top: 0px;
-  margin-bottom: 10px;
-  font-weight: 400;
-  font-size: 40px;
-  letter-spacing: 4px;
-  color: rgb(78, 78, 78);
-  text-align: center;
-  cursor: default;
-}
-
-@media (max-width: 768px) {
-  h1 {
-    font-size: 30px;
-  }
+  align-items: center;
+  position: relative;
 }

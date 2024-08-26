@@ -1,20 +1,36 @@
-.canvas {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
-
-.window {
-  position: absolute;
-  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
+.content {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+@media(max-width: 425px) {
+  .content {
+    margin-top: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+@media(max-width: 375px) {
+  .content {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
+app-header {
+  width: 100%;
+  max-width: 1000px;
+}
+
+app-calculator-info {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 .repolink img {
@@ -25,63 +41,8 @@
   transition: opacity 0.15s;
   width: 30px;
   height: 30px;
-  visibility: hidden;
 }
 
 .repolink:hover img {
   opacity: 100%;
-}
-/* .repolink {
-  position: absolute;
-  bottom: 0;
-  color: rgb(154, 154, 154);
-}
-
-.repolink a {
-  color: rgb(134, 134, 134);
-} */
-
-app-content {
-  flex: 1.0;
-}
-
-@media (min-width: 0) {
-  app-header {
-    height: 40px;
-  }
-
-  .window {
-    width: 100%;
-    height: 100%;
-  }
-}
-
-@media (min-width: 425px) {
-  app-header {
-    height: 60px;
-  }
-}
-
-@media (min-width: 768px) {
-  .window {
-    width: 80%;
-    height: 80%;
-  }
-  .repolink img {
-    visibility: visible;
-  }
-}
-
-@media (min-width: 1024px) {
-  .window {
-    width: 60%;
-    height: 80%;
-  }
-}
-
-@media (min-width: 1440px) {
-  .window {
-    width: 50%;
-    height: 80%;
-  }
 }

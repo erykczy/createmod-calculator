@@ -1,4 +1,4 @@
-import { CalculatorData } from "./calculator.model"
+import { CalculatorData } from "./calculator.model";
 
 export var g_invisibleChar: string = "​";
 

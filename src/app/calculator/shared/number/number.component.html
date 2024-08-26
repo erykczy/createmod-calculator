@@ -1,4 +1,6 @@
 <div class="head">
-  <label [class.tooltip]="help() !== undefined"><ng-content /><span class="tooltip-text">{{help()}}</span></label>
+  <label [tooltip]="help()">
+    <ng-content />
+  </label>
 </div>
 <input [clickSelect]="readonly()" [readOnly]="readonly()" (focus)="onFocus()" (blur)="onBlur()" [ngModel]="ngModelValue()" (ngModelChange)="onNgModelChange($event)">  

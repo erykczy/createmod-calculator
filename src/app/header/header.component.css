@@ -1,34 +1,58 @@
-.tabs {
-  background-color: rgba(0, 0, 0, 0.1);
-  height: 100%;
-  border-radius: 10px 10px 0 0;
+.header {
   display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+@media(max-width: 1024px) {
+  .header {
+    gap: 10px;
+  }
 }
 
 button {
-  aspect-ratio: 1.0;
+  width: 56px;
+  height: 56px;
   border: 0;
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0);
-  transition: background-color 0.1s;
+  padding: 5px;
+  background-color: black;
   cursor: pointer;
-  border-radius: 10px 10px 0 0;
+  border-width: 2px;
+  border-style: solid;
+  border-image: var(--primaryGradient) 1;
+  transition: border-image 100ms;
+  position: relative;
+  outline: 2px solid black;
 }
 
-/* button:first-child {
-  border-radius: 10px 0 0 0;
-} */
+button:hover {
+  border-image: var(--primaryHoverGradient) 1;
+}
+
+button:focus {
+  animation-name: click;
+  animation-duration: 400ms;
+}
+
+@keyframes click {
+  0% {
+    border-image: var(--primaryHoverGradient) 1;
+  }
+  20% {
+    border-image: var(--primaryClickGradient) 1;
+  }
+  100% {
+    border-image: var(--primaryHoverGradient) 1;
+  }
+}
+
+button.selected {
+  border-image: var(--primaryHoverGradient) 1;
+}
 
 img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-button:hover {
-  background-color: white;
-}
-
-button.selected {
-  background-color: white;
 }

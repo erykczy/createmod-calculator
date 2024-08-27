@@ -54,6 +54,9 @@ export class NumberComponent {
   onNgModelChange(newValueStr: string) {
     this.enteredValue.set(newValueStr);
     let newNumber = this.inputToNumber(newValueStr);
+    if(!this.focused()) {
+      this.enteredValue.set(newNumber.toString());
+    }
     
     this.calculatorService.saveProperty(this.id(), newNumber);
     this.valueChange.emit(newNumber);

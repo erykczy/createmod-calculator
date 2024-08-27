@@ -27,7 +27,7 @@
 
 body {
   background-color: rgb(12, 12, 12);
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 b {

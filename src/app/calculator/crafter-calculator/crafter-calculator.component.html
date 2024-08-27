@@ -6,7 +6,7 @@
 <app-output-side>
   <app-number [unit]="'/s'" [(value)]="val_speed" id=speed (userChange)="calculateFromSpeed()">Recipes/Second</app-number>
   <app-number [unit]="'s'" [(value)]="val_time" id="time" (userChange)="calculateFromTime()">Processing Time</app-number>
-  <app-number id="stress" [stress]="true" [unit]="'su'" [(value)]="val_stress" (userChange)="calculateFromStress()">Stress</app-number>
+  <app-number id="stress" [stress]="true" [unit]="'su'" [(value)]="val_stress" (userChange)="calculateFromStress()">Stress/Crafter</app-number>
   <app-info>
     The actual result might be slightly different depending on the order in which Minecraft will tick your Mechanical Crafters.
     <br><br>

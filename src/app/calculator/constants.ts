@@ -105,19 +105,19 @@ export var g_sawHardness = new Map<string, number>([
 ])
 
 export var g_delays = new Map<string, number>([
-  ["no delay", 0],
-  ["generator (any)", 30] 
+  ["No Delay", 0],
+  ["Generator (any)", 30] 
 ]);
 
 export var g_crushingInputDelays = new Map<string, number>([
-  ["funnel (fastest)", 1],
-  ["chute (slower)", 3],
-  ["thrown (slowest, not recommended)", 27]
+  ["Funnel (fastest)", 1],
+  ["Chute (slower)", 3],
+  ["Thrown (slowest, not recommended)", 27]
 ]);
 
 export var g_crafterInputDelays = new Map<string, number>([
-  ["funnel (faster)", 0],
-  ["chute (slower)", 2]
+  ["Funnel (faster)", 0],
+  ["Chute (slower)", 2]
 ]);
 
 export var g_cuttingRecipes = new Map<string, number>(

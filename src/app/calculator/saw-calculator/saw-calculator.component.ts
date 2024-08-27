@@ -17,7 +17,7 @@ import { DrillCalculator } from '../drill-calculator/drill.calculator';
   styleUrl: './saw-calculator.component.css'
 })
 export class SawCalculatorComponent {
-  stressRatio: number = 2;
+  stressRatio: number = 4;
   val_rpm: number = 256;
   val_time: number = 0;
   val_speed: number = 0;
@@ -61,7 +61,7 @@ export class SawCalculatorComponent {
 
   calculateFromTime() {
     if(this.isChopping)
-      this.updateValues(DrillCalculator.calculateFromSpeed(this.in_hardness, 0, this.val_time));
+      this.updateValues(DrillCalculator.calculateFromTime(this.in_hardness, 0, this.val_time));
     else
       this.updateValues(SawCalculator.calculateFromTime(this.val_time, this.in_recipeDuration));
   }

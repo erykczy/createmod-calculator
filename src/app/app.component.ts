@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { ActivationStart, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { CalculatorService } from './calculator/calculator.service';
+import { TooltipDirective } from './tooltip';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FormsModule],
+  imports: [RouterOutlet, HeaderComponent, FormsModule, TooltipDirective],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

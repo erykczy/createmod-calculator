@@ -27,20 +27,6 @@ app-header {
   max-width: 1000px;
 }
 
-.repolink img {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  opacity: 20%;
-  transition: opacity 0.15s;
-  width: 30px;
-  height: 30px;
-}
-
-.repolink:hover img {
-  opacity: 100%;
-}
-
 .calculator {
   width: 100%;
   position: relative;
@@ -62,7 +48,7 @@ app-header {
   }
 }
 
-img {
+img.background-img {
   --pos: translate(-50%, 0px);
   position: absolute;
   top: 0;
@@ -76,7 +62,7 @@ img {
   opacity: 0.1;
 }
 
-img.fadein {
+img.background-img.fadein {
   animation: iconFadein var(--tabSwitchDuration) ease-out;
 }
 
@@ -122,5 +108,25 @@ h1:hover {
   100% {
     opacity: 1;
     transform: translateY(0px);
+  }
+}
+
+.repolink img {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  opacity: 10%;
+  width: 35px;
+  height: 35px;
+  transition: opacity 0.15s;
+}
+
+.repolink:hover img {
+  opacity: 100%;
+}
+
+@media (max-width: 768px) {
+  .repolink img {
+    visibility: hidden;
   }
 }

@@ -34,13 +34,12 @@ export abstract class DeployerCalculator {
           totalFrames = framesExpanding + framesRetracting;
         else {
           totalFrames = framesWaiting + framesExpanding + framesRetracting
-          if(options.gathersItems)
-            totalFrames += framesOutputting;
         }
 
         let hits = Math.ceil(options.health / options.damage);
         totalFrames = hits * totalFrames;
-        totalFrames += framesOutputting; // output overflow items
+        if(!options.onContraption && options.gathersItems)
+          totalFrames += framesOutputting; 
       }
 
       return {

@@ -1,6 +1,9 @@
 <div class="content">
   <app-header />
-  <app-calculator-info />
-  <router-outlet class="calculator-router" />
+  <a [href]="calculator.wikiPage" target="_blank"><h1 [class.fadein]="switchTabAnimation" (animationend)="onAnimationend()">{{calculator.name}}</h1></a>
+  <div class="calculator" [class.fadein]="switchTabAnimation">
+    <img class="background-img" [src]="calculator.iconPath" (animationend)="onAnimationend()">
+    <router-outlet class="calculator-router" />
+  </div>
 </div>
 <!-- <a class="repolink" href="https://github.com/erykczy/createmod-calculator" target="_blank"><img src="assets/icons/github.png"></a> -->

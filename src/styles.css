@@ -46,16 +46,6 @@ input::-webkit-inner-spin-button {
 router-outlet+* {
   width: 100%;
   max-width: 700px;
-  animation: fadein var(--tabSwitchDuration) ease-out;
-}
-
-@keyframes fadein {
-  0% {
-    transform: scale(0.5);
-  }
-  100% {
-    transform: scale(1);
-  }
 }
 
 .tippy-box[data-theme~="create"] {

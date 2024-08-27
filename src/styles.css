@@ -7,6 +7,7 @@
   --secondaryFocusGradient: linear-gradient(to bottom, #504b45 0%, #403c37 100%);
   --primaryTextColor: rgb(235, 235, 235);
   --secondaryTextColor: rgb(161, 161, 161);
+  --tabSwitchDuration: 300ms
 }
 
 * {
@@ -45,12 +46,12 @@ input::-webkit-inner-spin-button {
 router-outlet+* {
   width: 100%;
   max-width: 700px;
-  animation: fadein 200ms ease-out;
+  animation: fadein var(--tabSwitchDuration) ease-out;
 }
 
 @keyframes fadein {
   0% {
-    transform: scale(0.8);
+    transform: scale(0.5);
   }
   100% {
     transform: scale(1);

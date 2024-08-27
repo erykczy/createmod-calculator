@@ -20,16 +20,14 @@ img {
 }
 
 img.fadein {
-  animation: iconFadein 200ms ease-out;
+  animation: iconFadein var(--tabSwitchDuration) ease-out;
 }
 
 @keyframes iconFadein {
   0% {
-    opacity: 0;
-    transform: var(--pos) scale(0.8);
+    transform: var(--pos) scale(0.5);
   }
   100% {
-    opacity: 0.1;
     transform: var(--pos) scale(1);
   }
 }
@@ -51,7 +49,7 @@ h1 {
 }
 
 h1.fadein {
-  animation: titleFadein 200ms ease-out;
+  animation: titleFadein var(--tabSwitchDuration) ease-out;
 }
 
 h1:hover {

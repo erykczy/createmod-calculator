@@ -15,7 +15,7 @@ import { CrushingCalculator, Result } from './crushing.calculator';
   styleUrl: './crushing-calculator.component.css'
 })
 export class CrushingCalculatorComponent {
-  stressRatio: number = 8;
+  stressRatio: number = 8 * 2;
   val_stress: number = 0;
   val_rpm: number = 256;
   in_stackSize: number = 1;

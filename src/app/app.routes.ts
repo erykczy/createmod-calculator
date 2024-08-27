@@ -14,11 +14,6 @@ import { SawCalculatorComponent } from './calculator/saw-calculator/saw-calculat
 
 export const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'drill',
-    pathMatch: 'full'
-  },
-  {
     path: 'drill',
     component: DrillCalculatorComponent
   },
@@ -65,5 +60,9 @@ export const routes: Routes = [
   {
     path: "pump",
     component: PumpCalculatorComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'drill'
   }
 ];

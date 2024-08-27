@@ -6,7 +6,7 @@ export abstract class CrushingCalculator {
       let speed = rpm/50*4;
   
       let step = clamp(speed/Math.log2(stackSize), 0.25, 20);
-      let processTicks = Math.ceil((recipeDuration - 19.999999)/step);
+      let processTicks = Math.ceil(Math.max(0, recipeDuration - 19.999999)/step);
       let frames = processTicks+1+delay;
       
       return {

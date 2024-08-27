@@ -25,10 +25,24 @@ export class DeployerCalculatorComponent {
      onContraption: 0,
      gathersItems: 0,
      health: 100,
-     damage: 4
+     damage: 4,
+     inputDelay: 0,
+     beltRpm: 256
   };
   private cdRef = inject(ChangeDetectorRef);
 
+  get inputDelaysKeys(): string[] {
+    return [
+      "No Delay",
+      "Mechanical Belt"
+    ]
+  }
+  get inputDelaysValues(): number[] {
+    return [
+      0,
+      -1
+    ]
+  }
   get processes(): string[] {
     return [
       "Processing",
@@ -47,6 +61,9 @@ export class DeployerCalculatorComponent {
   }
   get hint2(): string {
     return "Deployer on Contraption doesn't have several delays";
+  }
+  get delayHint(): string {
+    return "Different input methods have different delays. This is necessary to be specified when, for example, you provide items to be processed by a belt below the deployer.";
   }
 
   ngOnInit() {

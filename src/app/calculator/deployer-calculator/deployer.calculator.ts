@@ -1,3 +1,4 @@
+import { BeltCalculator } from "../belt-calculator/belt.calculator";
 import { clamp, decimal } from "../constants";
 
 export abstract class DeployerCalculator {
@@ -12,7 +13,11 @@ export abstract class DeployerCalculator {
 
       let totalFrames = undefined;
       if(options.process === Process.PROCESSING) {
-        totalFrames = framesExpanding + framesRetracting;
+        let inputDelay = options.inputDelay;
+        if(options.inputDelay === -1)
+          inputDelay = Math.ceil(BeltCalculator.calculateFromRpm(options.beltRpm, 1, 1).time*20);
+
+        totalFrames = framesExpanding + framesRetracting + Math.max(0, inputDelay - framesRetracting);
       }
       else if(options.process === Process.OTHER) {
         if(options.onContraption) {
@@ -92,5 +97,7 @@ export interface Options {
   onContraption: number,
   gathersItems: number,
   health: number,
-  damage: number
+  damage: number,
+  inputDelay: number,
+  beltRpm: number
 }

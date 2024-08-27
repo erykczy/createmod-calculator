@@ -1,6 +1,13 @@
 <app-input-side>
   <app-enum id="process" [(value)]="in_options.process" [values]="processes" (userChange)="calculateFromRpm()">Process</app-enum>
-  @if(in_options.process !== Process.PROCESSING) {
+  <app-number id="rpm" [(value)]="val_rpm" [min]="0" (userChange)="calculateFromRpm()">RPM</app-number>
+  @if(in_options.process === Process.PROCESSING) {
+    <app-nuenum id="input-delay" [hint]="delayHint" [(value)]="in_options.inputDelay" [label_custom]="'Custom Input Delay'" [unit]="'t'" [keys]="inputDelaysKeys" [values]="inputDelaysValues" (userChange)="calculateFromRpm()">Bump Target Input Delay</app-nuenum>
+    @if(in_options.inputDelay == -1) {
+      <app-number id="belt-rpm" [(value)]="in_options.beltRpm" [min]="0" (userChange)="calculateFromRpm()">Belt RPM</app-number>
+    }
+  }
+  @else {
     <app-enum id="on-contraption" [hint]="hint2" [(value)]="in_options.onContraption" [values]="noYes" (userChange)="calculateFromRpm()">On Contraption?</app-enum>
 
     @if(!in_options.onContraption) {
@@ -12,8 +19,6 @@
       <app-number id="damage" [(value)]="in_options.damage" [min]="0" (userChange)="calculateFromRpm()">Item Damage</app-number>
     }
   }
-  
-  <app-number id="rpm" [(value)]="val_rpm" [min]="0" (userChange)="calculateFromRpm()">RPM</app-number>
 </app-input-side>
 <app-output-side>
   <app-number [unit]="'/s'" [(value)]="val_speed" id=speed (userChange)="calculateFromSpeed()">

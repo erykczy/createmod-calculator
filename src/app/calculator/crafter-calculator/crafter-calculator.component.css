@@ -1,0 +1,21 @@
+ul {
+  margin-top: 5px;
+  margin-bottom: 0;
+  padding-left: 0px;
+  list-style-type: none;
+}
+
+li {
+  margin-top: 5px;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+li:before {
+  content: "+";
+  padding-right: 5px;
+}
+
+app-info {
+  margin-top: 20px;
+}

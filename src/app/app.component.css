@@ -1,87 +1,132 @@
-.canvas {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
-
-.window {
-  position: absolute;
-  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
+.content {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+@media(max-width: 425px) {
+  .content {
+    margin-top: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+@media(max-width: 375px) {
+  .content {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
+app-header {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.calculator {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calculator.fadein {
+  animation: calculatorFadein var(--tabSwitchDuration) ease-out;
+}
+
+@keyframes calculatorFadein {
+  0% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+img.background-img {
+  --pos: translate(-50%, 0px);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: var(--pos);
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1;
+  z-index: -10;
+  filter: saturate(0);
+  opacity: 0.1;
+}
+
+img.background-img.fadein {
+  animation: iconFadein var(--tabSwitchDuration) ease-out;
+}
+
+@keyframes iconFadein {
+  0% {
+    transform: var(--pos) scale(0.5);
+  }
+  100% {
+    transform: var(--pos) scale(1);
+  }
+}
+
+h1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+  text-align: center;
+  font-size: 18px;
+  color: var(--primaryTextColor);
+  cursor: pointer;
+  background-color: rgb(2, 2, 2);
+  border-width: 2px;
+  border-style: solid;
+  border-image: var(--primaryGradient) 1;
+  outline: 2px solid black;
+  padding: 5px 30px;
+  transition: border-image 100ms;
+}
+
+h1.fadein {
+  animation: titleFadein var(--tabSwitchDuration) ease-out;
+}
+
+h1:hover {
+  border-image: var(--primaryHoverGradient) 1;
+}
+
+@keyframes titleFadein {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
 
 .repolink img {
   position: absolute;
   top: 10px;
   right: 10px;
-  opacity: 20%;
+  opacity: 10%;
+  width: 35px;
+  height: 35px;
   transition: opacity 0.15s;
-  width: 30px;
-  height: 30px;
-  visibility: hidden;
 }
 
 .repolink:hover img {
   opacity: 100%;
 }
-/* .repolink {
-  position: absolute;
-  bottom: 0;
-  color: rgb(154, 154, 154);
-}
 
-.repolink a {
-  color: rgb(134, 134, 134);
-} */
-
-app-content {
-  flex: 1.0;
-}
-
-@media (min-width: 0) {
-  app-header {
-    height: 40px;
-  }
-
-  .window {
-    width: 100%;
-    height: 100%;
-  }
-}
-
-@media (min-width: 425px) {
-  app-header {
-    height: 60px;
-  }
-}
-
-@media (min-width: 768px) {
-  .window {
-    width: 80%;
-    height: 80%;
-  }
+@media (max-width: 768px) {
   .repolink img {
-    visibility: visible;
-  }
-}
-
-@media (min-width: 1024px) {
-  .window {
-    width: 60%;
-    height: 80%;
-  }
-}
-
-@media (min-width: 1440px) {
-  .window {
-    width: 50%;
-    height: 80%;
+    visibility: hidden;
   }
 }

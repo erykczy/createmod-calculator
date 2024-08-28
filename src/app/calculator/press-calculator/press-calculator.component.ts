@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { NumberComponent } from "../shared/number/number.component";
 import { OutputSideComponent } from "../shared/output-side/output-side.component";
 import { InputSideComponent } from "../shared/input-side/input-side.component";
 import { clamp, lerp } from '../constants';
+import { PressCalculator, Result } from './press-calculator.calculator';
 
 @Component({
   selector: 'app-press-calculator',
@@ -12,50 +13,43 @@ import { clamp, lerp } from '../constants';
   styleUrl: './press-calculator.component.css'
 })
 export class PressCalculatorComponent {
-  in_rpm: number = 256;
-  out1: number = 0;
-  out2: number = 0;
+  stressRatio: number = 8;
+  val_rpm: number = 256;
+  val_time: number = 0;
+  val_speed: number = 0;
+  val_stress: number = 0;
+  private cdRef = inject(ChangeDetectorRef);
 
-  get cycle(): number {
-    return 240;
-  }
-
-  get runningTickSpeed(): number {
-    return Math.floor(lerp(1, 60, clamp(this.in_rpm/512, 0, 1)));
+  ngOnInit() {
+    this.calculateFromRpm();
   }
 
   get hint1(): string {
     return "Includes time it takes to lift the press";
   }
 
-  calculate() {
-    if(this.in_rpm > 0) {
-      let runningTicks = 0;
-      let frame: number;
-      for(frame = 0; true; frame++) {
-        if(runningTicks > this.cycle)
-          break;
-
-        let prevRunningTicks = runningTicks;
-        runningTicks += this.runningTickSpeed;
-        
-        if(prevRunningTicks < this.cycle / 2 && runningTicks >= this.cycle / 2) {
-          runningTicks = this.cycle / 2;
-        }
-      }
-      frame += 1; // 1 lost frame while enabling 'running' state
-      let totalFrames: number = frame+1;
-
-      this.out2 = totalFrames / 20;
-      this.out1 = 1 / this.out2;
-    }
-    else {
-      this.out1 = 0;
-      this.out2 = 0;
-    }
-
+  calculateFromRpm() {
+    this.updateValues(PressCalculator.calculateFromRpm(this.val_rpm));
   }
 
-  ngOnInit() { this.calculate(); }
-  ngDoCheck() { this.calculate(); }
+  calculateFromSpeed() {
+    this.updateValues(PressCalculator.calculateFromSpeed(this.val_speed));
+  }
+
+  calculateFromTime() {
+    this.updateValues(PressCalculator.calculateFromTime(this.val_time));
+  }
+  
+  calculateFromStress() {
+    this.val_rpm = this.val_stress / this.stressRatio;
+    this.calculateFromRpm();
+  }
+
+  updateValues(result: Result) {
+    this.cdRef.detectChanges(); // update DOM with values given by user ( change detector is blind :( )
+    this.val_rpm = result.rpm;
+    this.val_time = result.time;
+    this.val_speed = result.speed;
+    this.val_stress = result.rpm * this.stressRatio;
+  }
 }

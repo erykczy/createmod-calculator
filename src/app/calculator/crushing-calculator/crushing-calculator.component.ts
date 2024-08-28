@@ -1,59 +1,42 @@
-import { Component } from '@angular/core';
-import { NumberComponent } from "../shared/number/number.component";
-import { OutputSideComponent } from "../shared/output-side/output-side.component";
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { g_crushingInputDelays, g_millstoneRecipes } from '../constants';
 import { EnumComponent } from "../shared/enum/enum.component";
 import { InputSideComponent } from "../shared/input-side/input-side.component";
-import { clamp, g_crushingRecipes, g_inputDelays, g_millstoneRecipes } from '../constants';
+import { NuenumComponent } from "../shared/nuenum/nuenum.component";
+import { NumberComponent } from "../shared/number/number.component";
+import { OutputSideComponent } from "../shared/output-side/output-side.component";
+import { CrushingCalculator, Result } from './crushing.calculator';
 
 @Component({
   selector: 'app-crushing-calculator',
   standalone: true,
-  imports: [NumberComponent, OutputSideComponent, EnumComponent, InputSideComponent],
+  imports: [NumberComponent, OutputSideComponent, EnumComponent, InputSideComponent, NuenumComponent],
   templateUrl: './crushing-calculator.component.html',
   styleUrl: './crushing-calculator.component.css'
 })
 export class CrushingCalculatorComponent {
-  in_rpm: number = 256;
+  stressRatio: number = 8 * 2;
+  val_stress: number = 0;
+  val_rpm: number = 256;
   in_stackSize: number = 1;
-  in_recipeIndex: number = 0;
-  in_customRecipeDuration: number = 100;
-  in_delayIndex: number = 0;
-  in_customDelay: number = 0;
-  out1: number = 0;
-  out2: number = 0;
+  in_recipeDuration: number = 100;
+  in_delay: number = 0;
+  val_speed: number = 0;
+  val_time: number = 0;
+  cdRef = inject(ChangeDetectorRef);
 
-  get delayValues(): string[] {
-    let arr: string[] = Array.from(g_inputDelays.keys());
-    arr.unshift("<custom>");
-    return arr;
-  }
+  ngOnInit() { this.calculateFromRpm(); }
 
-  get delay(): number {
-    if(this.in_delayIndex == 0)
-      return this.in_customDelay;
-    return Array.from(g_inputDelays.values())[this.in_delayIndex-1];
-  }
-
-  get recipesValues(): string[] {
-    let arr: string[] = Array.from(g_crushingRecipes.keys());
-    arr.unshift("<all other recipes>")
-    arr.unshift("<custom>");
-    return arr;
-  }
-
-  get recipeDuration(): number {
-    if(this.in_recipeIndex == 0)
-      return this.in_customRecipeDuration;
-    if(this.in_recipeIndex == 1)
-      return 100;
-    return Array.from(g_crushingRecipes.values())[this.in_recipeIndex-2];
-  }
+  get recipesKeys(): string[] { return Array.from(g_millstoneRecipes.keys()); }
+  get recipesValues(): number[] { return Array.from(g_millstoneRecipes.values()); }
+  get delayKeys(): string[] { return Array.from(g_crushingInputDelays.keys()); }
+  get delayValues(): number[] { return Array.from(g_crushingInputDelays.values()); }
 
   get recipeInputHint(): string {
     return "Different recipes have different durations. If you can't see your input, select <all other recipes> or <custom>";
   }
   get recipeDurationHint(): string {
-    return "Click the image on the left side of this page. There you will find a table with all available recipes and their duration";
+    return "Click the \"Crushing\" button above. There you will find a table with all available recipes and their duration";
   }
   get delayHint(): string {
     return "Different input methods have different delays.";
@@ -62,43 +45,29 @@ export class CrushingCalculatorComponent {
     return "These results may be slightly inaccurate due to irregular input delay.";
   }
 
-  calculate() {
-    if(this.in_rpm > 0) {
-      let speed = this.in_rpm/50*4;
-  
-      let remainingTime = this.recipeDuration;
-      let appliedRecipe = false;
-      let frame: number;
-      for(frame = 0; true; frame++) {
-        let processingSpeed = clamp((speed) / (!appliedRecipe ? Math.log2(this.in_stackSize) : 1), 0.25, 20);//clamp(speed / Math.log2(this.in_stackSize), 0.25, 20);
-        remainingTime -= processingSpeed;
-        
-        if(remainingTime < 20 && !appliedRecipe) {
-          appliedRecipe = true;
-          remainingTime = 0;
-          continue;
-        }
-        if(remainingTime <= 0)
-          break;
-      }
-      let frames: number = frame + 1;
-      frames += this.delay;
-  
-      this.out2 = frames / 20;
-      this.out1 = this.in_stackSize / this.out2;
-    }
-    else {
-      this.out1 = 0;
-      this.out2 = 0;
-    }
-    // let a = this.recipeDuration - 20;
-    // let _b = this.in_rpm * 4 / 50 / Math.log2(this.in_stackSize);
-    // let b = Math.max(0.25, Math.min(20, _b));
-    // let time = Math.ceil(a / b)+3;
-    // this.out2 = time / 20;
-    // this.out1 = this.in_stackSize / this.out2;
+  calculateFromRpm() {
+    this.updateValues(CrushingCalculator.calculateFromRpm(this.val_rpm, this.in_recipeDuration, this.in_stackSize, this.in_delay));
   }
 
-  ngOnInit() { this.calculate(); }
-  ngDoCheck() { this.calculate(); }
+  calculateFromTime() {
+    this.updateValues(CrushingCalculator.calculateFromTime(this.val_time, this.in_recipeDuration, this.in_stackSize, this.in_delay));
+  }
+
+  calculateFromSpeed() {
+    this.updateValues(CrushingCalculator.calculateFromSpeed(this.val_speed, this.in_recipeDuration, this.in_stackSize, this.in_delay));
+  }
+
+  calculateFromStress() {
+    this.val_rpm = this.val_stress / this.stressRatio;
+    this.calculateFromRpm();
+  }
+
+  updateValues(result: Result) {
+    this.cdRef.detectChanges(); // update DOM with values given by user ( change detector is blind :( )
+    this.val_rpm = result.rpm;
+    this.val_time = result.time;
+    this.val_speed = result.speed;
+    this.val_stress = this.stressRatio * result.rpm;
+  }
+
 }

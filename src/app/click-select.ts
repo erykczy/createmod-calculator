@@ -1,5 +1,4 @@
-import { Directive, Input, ElementRef, HostListener } from '@angular/core';
-import { g_invisibleChar } from './calculator/constants';
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
   selector: '[clickSelect]',
@@ -16,12 +15,7 @@ export class ClickSelectDirective {
       return;
     let element: HTMLInputElement = this.ref.nativeElement;
 
-    element.focus();
-    let end = element.value.indexOf(g_invisibleChar);
-    if(end === -1)
-      element.select();
-    else
-      element.setSelectionRange(0, end);
+    element.select();
   }
 
 }

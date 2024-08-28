@@ -1,41 +1,99 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, computed, EventEmitter, inject, input, Input, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { decimal, g_invisibleChar } from '../../constants';
-import { MinMaxDirective } from '../../../min-max.directive';
 import { ClickSelectDirective } from '../../../click-select';
+import { TooltipDirective } from '../../../tooltip';
+import { CalculatorService } from '../../calculator.service';
 
+// I present to you THE CLEANEST CODE OF ALL TIME
 @Component({
   selector: 'app-number',
   standalone: true,
-  imports: [FormsModule, MinMaxDirective, ClickSelectDirective],
+  imports: [FormsModule, ClickSelectDirective, TooltipDirective],
   templateUrl: './number.component.html',
   styleUrl: './number.component.css'
 })
 export class NumberComponent {
-  decimal = decimal;
-  @Input() output: boolean = false;
-  @Input() unit: string = "";
-  @Input() value: number = 0;
-  @Input() min?: number = undefined;
-  @Input() max?: number = undefined;
-  @Input() help?: string = undefined;
-  @Input() helpUrl?: string = undefined;
-  @Output() valueChange = new EventEmitter();
+  id = input.required<string>();
+  min = input<number | undefined>(undefined);
+  max = input<number | undefined>(undefined);
+  unit = input<string>("");
+  hint = input<string | undefined>(undefined);
+  readonly = input<boolean>(false);
+  stress = input<boolean>(false);
+  @Input()
+  set value(newValue: number) {
+    if(!this.initialized) {
+      let savedValue = this.calculatorService.getSavedProperty(this.id());
+      if(savedValue !== null) {
+        Promise.resolve().then(() => {
+          this.enteredValue.set(savedValue.toString());
+          this.valueChange.emit(savedValue);
+        });
+      }
+      else {
+        this.enteredValue.set(newValue.toString());
+      }
+      this.initialized = true;
+      return;
+    }
+
+    if(this.focused())
+      this.bluredValue = newValue;
+    else
+      this.enteredValue.set(newValue.toString());
+    this.calculatorService.saveProperty(this.id(), newValue);
+  }
+  @Output() valueChange = new EventEmitter<number>();
+  @Output() userChange = new EventEmitter<number>();
+  enteredValue = signal<string>("0");
+  private bluredValue: number | null = null;
+  private focused = signal<boolean>(false);
+  private initialized: boolean = false;
+  private calculatorService = inject(CalculatorService);
   
-  get visibleValue(): string {
-    if(this.output)
-      return decimal(this.value)+g_invisibleChar+this.unit;
-    return String(this.value);
+  onNgModelChange(newValueStr: string) {
+    this.enteredValue.set(newValueStr);
+    let newNumber = this.inputToNumber(newValueStr);
+    if(!this.focused()) {
+      this.enteredValue.set(newNumber.toString());
+    }
+    
+    this.calculatorService.saveProperty(this.id(), newNumber);
+    this.valueChange.emit(newNumber);
+    this.userChange.emit(newNumber);
   }
 
-  onValueChange(newValueStr: string) {
-    let newValue = Number(newValueStr);
-    if(newValue === null) newValue = 0;
-    if(this.min !== undefined && newValue < this.min)
-      newValue = this.min;
-    if(this.max !== undefined && newValue > this.max)
-      newValue = this.max;
-    this.value = newValue;
-    this.valueChange.emit(this.value);
+  onFocus() {
+    this.focused.set(true);
   }
+
+  onBlur() {
+    this.focused.set(false);
+    if(this.bluredValue !== null) {
+      this.enteredValue.set(this.bluredValue.toString());
+      this.bluredValue = null;
+    }
+    else {
+      this.enteredValue.set(this.inputToNumber(this.enteredValue()).toString());
+    }
+  }
+  
+  inputToNumber(str: string) {
+    let splitStr = str.match(/\d+(\.\d+)?/);
+    let num = Number(splitStr ? splitStr[0] : '');
+    if(num === null || Number.isNaN(num) || !Number.isFinite(num))
+      num = this.min() === undefined ? 0 : this.min()!;
+    if(this.min() !== undefined && num < this.min()!)
+      num = this.min()!;
+    if(this.max() !== undefined && num > this.max()!)
+      num = this.max()!;
+    return num;
+  }
+
+  ngModelValue = computed<string>(() => {
+    if(!this.focused() && Number.isFinite(this.inputToNumber(this.enteredValue())) && this.unit())
+      return this.enteredValue()+" "+this.unit();
+    else
+      return this.enteredValue();
+  })
 }

@@ -1,24 +1,42 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TooltipDirective } from '../../../tooltip';
+import { CalculatorService } from '../../calculator.service';
 
 @Component({
   selector: 'app-enum',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, TooltipDirective],
   templateUrl: './enum.component.html',
   styleUrl: './enum.component.css'
 })
 export class EnumComponent {
-  @Input() output: boolean = false;
+  @Input({required: true}) id!: string;
   @Input({required: true}) values!: string[];
+  @Input() hint?: string = undefined;
   @Input() value: number = 0;
-  @Input() help?: string = undefined;
-  @Input() helpUrl?: string = undefined;
-  @Output() valueChange = new EventEmitter();
+  @Output() valueChange = new EventEmitter<number>();
+  @Output() userChange = new EventEmitter<number>();
+  private calculatorService = inject(CalculatorService);
   
-  onValueChange(newValue: string) {
-    if(newValue === null) newValue = "0";
+  get ngModelValue(): string {
+    return this.value.toString();
+  }
+
+  onngModelValueChange(newValue: string) {
     this.value = Number(newValue);
     this.valueChange.emit(this.value);
+    this.calculatorService.saveProperty(this.id, this.value);
+    this.userChange.emit(this.value);
+  }
+
+  ngOnInit() {
+    let savedValue = this.calculatorService.getSavedProperty(this.id);
+    if(savedValue !== null) {
+      Promise.resolve().then(() => {
+        this.value = savedValue;
+        this.valueChange.emit(this.value);
+      });
+    }
   }
 }

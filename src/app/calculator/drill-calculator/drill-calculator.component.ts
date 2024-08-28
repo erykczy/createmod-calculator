@@ -1,93 +1,65 @@
-import { Component } from '@angular/core';
-import { clamp, g_delays, g_hardness } from '../constants';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { clamp, g_delays, g_drillHardness } from '../constants';
 import { InputSideComponent } from "../shared/input-side/input-side.component";
 import { OutputSideComponent } from "../shared/output-side/output-side.component";
 import { EnumComponent } from "../shared/enum/enum.component";
 import { NumberComponent } from "../shared/number/number.component";
 import { WarningComponent } from "../shared/warning/warning.component";
+import { NuenumComponent } from "../shared/nuenum/nuenum.component";
+import { DrillCalculator, Result } from './drill.calculator';
 
 @Component({
   selector: 'app-drill-calculator',
   standalone: true,
-  imports: [InputSideComponent, OutputSideComponent, NumberComponent, EnumComponent, WarningComponent],
+  imports: [InputSideComponent, OutputSideComponent, NumberComponent, EnumComponent, WarningComponent, NuenumComponent],
   templateUrl: './drill-calculator.component.html',
   styleUrl: './drill-calculator.component.css'
 })
 export class DrillCalculatorComponent {
-  in_rpm: number = 256;
-  in_hardnessIndex: number = 0;
-  in_customHardness: number = 0;
-  in_delayIndex: number = 0;
-  in_customDelay: number = 0;
-  out1: number = 0;
-  out2: number = 0;
-  out3: number = 0;
-  out4: number = 0;
-
-  get hardnessValues(): string[] {
-    let arr: string[] = Array.from(g_hardness.keys());
-    arr.unshift("<custom>");
-    return arr;
+  stressRatio: number = 4;
+  val_stress: number = 0;
+  val_rpm: number = 256;
+  val_speed: number = 0;
+  val_time: number = 0;
+  in_hardness: number = 0;
+  in_delay: number = 0;
+  private cdRef: ChangeDetectorRef = inject(ChangeDetectorRef);
+  
+  ngOnInit() {
+    this.calculateFromRpm(); // calculate default values
   }
 
-  get hardness(): number {
-    if(this.in_hardnessIndex == 0)
-      return this.in_customHardness;
-    return Array.from(g_hardness.values())[this.in_hardnessIndex-1];
-  }
-
-  get delayValues(): string[] {
-    let arr: string[] = Array.from(g_delays.keys());
-    arr.unshift("<custom>");
-    return arr;
-  }
-
-  get delay(): number {
-    if(this.in_delayIndex == 0)
-      return this.in_customDelay;
-    return Array.from(g_delays.values())[this.in_delayIndex-1];
-  }
+  get hardnessKeys(): string[] { return Array.from(g_drillHardness.keys()); }
+  get hardnessValues(): number[] { return Array.from(g_drillHardness.values()); }
+  get delayKeys(): string[] { return Array.from(g_delays.keys()); }
+  get delayValues(): number[] { return Array.from(g_delays.values()); }
 
   get delayHint(): string {
-    return "The delay should be taken into account, for example, when using a cobblestone generator. This is the time it takes to generate a new block.";
+    return "The delay should be taken into account, for example, when using a Cobblestone Generator. This is the time it takes to generate a new block.";
   }
 
-  calculate() {
-    if(this.in_rpm > 0) {
-      let breakSpeed = this.in_rpm / 100;
-      let ticksUntilNextProgress = 0;
-      let destroyProgress = 0;
-      let frame: number;
-      for(frame = 0; true; frame++) {
-        if(ticksUntilNextProgress-- > 0)
-          continue;
-  
-        destroyProgress += clamp(Math.floor(breakSpeed / this.hardness), 1, 10 - destroyProgress);
-  
-        if(destroyProgress >= 10) {
-          break;
-        }
-  
-        ticksUntilNextProgress = Math.floor(this.hardness / breakSpeed);
-      }
-      frame += 1; // this weird frame of delay
-      let totalFrames = frame+1;
-  
-      this.out1 = totalFrames / 20;
-      this.out2 = 1 / this.out1;
-      let delayInFrames = this.delay*20;
-      this.out3 = ((totalFrames-Math.min(1, delayInFrames)) + delayInFrames) / 20;
-      this.out4 = 1 / this.out3;
-    }
-    else {
-      this.out1 = 0;
-      this.out2 = 0;
-      this.out3 = 0;
-      this.out4 = 0;
-    }
-    
+  calculateFromRpm() {
+    this.updateValues(DrillCalculator.calculateFromRpm(this.in_hardness, this.in_delay, this.val_rpm));
   }
 
-  ngOnInit() { this.calculate(); }
-  ngDoCheck() { this.calculate(); }
+  calculateFromTime() {
+    this.updateValues(DrillCalculator.calculateFromTime(this.in_hardness, this.in_delay, this.val_time));
+  }
+
+  calculateFromSpeed() {
+    this.updateValues(DrillCalculator.calculateFromSpeed(this.in_hardness, this.in_delay, this.val_speed));
+  }
+
+  calculateFromStress() {
+    this.val_rpm = this.val_stress / this.stressRatio;
+    this.calculateFromRpm();
+  }
+
+  updateValues(result: Result) {
+    this.cdRef.detectChanges(); // update DOM with values given by user ( change detector is blind :( )
+    this.val_rpm = result.rpm;
+    this.val_time = result.time;
+    this.val_speed = result.speed;
+    this.val_stress = this.stressRatio * result.rpm;
+  }
 }

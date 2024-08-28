@@ -1,0 +1,8 @@
+h2 {
+  text-align: center;
+  margin: 0;
+  color: var(--secondaryTextColor);
+  margin-top: 8px;
+  font-size: 20px;
+  letter-spacing: 2px;
+}

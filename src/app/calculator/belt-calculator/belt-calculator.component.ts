@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { InputSideComponent } from "../shared/input-side/input-side.component";
 import { NumberComponent } from "../shared/number/number.component";
 import { OutputSideComponent } from "../shared/output-side/output-side.component";
+import { BeltCalculator, Result } from './belt.calculator';
 
 @Component({
   selector: 'app-belt-calculator',
@@ -11,38 +12,50 @@ import { OutputSideComponent } from "../shared/output-side/output-side.component
   styleUrl: './belt-calculator.component.css'
 })
 export class BeltCalculatorComponent {
-  in_rpm: number = 256;
+  stressRatio: number = 0;
+  val_stress: number = 0;
+  val_rpm: number = 256;
   in_stackSize: number = 1;
   in_beltLength: number = 1;
-  out1: number = 0;
-  out2: number = 0;
-  out3: number = 0;
+  val_time: number = 0;
+  val_itemsSpeed: number = 0;
+  val_stacksSpeed: number = 0;
+  private cdRef = inject(ChangeDetectorRef);
 
+  ngOnInit() { this.calculateFromRpm(); }
+  
   get hint1(): string {
     return "Traverse time may be shorter depending on how you input and output items"
   }
 
-  calculate() {
-    if(this.in_rpm > 0) {
-      let ticksOneBlock = 1 / (this.in_rpm / 480);
-      let secondsOneBlock = ticksOneBlock/20;
-      this.out2 = 1/secondsOneBlock;
-      this.out1 = this.out2 * this.in_stackSize;
-      this.out3 = Math.ceil(ticksOneBlock * this.in_beltLength) / 20;
-    }
-    else {
-      this.out1 = 0;
-      this.out2 = 0;
-      this.out3 = 0;
-    }
-
-    // let stacksPerMinute = 75/32 * this.in_rpm;
-    // let stacksPerSecond = stacksPerMinute / 60;
-    // this.out2 = stacksPerSecond;
-    // this.out1 = stacksPerSecond * this.in_stackSize;
-    // this.out3 = 1/stacksPerSecond*this.in_beltLength;
+  calculateFromRpm() {
+    this.updateValues(BeltCalculator.calculateFromRpm(this.val_rpm, this.in_stackSize, this.in_beltLength));
   }
 
-  ngOnInit() { this.calculate(); }
-  ngDoCheck() { this.calculate(); }
+  calculateFromItemsSpeed() {
+    this.updateValues(BeltCalculator.calculateFromItemsSpeed(this.val_itemsSpeed, this.in_stackSize, this.in_beltLength));
+  }
+
+  calculateFromStacksSpeed() {
+    this.updateValues(BeltCalculator.calculateFromStacksSpeed(this.val_stacksSpeed, this.in_stackSize, this.in_beltLength));
+  }
+
+  calculateFromTime() {
+    this.updateValues(BeltCalculator.calculateFromTime(this.val_time, this.in_stackSize, this.in_beltLength));
+  }
+
+  calculateFromStress() {
+    this.cdRef.detectChanges();
+    this.val_stress = 0;
+  }
+
+  updateValues(result: Result) {
+    this.cdRef.detectChanges(); // update DOM with values given by user ( change detector is blind :( )
+    this.val_rpm = result.rpm;
+    this.val_time = result.time;
+    this.val_itemsSpeed = result.itemsSpeed;
+    this.val_stacksSpeed = result.stacksSpeed;
+    this.val_stress = this.stressRatio * result.rpm;
+  }
+
 }

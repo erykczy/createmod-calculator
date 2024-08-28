@@ -1,0 +1,9 @@
+<app-input-side>
+  <app-number [(value)]="val_rpm" [min]="0" id="rpm" (userChange)="calculateFromRpm()">RPM</app-number>
+  <app-number [unit]="'mb'" [(value)]="in_amount" [min]="0" id="amount" (userChange)="calculateFromRpm()">Fluid Amount</app-number>
+</app-input-side>
+<app-output-side>
+  <app-number [unit]="'mB/s'" [(value)]="val_speed" id=speed (userChange)="calculateFromSpeed()">MB/Second</app-number>
+  <app-number [unit]="'s'" [(value)]="val_time" id="time" (userChange)="calculateFromTime()">Traverse Time for Specified Amount</app-number>
+  <app-number id="stress" [stress]="true" [unit]="'su'" [(value)]="val_stress" (userChange)="calculateFromStress()">Stress</app-number>
+</app-output-side>

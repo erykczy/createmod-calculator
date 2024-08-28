@@ -1,7 +1,26 @@
+:host {
+  width: 100%;
+}
+
 p {
-  background-color: rgb(222, 158, 65);
-  padding: 15px;
-  color: white;
-  border-radius: 2px;
+  background-color: transparent;
+  padding: 10px;
+  color: #fcaca2;
   margin: 0;
+  outline: 2px solid black;
+  border-width: 2px;
+  border-style: solid;
+  border-image: linear-gradient(to bottom, #2e2400 0%, #0f0c00 100%) 1;
+  font-size: 18px;
+  animation: fadein 200ms ease-out;
+  line-height: 18px;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

@@ -1,20 +1,12 @@
 <app-input-side>
-  <app-number [(value)]="in_rpm" [min]="0">RPM</app-number>
-  <app-number [(value)]="in_stackSize" [min]="1">Stack Size</app-number>
-  <div class="variable-container">
-    <app-enum class="enum" [values]="recipesValues" [(value)]="in_recipeIndex" [help]="recipeInputHint">Recipe Input</app-enum>
-    @if(in_recipeIndex === 0) {
-      <app-number class="variable" [(value)]="in_customRecipeDuration" [min]="0" [help]="recipeDurationHint">Custom Recipe Duration</app-number>
-    }
-  </div>
-  <div class="variable-container">
-    <app-enum class="enum" [values]="delayValues" [(value)]="in_delayIndex" [help]="delayHint">Input Delay</app-enum>
-    @if(in_delayIndex === 0) {
-      <app-number class="variable" [(value)]="in_customDelay" [min]="0">Custom Delay (ticks)</app-number>
-    }
-  </div>
+  <app-number [(value)]="val_rpm" [min]="0" id="rpm" (userChange)="calculateFromRpm()">RPM</app-number>
+  <app-number [(value)]="in_stackSize" [min]="1" id="stack-size" (userChange)="calculateFromRpm()">Stack Size</app-number>
+  
+  <app-nuenum id="recipe-duration" [unit]="'t'" [label_custom]="'Custom Recipe Duration'" [keys]="recipesKeys" [values]="recipesValues" [hint]="recipeInputHint" [hint_custom]="recipeDurationHint" [(value)]="in_recipeDuration" (userChange)="calculateFromRpm()">Recipe Input</app-nuenum>
+  <app-nuenum id="input-delay" [unit]="'t'" label_custom="Custom Delay" [keys]="delayKeys" [values]="delayValues" [hint]="delayHint" [(value)]="in_delay" (userChange)="calculateFromRpm()">Input Delay</app-nuenum>
 </app-input-side>
 <app-output-side>
-  <app-number [output]="true" [unit]="'/s'" [(value)]="out1" [help]="warning">Recipes/Second</app-number>
-  <app-number [output]="true" [unit]="'s'" [(value)]="out2" [help]="warning">Processing Time</app-number>
+  <app-number [unit]="'/s'" [(value)]="val_speed" [hint]="warning" id="speed" (userChange)="calculateFromSpeed()">Recipes/Second</app-number>
+  <app-number [unit]="'s'" [(value)]="val_time" [hint]="warning" id="time" (userChange)="calculateFromTime()">Processing Time</app-number>
+  <app-number id="stress" [stress]="true" [unit]="'su'" [(value)]="val_stress" (userChange)="calculateFromStress()">Stress/2 Wheels</app-number>
 </app-output-side>

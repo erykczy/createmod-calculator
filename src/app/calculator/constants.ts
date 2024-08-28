@@ -1,9 +1,9 @@
-import { CalculatorData } from "./calculator.model"
+import { CalculatorData } from "./calculator.model";
 
 export var g_invisibleChar: string = "​";
 
-export function decimal(num: number): number {
-  return Number(num.toFixed(3));
+export function decimal(num?: number): number | undefined {
+  return num === undefined ? undefined : Number(num.toFixed(3));
 }
 
 export function clamp(num: number, min: number, max: number) {
@@ -17,59 +17,129 @@ export function lerp(a: number, b: number, t: number) {
 export var g_calculatorsData: CalculatorData[] = [
   {
     name: "Mechanical Drill",
+    id: "drill",
     iconPath: "assets/icons/drill.png",
     wikiPage: "https://create.fandom.com/wiki/Mechanical_Drill"
   },
   {
     name: "Mechanical Mixer",
+    id: "mixer",
     iconPath: "assets/icons/mixer.png",
     wikiPage: "https://create.fandom.com/wiki/Mechanical_Mixer"
   },
   {
-    name: "Bulk Processing",
+    name: "Encased Fan",
+    id: "fan",
     iconPath: "assets/icons/fan.png",
     wikiPage: "https://create.fandom.com/wiki/Encased_Fan"
   },
   {
     name: "Mechanical Press",
+    id: "press",
     iconPath: "assets/icons/press.png",
     wikiPage: "https://create.fandom.com/wiki/Mechanical_Press"
   },
   {
     name: "Millstone",
+    id: "millstone",
     iconPath: "assets/icons/millstone.png",
     wikiPage: "https://create.fandom.com/wiki/Millstone#Recipe_Table"
   },
   {
     name: "Crushing",
+    id: "crushing",
     iconPath: "assets/icons/crushing.png",
     wikiPage: "https://create.fandom.com/wiki/Crushing_Wheel#Recipe_Duration_Table"
   },
   {
     name: "Mechanical Belt",
+    id: "belt",
     iconPath: "assets/icons/belt.png",
     wikiPage: "https://create.fandom.com/wiki/Mechanical_Belt"
+  },
+  {
+    name: "Mechanical Saw",
+    id: "saw",
+    iconPath: "assets/icons/saw.png",
+    wikiPage: "https://create.fandom.com/wiki/Mechanical_Saw"
+  },
+  {
+    name: "Deployer",
+    id: "deployer",
+    iconPath: "assets/icons/deployer.png",
+    wikiPage: "https://create.fandom.com/wiki/Deployer"
+  },
+  {
+    name: "Mechanical Arm",
+    id: "arm",
+    iconPath: "assets/icons/arm.png",
+    wikiPage: "https://create.fandom.com/wiki/Mechanical_Arm"
+  },
+  {
+    name: "Mechanical Crafter",
+    id: "crafter",
+    iconPath: "assets/icons/crafter.png",
+    wikiPage: "https://create.fandom.com/wiki/Mechanical_Crafter"
+  },
+  {
+    name: "Mechanical Pump",
+    id: "pump",
+    iconPath: "assets/icons/pump.png",
+    wikiPage: "https://create.fandom.com/wiki/Mechanical_Pump"
   }
 ];
 
-export var g_hardness = new Map<string, number>([
+export var g_drillHardness = new Map<string, number>([
   ["cobblestone", 2],
   ["stone", 1.5],
   ["basalt", 1.25],
   ["obsidian", 50]
 ]);
 
+export var g_sawHardness = new Map<string, number>([
+  ["log (any)", 2],
+  ["wood (any)", 2],
+  ["mangrove roots", 0.7],
+  ["mushroom stem", 0.2],
+  ["cactus", 0.4]
+])
+
 export var g_delays = new Map<string, number>([
- ["generator (any)", 1.5] 
+  ["No Delay", 0],
+  ["Generator (any)", 30] 
 ]);
 
-export var g_inputDelays = new Map<string, number>([
-  ["funnel (fastest)", 1],
-  ["chute (slower)", 3],
-  ["thrown (slowest, not recommended)", 27]
+export var g_crushingInputDelays = new Map<string, number>([
+  ["Funnel (fastest)", 1],
+  ["Chute (slower)", 3],
+  ["Thrown (slowest, not recommended)", 27]
 ]);
+
+export var g_crafterInputDelays = new Map<string, number>([
+  ["Funnel (faster)", 0],
+  ["Chute (slower)", 2]
+]);
+
+export var g_cuttingRecipes = new Map<string, number>(
+  [
+    ["<all other recipes>", 50], // stone cutting recipes
+    // ["log (any)", 50],
+    // ["wood (any)", 50],
+    // ["warped/crimson stem", 50],
+    // ["warped/crimson hyphae", 50],
+    // ["stripped log (any)", 50],
+    // ["stipped wood (any)", 50],
+    // ["stripped warped/crimson stem", 50],
+    // ["stripped warped/crimson hyphae", 50],
+    //["bamboo block", 50],
+    ["andesite alloy → shaft", 200],
+    ["andesite alloy", 50],
+    ["bamboo planks", 20]
+  ]
+)
 
 export var g_millstoneRecipes = new Map<string, number>([
+  ["<all other recipes>", 100],
   ["clay block", 50],
   ["cactus", 50],
   ["sea pickle", 50],
@@ -121,6 +191,7 @@ export var g_millstoneRecipes = new Map<string, number>([
 ]);
 
 export var g_crushingRecipes = new Map<string, number>([
+  ["<all other recipes>", 100],
   ["clay block", 50],
   ["cactus", 50],
   ["sea pickle", 50],

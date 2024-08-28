@@ -45,9 +45,9 @@ export class DeployerCalculatorComponent {
   }
   get processes(): string[] {
     return [
-      "Processing",
+      "Processing Other Items",
       "Killing",
-      "Other"
+      "Other (e.g. placing)"
     ]
   }
   get noYes(): string[] {

@@ -1,4 +1,4 @@
 # Create Mod Calculator
 https://erykczy.github.io/createmod-calculator/
 
-![image](https://github.com/user-attachments/assets/c32abf74-a692-4d8f-b5df-ef52fd86ba86)
+![image](https://github.com/user-attachments/assets/2e465089-c2dd-45d0-9b22-6f58ad766d7d)

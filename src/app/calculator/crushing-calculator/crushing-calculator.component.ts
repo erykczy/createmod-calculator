@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
-import { g_crushingInputDelays, g_millstoneRecipes } from '../constants';
+import { g_crushingInputDelays, g_crushingRecipes, g_millstoneRecipes } from '../constants';
 import { EnumComponent } from "../shared/enum/enum.component";
 import { InputSideComponent } from "../shared/input-side/input-side.component";
 import { NuenumComponent } from "../shared/nuenum/nuenum.component";
@@ -27,8 +27,8 @@ export class CrushingCalculatorComponent {
 
   ngOnInit() { this.calculateFromRpm(); }
 
-  get recipesKeys(): string[] { return Array.from(g_millstoneRecipes.keys()); }
-  get recipesValues(): number[] { return Array.from(g_millstoneRecipes.values()); }
+  get recipesKeys(): string[] { return Array.from(g_crushingRecipes.keys()); }
+  get recipesValues(): number[] { return Array.from(g_crushingRecipes.values()); }
   get delayKeys(): string[] { return Array.from(g_crushingInputDelays.keys()); }
   get delayValues(): number[] { return Array.from(g_crushingInputDelays.values()); }
 

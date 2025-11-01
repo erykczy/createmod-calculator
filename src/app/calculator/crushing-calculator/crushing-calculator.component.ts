@@ -6,11 +6,13 @@ import { NuenumComponent } from "../shared/nuenum/nuenum.component";
 import { NumberComponent } from "../shared/number/number.component";
 import { OutputSideComponent } from "../shared/output-side/output-side.component";
 import { CrushingCalculator, Result } from './crushing.calculator';
+import { WarningComponent } from '../shared/warning/warning.component';
+import { InfoComponent } from '../shared/info/info.component';
 
 @Component({
   selector: 'app-crushing-calculator',
   standalone: true,
-  imports: [NumberComponent, OutputSideComponent, EnumComponent, InputSideComponent, NuenumComponent],
+  imports: [NumberComponent, OutputSideComponent, EnumComponent, InputSideComponent, NuenumComponent, InfoComponent],
   templateUrl: './crushing-calculator.component.html',
   styleUrl: './crushing-calculator.component.css'
 })
